@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class CooldownButton : MonoBehaviour
 {
+    [SerializeField] Navigation _navigation;
     public Button[] buttons;
     public Text cooldownText;
     public float cooldownTime = 1f;
@@ -12,11 +13,6 @@ public class CooldownButton : MonoBehaviour
 
     private void Start()
     {
-        foreach (Button button in buttons)
-        {
-            button.onClick.AddListener(OnButtonClicked);
-            button.interactable = true;
-        }
         cooldownText.text = "";
     }
 
@@ -25,7 +21,7 @@ public class CooldownButton : MonoBehaviour
         // В Update() нет необходимости для отсчета времени, так как мы используем корутин
     }
 
-    private void OnButtonClicked()
+    public void OnButtonClicked(Button sender)
     {
         if (!isCooldown)
         {
@@ -34,13 +30,8 @@ public class CooldownButton : MonoBehaviour
             foreach (Button button in buttons)
             {
                 button.interactable = false;
-                EventTrigger eventTrigger = button.GetComponent<EventTrigger>();
-                if (eventTrigger != null)
-                {
-                    eventTrigger.enabled = false; // Блокируем EventTrigger кнопки
-                }
             }
-            StartCoroutine(StartCooldown());
+            StartCoroutine(StartCooldown(sender));
         }
         else
         {
@@ -48,7 +39,7 @@ public class CooldownButton : MonoBehaviour
         }
     }
 
-    private IEnumerator StartCooldown()
+    private IEnumerator StartCooldown(Button button)
     {
         float timer = cooldownTime;
         while (timer > 0)
@@ -60,14 +51,6 @@ public class CooldownButton : MonoBehaviour
 
         isCooldown = false;
         cooldownText.text = "";
-        foreach (Button button in buttons)
-        {
-            button.interactable = true;
-            EventTrigger eventTrigger = button.GetComponent<EventTrigger>();
-            if (eventTrigger != null)
-            {
-                eventTrigger.enabled = true; // Разблокируем EventTrigger кнопки
-            }
-        }
+        _navigation.OnArriveToSector(button);
     }
 }
