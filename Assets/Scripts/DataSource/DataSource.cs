@@ -24,14 +24,6 @@ public class DataSource : IDataSource
         AddSector(new SectorMain1211(12, 11));
         AddSector(new SectorMain1311(13, 11));
         AddSector(new SectorMain1411(14, 11));
-        AddSector(new SectorMain1512(15, 12));
-        AddSector(new SectorMain1513(15, 13));
-        AddSector(new SectorMain1612(16, 12));
-        AddSector(new SectorMain1613(16, 13));
-        AddSector(new SectorMain1614(16, 14));
-        AddSector(new SectorMain1514(15, 14));
-        AddSector(new SectorMain1714(17, 14));
-        AddSector(new SectorMain1713(17, 13));
     }
     public SectorData GetSectorData(string sectorID)
     {
