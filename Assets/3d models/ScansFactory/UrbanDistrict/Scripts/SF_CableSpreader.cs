@@ -113,7 +113,7 @@ namespace SF_CableSpreader
         {
             if (!Application.isPlaying)
             {
-                propertiesChanged = true;
+                //propertiesChanged = true;
             }
         }
         

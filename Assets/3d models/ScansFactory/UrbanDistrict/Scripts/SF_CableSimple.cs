@@ -74,7 +74,7 @@ namespace SF_CableSimple
         {
             if (!Application.isPlaying)
             {
-                propertiesChanged = true;
+              //  propertiesChanged = true;
             }
         }
         
