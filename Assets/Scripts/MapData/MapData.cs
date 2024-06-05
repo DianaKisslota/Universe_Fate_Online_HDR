@@ -46,7 +46,8 @@ public abstract class MapData : MonoBehaviour
 
     private void Update()
     {
-        _miniMapCamera.gameObject.SetActive(Input.GetKey(KeyCode.M));
+        if(Input.GetKeyDown(KeyCode.M))
+            _miniMapCamera.gameObject.SetActive(!_miniMapCamera.gameObject.activeSelf);
     }
 
     private void StartToGo(string direction)
@@ -158,6 +159,11 @@ public abstract class MapData : MonoBehaviour
     public void CleanupSector()
     {
         SceneManager.LoadScene("BattleScene");
+    }
+
+    public void ShowBirdEyeView()
+    {
+        _miniMapCamera.gameObject.SetActive(!_miniMapCamera.gameObject.activeSelf);
     }
 
     public void ShowInventory()
