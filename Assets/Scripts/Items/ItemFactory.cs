@@ -18,5 +18,18 @@ public static class ItemFactory
 
         return itemObject;
     }
+
+    public static ItemPresenter CreateItemPresenter(Type itemType, Transform parent = null)
+    {
+        var presenterObject = GameObject.Instantiate<GameObject>(Global.ItemPresenterPrefab, parent);
+
+        var presenter = presenterObject.GetComponent<ItemPresenter>();
+
+        presenter.Icon = Global.GetIconFor(itemType);
+        presenter.Item = Activator.CreateInstance(itemType) as Item;
+        presenter.Count = 1;
+
+        return presenter;
+    }
 }
 
