@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Bark_Wal
     second: {fileID: 2100000, guid: 0bff59e74b1c14547a6289fc5a40bb41, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plum_Tre
+    second: {fileID: 2100000, guid: e5a019a6d46bcf0439a1d182c535d62b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
