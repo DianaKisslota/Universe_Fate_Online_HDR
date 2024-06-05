@@ -14,6 +14,7 @@ public abstract class MapData : MonoBehaviour
     [SerializeField] protected TMP_Text _sectorInfoText;
     [SerializeField] protected Button _cleanupSectorButton;
     [SerializeField] protected Camera _miniMapCamera;
+    [SerializeField] protected GameObject _inventoryPanel;
 
     protected SectorData _currentSector;
     protected IDataSource _source;
@@ -157,6 +158,11 @@ public abstract class MapData : MonoBehaviour
     public void CleanupSector()
     {
         SceneManager.LoadScene("BattleScene");
+    }
+
+    public void ShowInventory()
+    {
+        _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
     }
 
 }
