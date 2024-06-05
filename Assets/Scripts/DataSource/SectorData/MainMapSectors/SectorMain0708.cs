@@ -1,6 +1,6 @@
-public class SectorMain0608 : SectorData
+public class SectorMain0708 : SectorData
 {
-    public SectorMain0608(int x, int y) : base("Main", x, y)
+    public SectorMain0708(int x, int y) : base("Main", x, y)
     {
         AddMonster(new EntitySpawner(typeof(Reptiloid), 1));
     }
