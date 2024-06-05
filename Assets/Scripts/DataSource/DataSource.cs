@@ -11,11 +11,19 @@ public class DataSource : IDataSource
         AddSector(new SectorMain0609(6, 9));
         AddSector(new SectorMain0610(6, 10));
         AddSector(new SectorMain0611(6, 11));
+        AddSector(new SectorMain0612(6, 12));
+        AddSector(new SectorMain0613(6, 13));
+        AddSector(new SectorMain0614(6, 14));
+        AddSector(new SectorMain0615(6, 15));
         AddSector(new SectorMain0706(7, 6));
         AddSector(new SectorMain0707(7, 7));
         AddSector(new SectorMain0708(7, 8));
         AddSector(new SectorMain0908(9, 8));
         AddSector(new SectorMain0709(07, 9));
+        AddSector(new SectorMain0712(07, 12));
+        AddSector(new SectorMain0713(07, 13));
+        AddSector(new SectorMain0714(07, 14));
+        AddSector(new SectorMain0715(07, 15));
         AddSector(new SectorMain1110(11, 10));
         AddSector(new SectorMain1210(12, 10));
         AddSector(new SectorMain1209(12, 9));
@@ -56,6 +64,9 @@ public class DataSource : IDataSource
         AddSector(new SectorMain1310(13, 10));
         AddSector(new SectorMain1311(13, 11));
         AddSector(new SectorMain1312(13, 12));
+        AddSector(new SectorMain1313(13, 13));
+        AddSector(new SectorMain1314(13, 14));
+        AddSector(new SectorMain1315(13, 15));
         AddSector(new SectorMain1406(14, 06));
         AddSector(new SectorMain1407(14, 07));
         AddSector(new SectorMain1408(14, 08));
@@ -63,6 +74,9 @@ public class DataSource : IDataSource
         AddSector(new SectorMain1410(14, 10));
         AddSector(new SectorMain1411(14, 11));
         AddSector(new SectorMain1412(14, 12));
+        AddSector(new SectorMain1413(14, 13));
+        AddSector(new SectorMain1414(14, 14));
+        AddSector(new SectorMain1415(14, 15));
     }
     public SectorData GetSectorData(string sectorID)
     {
