@@ -11,7 +11,6 @@ public enum WeaponType
     Rifle,
     AssaultRifle,
     MG,
-    Cut,
-    Blunt
+    Knife
 }
 

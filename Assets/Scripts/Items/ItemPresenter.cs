@@ -16,6 +16,8 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     private int _count;
     public Item Item { get; set; }
 
+    public Transform OldParent => _oldParent;
+
     public Sprite Icon 
     { set {_icon.sprite = value;}}
 
@@ -44,6 +46,7 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         _canvasGroup.blocksRaycasts = false;
         _oldParent = transform.parent;
         transform.SetParent(_transportPanel);
+        transform.localEulerAngles = Vector3.zero;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -58,6 +61,11 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             transform.SetParent(_oldParent);
             transform.localPosition = Vector2.zero;
         }
+        if (transform.parent.gameObject.TryGetComponent<ItemSlot>(out var itemSlot) && itemSlot.SlotType == SlotType.Shoulder)
+        {
+            eventData.pointerDrag.transform.localEulerAngles = new Vector3(0, 0, -90);
+        }
+
         _canvasGroup.blocksRaycasts = true;
     }
 }

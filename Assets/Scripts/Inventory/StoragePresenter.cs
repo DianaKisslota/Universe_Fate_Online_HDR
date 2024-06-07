@@ -17,6 +17,11 @@ public abstract class StoragePresenter : MonoBehaviour
 
     private void OnEnable()
     {
+        FillSlots();
+    }
+
+    protected virtual void FillSlots()
+    {
         while (_children.Count > 0)
         {
             var item = _children[0];
@@ -24,7 +29,7 @@ public abstract class StoragePresenter : MonoBehaviour
             Destroy(item);
         }
 
-        foreach (StoragePosition position in _storage.Items) 
+        foreach (StoragePosition position in _storage.Items)
         {
             var itemPresenter = ItemFactory.CreateItemPresenter(position.Item.GetType(), _itemsParent.transform);
             itemPresenter.Count = position.Count;

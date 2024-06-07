@@ -56,7 +56,7 @@ public static class Global
     public static void InitCharacter()
     {
         Character = new Character();
-        Character.MainWeapon = new AK47();
+        Character.Inventory.AddItem(new AK47());
         Character.Inventory.AddItem(new PM());
     }
         
