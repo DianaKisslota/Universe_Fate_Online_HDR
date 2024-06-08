@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class CharacterItemSlot : ItemSlot
 {
+    public Character Character => Global.Character;
 
+    private void Awake()
+    {
+        ItemLeave += Character.UnEquip;
+    }
 }

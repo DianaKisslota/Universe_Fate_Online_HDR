@@ -411,7 +411,6 @@ GameObject:
   - component: {fileID: 8213074371065168663}
   - component: {fileID: 758120680636984475}
   - component: {fileID: 3385996425845455868}
-  - component: {fileID: 3805563337983819798}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -479,19 +478,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3805563337983819798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2766262553542360065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13a681d72359ddb48b6558f9d12de4e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemsParent: {fileID: 4040325505128132499}
 --- !u!1 &3591277622035095180
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +732,7 @@ GameObject:
   - component: {fileID: 8758392864182175538}
   - component: {fileID: 4330659436079567874}
   - component: {fileID: 7772525232515565658}
-  - component: {fileID: 6235933336055405617}
+  - component: {fileID: 8846341841702232534}
   m_Layer: 5
   m_Name: ItemPanel
   m_TagString: Untagged
@@ -835,7 +821,7 @@ MonoBehaviour:
   m_Spacing: {x: 3, y: 3}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &6235933336055405617
+--- !u!114 &8846341841702232534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -844,9 +830,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4040325505128132499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffcb96e3080e7c748a1c87426f82e4b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 13a681d72359ddb48b6558f9d12de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemsParent: {fileID: 4040325505128132499}
 --- !u!1 &4295701501505753831
 GameObject:
   m_ObjectHideFlags: 0

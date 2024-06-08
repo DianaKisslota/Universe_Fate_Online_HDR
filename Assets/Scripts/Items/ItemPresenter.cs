@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -47,6 +48,8 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         _oldParent = transform.parent;
         transform.SetParent(_transportPanel);
         transform.localEulerAngles = Vector3.zero;
+        if (_oldParent.TryGetComponent<DropSlot>(out var dropSlot))
+            dropSlot.OnItemLeave(Item);
     }
 
     public void OnDrag(PointerEventData eventData)

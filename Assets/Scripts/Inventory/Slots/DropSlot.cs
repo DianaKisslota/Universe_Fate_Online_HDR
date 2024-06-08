@@ -1,9 +1,16 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DropSlot : MonoBehaviour, IDropHandler
 {
 
+    public event Action<Item> ItemLeave;
+
+    public virtual void OnItemLeave(Item item)
+    {
+        ItemLeave?.Invoke(item);
+    }
     public void OnDrop(PointerEventData eventData)
     {
         var transferredObject = eventData.pointerDrag;

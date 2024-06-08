@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterInventoryPresenter : StoragePresenter
+public class CharacterInventorySlot : StorageSlot
 {
     private Character Character;
 
@@ -10,5 +10,6 @@ public class CharacterInventoryPresenter : StoragePresenter
     {
         Character = Global.Character;
         Storage = Character.Inventory;
+        ItemLeave += Character.UnEquip;
     }
 }

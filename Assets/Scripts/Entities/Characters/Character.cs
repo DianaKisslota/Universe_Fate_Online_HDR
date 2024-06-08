@@ -16,4 +16,19 @@ public class Character : BaseEntity
     public Weapon ShoulderWeapon { get; set; }
 
     public CharacterInventory Inventory { get; private set; }  = new CharacterInventory();
+
+
+    public void UnEquip(Item item)
+    {
+        if (item == MainWeapon)
+            MainWeapon = null;
+        else
+            if (item == SecondaryWeapon)
+                SecondaryWeapon = null;
+            else
+                if (item == ShoulderWeapon)
+                    ShoulderWeapon = null;
+                else
+                    Inventory.RemoveItem(item);
+    }
 }
