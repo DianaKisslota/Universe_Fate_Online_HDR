@@ -27,9 +27,13 @@ public abstract class Storage
         }
     }
 
-    public void RemoveItem(Item item, int number = 1)
+    public void RemoveItem(Item item)
     {
-        //Items.Remove(item);
+        var position = Items.FirstOrDefault(x => x.Item == item);
+        if (position != null)
+        {
+            Items.Remove(position);
+        }
     }
 
 }

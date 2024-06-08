@@ -11,6 +11,7 @@ public class CharacterController : AvatarController
 {
     [SerializeField] private Material AccessMoveMaterial;
     [SerializeField] private Material RestrictMoveMaterial;
+    [SerializeField] private GameObject _inventoryPanel;
 
     [SerializeField] private PointerController _pointer;
     //   [SerializeField] protected LineRenderer _pathDrawer;
@@ -257,6 +258,11 @@ public class CharacterController : AvatarController
     public void ButtonClearAllNavPoints()
     {
         ClearAllQuants();
+    }
+
+    public void InventoryPanelSwitch()
+    {
+        _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
     }
 
 }

@@ -17,6 +17,22 @@ public class Character : BaseEntity
 
     public CharacterInventory Inventory { get; private set; }  = new CharacterInventory();
 
+    public void Equip(SlotType slot, Item item)
+    {
+        switch (slot)
+        {
+            case SlotType.MainWeapon:
+                MainWeapon = (Weapon)item;
+                break;
+            case SlotType.SecondaryWeapon:
+                SecondaryWeapon = (Weapon)item;
+                break;
+
+            case SlotType.Shoulder:
+                ShoulderWeapon = (Weapon)item;
+                break;
+        }
+    }
 
     public void UnEquip(Item item)
     {

@@ -52,4 +52,19 @@ public class ItemSlot : DropSlot
         _backgroungImage.SetActive(false);
         _isOccuped = true;
     }
+
+    public void InitSlot(Item item)
+    {
+        if (item == null)
+            return;
+        var itemPresenter = ItemFactory.CreateItemPresenter(item);
+        itemPresenter.transform.SetParent(this.transform);
+        itemPresenter.transform.localPosition = Vector3.zero;
+        if(SlotType == SlotType.Shoulder)
+        {
+            itemPresenter.transform.localEulerAngles = new Vector3(0, 0, -90);
+        }
+        _backgroungImage.SetActive(false);
+        _isOccuped = true;
+    }
 }

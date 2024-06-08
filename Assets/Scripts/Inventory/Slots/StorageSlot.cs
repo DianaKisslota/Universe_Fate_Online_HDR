@@ -32,7 +32,7 @@ public abstract class StorageSlot : DropSlot
 
         foreach (StoragePosition position in _storage.Items)
         {
-            var itemPresenter = ItemFactory.CreateItemPresenter(position.Item.GetType(), _itemsParent.transform);
+            var itemPresenter = ItemFactory.CreateItemPresenter(position.Item, _itemsParent.transform);
             itemPresenter.Count = position.Count;
 
             _children.Add(itemPresenter.gameObject);
@@ -57,7 +57,6 @@ public abstract class StorageSlot : DropSlot
         if (itemObject != null)
         {
             _children.Remove(itemObject);
-            Destroy(itemObject);
         }
         base.OnItemLeave(item);
     }
