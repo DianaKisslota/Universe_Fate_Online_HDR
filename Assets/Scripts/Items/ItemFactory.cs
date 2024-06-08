@@ -34,6 +34,7 @@ public static class ItemFactory
         presenter.Icon = Global.GetIconFor(item.GetType());
         presenter.Item = item;
         presenter.Count = 1;
+        presenter.Name = item.Name;
 
         return presenter;
     }

@@ -8,6 +8,7 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 {
     [SerializeField] private Image _icon;
     [SerializeField] private TMP_Text _countText;
+    [SerializeField] private TMP_Text _nameText;
 
     private Transform _transportPanel;
     private Transform _oldParent;
@@ -33,6 +34,11 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             else
                 _countText.text = string.Empty;
         }
+    }
+
+    public string Name
+    {
+        set { _nameText.text = value; }
     }
 
     private void Start()

@@ -2,6 +2,7 @@
 {
     public PM()
     {
+        Name = "ПМ";
         WeaponType = WeaponType.Pistol;
         Weight = 0.73f;
         Volume = 0.3f;
