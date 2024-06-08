@@ -70,10 +70,15 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             transform.SetParent(_oldParent);
             transform.localPosition = Vector2.zero;
         }
-        if (transform.parent.gameObject.TryGetComponent<ItemSlot>(out var itemSlot) && itemSlot.SlotType == SlotType.Shoulder)
+
+        if (transform.parent.gameObject.TryGetComponent<ItemSlot>(out var itemSlot))
         {
-            eventData.pointerDrag.transform.localEulerAngles = new Vector3(0, 0, -90);
+            if (itemSlot.SlotType == SlotType.Shoulder)
+                eventData.pointerDrag.transform.localEulerAngles = new Vector3(0, 0, -90);
+            _nameText.gameObject.SetActive(false);
         }
+        else
+            _nameText.gameObject.SetActive(true);
 
         _canvasGroup.blocksRaycasts = true;
     }
