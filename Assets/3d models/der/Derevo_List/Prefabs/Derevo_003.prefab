@@ -58,14 +58,10 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5784823061233956934}
-  - screenRelativeHeight: 0.26708212
+  - screenRelativeHeight: 0.025088768
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5000373298338229687}
-  - screenRelativeHeight: 0.025500812
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 220823007459181956}
   m_Enabled: 1
 --- !u!1 &3304011570858882722
 GameObject:
