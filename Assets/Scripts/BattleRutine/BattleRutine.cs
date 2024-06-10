@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class BattleRutine : MonoBehaviour
 {
     [SerializeField] List<Transform> _spawnPoints;
+    [SerializeField] List<Transform> _staticContainersPoints;
     [SerializeField] Transform _character;
     [SerializeField] Transform _cameraHolder;
 
@@ -30,8 +31,20 @@ public class BattleRutine : MonoBehaviour
         _source = new DataSource();
         _sectorData = _source.GetSectorData(Global.CurrentSectorID);
 
+        foreach(Container container in _sectorData.Containers)
+        {
+            if (_staticContainersPoints.Count == 0)
+                break;
+            var staticContainerPointIndex = Random.Range(0, _staticContainersPoints.Count);
+            var staticContainerPoint = _staticContainersPoints[staticContainerPointIndex];
+            var staticContainer = ContainerFactory.CreateContainer(container, staticContainerPoint);
+            _staticContainersPoints.Remove(staticContainerPoint);
+        }
+
         foreach (ItemSpawner spawner in _sectorData.Items)
         {
+            if (_spawnPoints.Count == 0)
+                break;
             var spawnPointIndex = Random.Range(0, _spawnPoints.Count);
             var spawnPoint = _spawnPoints[spawnPointIndex];
             var item = ItemFactory.CreateItem(spawner.ItemType);

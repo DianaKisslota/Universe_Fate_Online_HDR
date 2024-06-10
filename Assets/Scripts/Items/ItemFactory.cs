@@ -9,10 +9,11 @@ public static class ItemFactory
         var model = GameObject.Instantiate<GameObject>(modelPrefab);
         var itemObject = model.AddComponent<ItemObject>();
         model.AddComponent<Rigidbody>();
-        //var light = model.AddComponent<Light>();
-        //light.intensity = 10;
-        //light.range = 2;
-        //light.color = new Color(19, 87, 3);
+        var highLighter = GameObject.Instantiate<GameObject>(Global.ItemHighlighterPrefab);
+        highLighter.transform.SetParent(model.transform, false);
+        highLighter.transform.localPosition = Vector3.zero;
+        itemObject.Light = highLighter;
+        itemObject.LightOff();
         var item = Activator.CreateInstance(itemType) as Item;
         itemObject.Item = item;
 

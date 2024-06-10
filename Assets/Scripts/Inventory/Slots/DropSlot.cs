@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 
 public class DropSlot : MonoBehaviour, IDropHandler
 {
-
     public event Action<Item> ItemLeave;
 
     public virtual void OnItemLeave(Item item)

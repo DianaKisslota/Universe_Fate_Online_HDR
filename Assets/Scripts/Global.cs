@@ -12,6 +12,7 @@ public static class Global
 
     private static Dictionary<Type, GameObject> EntityPrefabs = new Dictionary<Type, GameObject>();
     private static Dictionary<Type, GameObject> ItemPrefabs = new Dictionary<Type, GameObject>();
+    private static Dictionary<Type, GameObject> ContainerPrefabs = new Dictionary<Type, GameObject>();
     private static Dictionary<Type, Sprite> Icons = new Dictionary<Type, Sprite>();
     public static GameObject GetPrefabForEntity(Type entityType)
     {
@@ -25,6 +26,12 @@ public static class Global
         return obj;
     }
 
+    public static GameObject GetPrefabForContainer(Type containerType)
+    {
+        ContainerPrefabs.TryGetValue(containerType, out GameObject obj);
+        return obj;
+    }
+
     public static Sprite GetIconFor(Type type)
     {
         Icons.TryGetValue(type, out Sprite sprite);
@@ -33,6 +40,9 @@ public static class Global
 
     public static GameObject NavPointPrefab { get; set; }
     public static GameObject ItemPresenterPrefab { get; set; }
+    public static GameObject ItemHighlighterPrefab { get; set; }
+    public static GameObject ContainerHighlighterPrefab { get; set; }
+
 
     static Global()
     {
@@ -41,14 +51,18 @@ public static class Global
 
         ItemPrefabs.Add(typeof(AK47), Resources.Load<GameObject>("WeaponModels/Modern Weapons Pack/Ak-47/Prefab/Ak-47"));
         ItemPrefabs.Add(typeof(PM), Resources.Load<GameObject>("WeaponModels/PM Makarov/Makarov (PM)/Makarov"));
+        ItemPrefabs.Add(typeof(KitchenKnife), Resources.Load<GameObject>("WeaponModels/kitchen-knife/lp"));
+
+        ContainerPrefabs.Add(typeof(Cabinet), Resources.Load<GameObject>("OtherModels/Cabinet/Cabinet"));
 
         Icons.Add(typeof(AK47), Resources.Load<Sprite>("WeaponModels/Modern Weapons Pack/Ak-47/AK-47_icon"));
         Icons.Add(typeof(PM), Resources.Load<Sprite>("WeaponModels/PM Makarov/Makarov (PM)/pm_icon"));
+        Icons.Add(typeof(KitchenKnife), Resources.Load<Sprite>("WeaponModels/kitchen-knife/KitchenKnife"));
 
         NavPointPrefab = Resources.Load<GameObject>("ControlPrefabs/Nav");
         ItemPresenterPrefab = Resources.Load<GameObject>("Presenters/ItemPresenter");
-
-
+        ItemHighlighterPrefab = Resources.Load<GameObject>("ItemHighLighter");
+        ContainerHighlighterPrefab = Resources.Load<GameObject>("ContainerHighLighter");
 
         InitCharacter();
     }
@@ -56,8 +70,8 @@ public static class Global
     public static void InitCharacter()
     {
         Character = new Character();
-        Character.Inventory.AddItem(new AK47());
         Character.Inventory.AddItem(new PM());
+        Character.Inventory.AddItem(new KitchenKnife());
     }
         
 }

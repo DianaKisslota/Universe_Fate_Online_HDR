@@ -7,16 +7,15 @@ public class ItemObject : MonoBehaviour
 {
     private Rigidbody _rigidBody;
     public Item Item {  get; set; }
-    public Light _light {  get; set; }
+    public GameObject Light {  get; set; }
 
     private bool _isFree  = true;
 
 
     private void Start()
     {
-        _light = GetComponent<Light>();
         _rigidBody = GetComponent<Rigidbody>();
-        _light.enabled = false;
+        Light.SetActive(false);
     }
 
     public void Drop()
@@ -39,17 +38,17 @@ public class ItemObject : MonoBehaviour
 
     public void LightOff()
     {
-        _light.enabled = false;
+        Light.SetActive(false);
     }
     private void OnMouseOver()
     {
-        if (_isFree) 
-            _light.enabled = true;
+        if (_isFree)
+            Light.SetActive(true);
     }
 
     private void OnMouseExit()
     {
         if (_isFree)
-            _light.enabled = false;
+            Light.SetActive(false);
     }
 }

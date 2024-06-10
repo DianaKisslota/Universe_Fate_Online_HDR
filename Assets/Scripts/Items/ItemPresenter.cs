@@ -20,6 +20,10 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public Transform OldParent => _oldParent;
 
+    public void HideName()
+    {
+        _nameText.gameObject.SetActive(false);
+    }
     public Sprite Icon 
     { set {_icon.sprite = value;}}
 

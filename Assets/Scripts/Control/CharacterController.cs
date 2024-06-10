@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +8,7 @@ public class CharacterController : AvatarController
     [SerializeField] private Material AccessMoveMaterial;
     [SerializeField] private Material RestrictMoveMaterial;
     [SerializeField] private GameObject _inventoryPanel;
+    [SerializeField] private ContainerPresenter _containerPresenter;
 
     [SerializeField] private PointerController _pointer;
     //   [SerializeField] protected LineRenderer _pathDrawer;
@@ -39,6 +36,8 @@ public class CharacterController : AvatarController
 
     private void Start()
     {
+        _containerPresenter.gameObject.SetActive(false);
+        _inventoryPanel.gameObject.SetActive(false);
         _playerAvatar.StartMoving += () => _avatarMoving = true;
         _playerAvatar.EndMoving += () => _avatarMoving = false;
         _playerAvatar.StartApplainQuants += () => _avatarApplyingQants = true;
@@ -77,6 +76,18 @@ public class CharacterController : AvatarController
                 return;
             }
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            var containerObject = GetContainerUnderMousePoint();
+            if (containerObject != null)
+            {
+                _containerPresenter.BindToContainer(containerObject.Container);
+                _containerPresenter.gameObject.SetActive(true);
+                return;
+            }
+        }
+
         if (Input.GetMouseButtonDown(0) && !_mouseOverUI && _canMove && PlayerCanReach(AllignPoint.ToMid(GetPointerPositionOnMap())) && !AvatarBusy)
         {
             var navPoint = Instantiate(Global.NavPointPrefab);
@@ -123,6 +134,18 @@ public class CharacterController : AvatarController
         if (hit.rigidbody != null && hit.rigidbody.gameObject.TryGetComponent<ItemObject>(out var itemObject))
         {
             return itemObject;
+        }
+        return null;
+    }
+
+    private ContainerObject GetContainerUnderMousePoint()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit);
+        if (hit.rigidbody != null && hit.rigidbody.gameObject.TryGetComponent<ContainerObject>(out var containerObject))
+        {
+            return containerObject;
         }
         return null;
     }
@@ -262,7 +285,8 @@ public class CharacterController : AvatarController
 
     public void InventoryPanelSwitch()
     {
-        _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
+        if(!_containerPresenter.isActiveAndEnabled)
+            _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
     }
 
 }

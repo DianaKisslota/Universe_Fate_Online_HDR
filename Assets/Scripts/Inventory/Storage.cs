@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-public abstract class Storage
+public class Storage
 {
     public List<StoragePosition> Items { get; private set; } = new List<StoragePosition>();
 
     private int _positionCapacity;
 
-    protected Storage(int positionCapacity)
+    public Storage(int positionCapacity)
     {
         _positionCapacity = positionCapacity;
     }

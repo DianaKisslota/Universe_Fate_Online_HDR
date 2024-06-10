@@ -29,6 +29,9 @@ public abstract class SectorData
 
     public List<EntitySpawner> Monsters { get; } = new List<EntitySpawner>();
     public List<ItemSpawner> Items { get; } = new List<ItemSpawner> ();
+
+    public List<Container> Containers { get; } = new List<Container> ();
+
     protected List<string> NPC { get; } = new List<string>();
 
     public void AddItem(Type itemType)
@@ -39,6 +42,11 @@ public abstract class SectorData
     public void AddMonster(EntitySpawner spawner)
     {
         Monsters.Add(spawner);
+    }
+
+    public void AddContainer(Container container)
+    {
+        Containers.Add(container);
     }
 
     public void ADDNPC (string npc)

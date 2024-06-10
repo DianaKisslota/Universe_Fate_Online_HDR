@@ -58,6 +58,7 @@ public class ItemSlot : DropSlot
         if (item == null)
             return;
         var itemPresenter = ItemFactory.CreateItemPresenter(item);
+        itemPresenter.HideName();
         itemPresenter.transform.SetParent(this.transform);
         itemPresenter.transform.localPosition = Vector3.zero;
         if(SlotType == SlotType.Shoulder)
