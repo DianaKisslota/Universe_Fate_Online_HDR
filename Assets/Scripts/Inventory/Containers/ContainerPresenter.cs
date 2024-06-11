@@ -13,6 +13,8 @@ public class ContainerPresenter : MonoBehaviour
         _slot.Storage = container.Storage;
     }
 
+    public ContainerSlot Slot => _slot;
+
     public void Close()
     {
         gameObject.SetActive(false);

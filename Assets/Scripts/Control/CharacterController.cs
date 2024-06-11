@@ -110,6 +110,8 @@ public class CharacterController : AvatarController
                 rt.offsetMin = Vector2.zero;
                 _inventoryPanel.gameObject.SetActive(true);
                 _containerPresenter.gameObject.SetActive(true);
+                _containerPresenter.Slot.ItemLeave += ItemLeave;
+                _containerPresenter.Slot.ItemSet += ItemSet;
                 return;
             }
         }
@@ -220,11 +222,8 @@ public class CharacterController : AvatarController
 
     private void ApplyQuants()
     {
-        if (!_containerPresenter.isActiveAndEnabled)
-        {
-            RevertAllQuants();
-            _playerAvatar.ApplyQuants();
-        }
+        RevertAllQuants();
+        _playerAvatar.ApplyQuants();        
     }
 
     private void RevertQuant(Quant quant)
@@ -261,26 +260,7 @@ public class CharacterController : AvatarController
                     var destinationSlot = transferItemInfo.Destination;
                     var item = transferItemInfo.Item;
 
-                    if (sourceSlot is CharacterItemSlot sourceItemSlot)
-                    {
-                        sourceItemSlot.Character.Equip(item, sourceItemSlot);
-                        sourceItemSlot.InitSlot(item);
-                    }
-                    if(destinationSlot is CharacterItemSlot destinationItemSlot)
-                    {
-                        destinationItemSlot.Character.UnEquip(item, destinationItemSlot);
-                        destinationItemSlot.InitSlot(null);
-                    }
-                    if (sourceSlot is StorageSlot sourceStorageSlotSlot)
-                    {
-                        sourceStorageSlotSlot.Storage.AddItem(item);
-                        sourceStorageSlotSlot.FillSlots();
-                    }
-                    if (destinationSlot is StorageSlot destinationStorageSlot)
-                    {
-                        destinationStorageSlot.Storage.RemoveItem(item);
-                        destinationStorageSlot.FillSlots();
-                    }
+                    _playerAvatar.TransferItem(destinationSlot, sourceSlot, item);
 
                     break;
                 }
@@ -289,13 +269,13 @@ public class CharacterController : AvatarController
 
     private void RevertLastQuant()
     {
-        if (_playerAvatar.Quants.Count > 0 && !_containerPresenter.isActiveAndEnabled)
+        if (_playerAvatar.Quants.Count > 0)
             RevertQuant(_playerAvatar.Quants.Last());
     }
 
     private void RevertAllQuants()
     {
-        if (AvatarBusy || _containerPresenter.isActiveAndEnabled)
+        if (AvatarBusy)
             return;
         _playerAvatar.Quants.Reverse();
         foreach (var quant in _playerAvatar.Quants) 
@@ -371,5 +351,11 @@ public class CharacterController : AvatarController
     {
         var transferItemInfo = new TransferItemInfo(_slotDraggingFrom, slot, item);
         _playerAvatar.AddItemtransferQuant(transferItemInfo);
+    }
+
+    public void ContainerCloseClick()
+    {
+        _containerPresenter.Slot.ItemLeave -= ItemLeave;
+        _containerPresenter.Slot.ItemSet -= ItemSet;
     }
 }

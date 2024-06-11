@@ -76,6 +76,17 @@ public class CharacterAvatar : EntityAvatar
             case EntityAction.PickObject:
                 TakeItem(_quants[0].Object as ItemObject);
                 break;
+            case EntityAction.TransferItem:
+                {
+                    var transferItemInfo = _quants[0].Object as TransferItemInfo;
+                    var sourceSlot = transferItemInfo.Source;
+                    var destinationSlot = transferItemInfo.Destination;
+                    var item = transferItemInfo.Item;
+
+                    TransferItem(sourceSlot, destinationSlot, item);
+                }
+                break;
+                
             default:
                 Debug.LogError("Неизвестный тип действия");
                 break;
@@ -141,6 +152,32 @@ public class CharacterAvatar : EntityAvatar
                     EndApplainQuants?.Invoke();
                 }
             }
+        }
+    }
+
+    public void TransferItem(DropSlot sourceSlot, DropSlot destinationSlot, Item item)
+    {
+        if (sourceSlot is CharacterItemSlot sourceItemSlot)
+        {
+            sourceItemSlot.Character.UnEquip(item, sourceItemSlot);
+            sourceItemSlot.InitSlot(null);
+        }
+        if (destinationSlot is CharacterItemSlot destinationItemSlot)
+        {
+            destinationItemSlot.Character.Equip(item, destinationItemSlot);
+            destinationItemSlot.InitSlot(item);
+
+        }
+        if (sourceSlot is StorageSlot sourceStorageSlotSlot)
+        {
+            sourceStorageSlotSlot.Storage.RemoveItem(item);
+            sourceStorageSlotSlot.FillSlots();
+        }
+        if (destinationSlot is StorageSlot destinationStorageSlot)
+        {
+            destinationStorageSlot.Storage.AddItem(item);
+            destinationStorageSlot.FillSlots();
+
         }
     }
 
