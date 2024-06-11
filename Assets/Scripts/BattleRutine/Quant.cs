@@ -4,7 +4,27 @@ public enum EntityAction
 {
     Move,
     DistantAttack,
-    PickObject
+    PickObject,
+    GetObjectFromContainer
+}
+
+public class TransferItemInfo
+{
+    public DropSlot Source {  get; private set; }
+    public DropSlot Destination { get; private set; }
+    public int SourceItemIndex {  get; private set; } 
+    public int DestinationItemIndex { get; private set; }
+
+    public Item Item { get; private set; }
+
+    public TransferItemInfo(DropSlot source, DropSlot destination, Item item, int sourceItemIndex, int destinationItemIndex)
+    {
+        Source = source;
+        Destination = destination;
+        Item = item;
+        SourceItemIndex = sourceItemIndex;
+        DestinationItemIndex = destinationItemIndex;
+    }
 }
 public class Quant
 {
@@ -14,11 +34,11 @@ public class Quant
     public Vector3? LastPosition {  get; private set; }
     public Quaternion LastRotation { get; private set; }
 
-    public Quant(EntityAction _action, object _object, Vector3? _lastPosition, Quaternion lastRotation)
+    public Quant(EntityAction _action, object _object, Vector3? lastPosition, Quaternion lastRotation)
     {
         Action = _action;
         Object = _object;
-        LastPosition = _lastPosition;
+        LastPosition = lastPosition;
         LastRotation = lastRotation;
     }
 

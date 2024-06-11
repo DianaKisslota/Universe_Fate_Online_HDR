@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,8 +8,10 @@ public class CharacterController : AvatarController
 {
     [SerializeField] private Material AccessMoveMaterial;
     [SerializeField] private Material RestrictMoveMaterial;
-    [SerializeField] private GameObject _inventoryPanel;
+    [SerializeField] private CharacterInventoryPresenter _inventoryPanel;
     [SerializeField] private ContainerPresenter _containerPresenter;
+    [SerializeField] private Transform _originInventoryPlaceHolder;
+    [SerializeField] private Transform _containerInventoryPlaceHolder;
 
     [SerializeField] private PointerController _pointer;
     //   [SerializeField] protected LineRenderer _pathDrawer;
@@ -36,6 +39,7 @@ public class CharacterController : AvatarController
 
     private void Start()
     {
+        _originInventoryPlaceHolder = _inventoryPanel.transform.parent;
         _containerPresenter.gameObject.SetActive(false);
         _inventoryPanel.gameObject.SetActive(false);
         _playerAvatar.StartMoving += () => _avatarMoving = true;
@@ -69,7 +73,7 @@ public class CharacterController : AvatarController
         if (Input.GetMouseButtonDown(0))
         {
             var itemObject = GetItemUnderMousePoint();
-            if (itemObject != null)
+            if (itemObject != null  && Vector3.Distance(_playerAvatar.transform.position, itemObject.transform.position) < 1.2f)                
             {
                 _playerAvatar.AddPickObjectQuant(itemObject);
                 _playerAvatar.TakeItem(itemObject);
@@ -80,9 +84,15 @@ public class CharacterController : AvatarController
         if (Input.GetMouseButtonDown(0))
         {
             var containerObject = GetContainerUnderMousePoint();
-            if (containerObject != null)
+            if (containerObject != null && Vector3.Distance(_playerAvatar.transform.position, containerObject.transform.position) < 1.5f)
             {
                 _containerPresenter.BindToContainer(containerObject.Container);
+                _inventoryPanel.transform.SetParent(_containerInventoryPlaceHolder);
+                _inventoryPanel.transform.localPosition = Vector3.zero;
+                var rt = _inventoryPanel.GetComponent<RectTransform>();
+                rt.offsetMax = Vector2.zero;
+                rt.offsetMin = Vector2.zero;
+                _inventoryPanel.gameObject.SetActive(true);
                 _containerPresenter.gameObject.SetActive(true);
                 return;
             }
@@ -193,8 +203,11 @@ public class CharacterController : AvatarController
 
     private void ApplyQuants()
     {
-        RevertAllQuants();
-        _playerAvatar.ApplyQuants();
+        if (!_containerPresenter.isActiveAndEnabled)
+        {
+            RevertAllQuants();
+            _playerAvatar.ApplyQuants();
+        }
     }
 
     private void RevertQuant(Quant quant)
@@ -229,13 +242,13 @@ public class CharacterController : AvatarController
 
     private void RevertLastQuant()
     {
-        if (_playerAvatar.Quants.Count > 0)
+        if (_playerAvatar.Quants.Count > 0 && !_containerPresenter.isActiveAndEnabled)
             RevertQuant(_playerAvatar.Quants.Last());
     }
 
     private void RevertAllQuants()
     {
-        if (AvatarBusy)
+        if (AvatarBusy || _containerPresenter.isActiveAndEnabled)
             return;
         _playerAvatar.Quants.Reverse();
         foreach (var quant in _playerAvatar.Quants) 
@@ -278,15 +291,28 @@ public class CharacterController : AvatarController
         ClearLastQuant();
     }
 
-    public void ButtonClearAllNavPoints()
+    public void ButtonClearAll()
     {
         ClearAllQuants();
     }
 
     public void InventoryPanelSwitch()
     {
-        if(!_containerPresenter.isActiveAndEnabled)
-            _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
+        if (_containerPresenter.gameObject.activeSelf)
+            return;
+        
+
+        if (_inventoryPanel.transform.parent != _originInventoryPlaceHolder)
+        {
+            _inventoryPanel.transform.SetParent(_originInventoryPlaceHolder, false);
+            _inventoryPanel.transform.localPosition = Vector3.zero;
+            var rt = _inventoryPanel.GetComponent<RectTransform>();
+            rt.offsetMax = Vector2.zero;
+            rt.offsetMin = Vector2.zero;
+            _inventoryPanel.gameObject.SetActive(true);
+        }
+        else
+            _inventoryPanel.gameObject.SetActive(!_inventoryPanel.gameObject.activeSelf);
     }
 
 }

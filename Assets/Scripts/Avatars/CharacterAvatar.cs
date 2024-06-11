@@ -20,8 +20,7 @@ public class CharacterAvatar : EntityAvatar
 
     public void TakeItem(ItemObject itemObject)
     {
-        if (Vector3.Distance(transform.position, itemObject.transform.position) < 1.2f)
-        {
+
             if (itemObject.Item is Weapon)
             {
                 if ((itemObject.Item as Weapon).WeaponType == WeaponType.Rifle || (itemObject.Item as Weapon).WeaponType == WeaponType.AssaultRifle)
@@ -32,7 +31,6 @@ public class CharacterAvatar : EntityAvatar
                 itemObject.gameObject.transform.localRotation = Quaternion.identity;
             }
             itemObject.Take();
-        }
     }
 
     public void AddQuant(EntityAction action, object _object, Vector3? lastPosition, Quaternion lastRotation)
