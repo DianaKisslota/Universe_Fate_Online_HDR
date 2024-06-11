@@ -4,11 +4,17 @@ using UnityEngine.EventSystems;
 
 public class DropSlot : MonoBehaviour, IDropHandler
 {
-    public event Action<Item> ItemLeave;
+    public event Action<Item, DropSlot> ItemLeave;
+    public event Action<Item, DropSlot> ItemSet;
 
     public virtual void OnItemLeave(Item item)
     {
-        ItemLeave?.Invoke(item);
+        ItemLeave?.Invoke(item, this);
+    }
+
+    public void OnItemSet(Item item, DropSlot slot)
+    {
+        ItemSet?.Invoke(item, slot);
     }
     public void OnDrop(PointerEventData eventData)
     {

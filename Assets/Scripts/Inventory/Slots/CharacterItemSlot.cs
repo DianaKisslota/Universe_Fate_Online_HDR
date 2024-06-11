@@ -7,8 +7,6 @@ public class CharacterItemSlot : ItemSlot
 {
     public Character Character => Global.Character;
 
-    public event Action<SlotType, Item> ItemSet;
-
     private void Awake()
     {
         ItemSet += Character.Equip;
@@ -18,6 +16,8 @@ public class CharacterItemSlot : ItemSlot
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
         base.DropProcess(itemPresenter);
-        ItemSet?.Invoke(SlotType, itemPresenter.Item);
+        OnItemSet(itemPresenter.Item, this);
     }
+
+
 }

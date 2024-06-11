@@ -48,6 +48,11 @@ public class CharacterAvatar : EntityAvatar
         AddQuant(EntityAction.PickObject, itemObject, itemObject.transform.position, itemObject.transform.rotation);
     }
 
+    public void AddItemtransferQuant(TransferItemInfo transferItemInfo)
+    {
+        AddQuant(EntityAction.TransferItem, transferItemInfo, transform.position, transform.rotation);
+    }
+
     public void RemoveLastQuant()
     {
         if (_quants.Count > 0)

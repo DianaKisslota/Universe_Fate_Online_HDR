@@ -17,9 +17,9 @@ public class Character : BaseEntity
 
     public CharacterInventory Inventory { get; private set; }  = new CharacterInventory();
 
-    public void Equip(SlotType slot, Item item)
+    public void Equip(Item item, DropSlot slot)
     {
-        switch (slot)
+        switch ((slot as CharacterItemSlot).SlotType)
         {
             case SlotType.MainWeapon:
                 MainWeapon = (Weapon)item;
@@ -34,7 +34,7 @@ public class Character : BaseEntity
         }
     }
 
-    public void UnEquip(Item item)
+    public void UnEquip(Item item, DropSlot slot)
     {
         if (item == MainWeapon)
             MainWeapon = null;

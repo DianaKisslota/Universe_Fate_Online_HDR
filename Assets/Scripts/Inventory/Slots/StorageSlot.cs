@@ -21,7 +21,7 @@ public abstract class StorageSlot : DropSlot
         FillSlots();
     }
 
-    protected virtual void FillSlots()
+    public virtual void FillSlots()
     {
         while (_children.Count > 0)
         {

@@ -5,7 +5,7 @@ public enum EntityAction
     Move,
     DistantAttack,
     PickObject,
-    GetObjectFromContainer
+    TransferItem
 }
 
 public class TransferItemInfo
@@ -13,17 +13,14 @@ public class TransferItemInfo
     public DropSlot Source {  get; private set; }
     public DropSlot Destination { get; private set; }
     public int SourceItemIndex {  get; private set; } 
-    public int DestinationItemIndex { get; private set; }
-
     public Item Item { get; private set; }
 
-    public TransferItemInfo(DropSlot source, DropSlot destination, Item item, int sourceItemIndex, int destinationItemIndex)
+    public TransferItemInfo(DropSlot source, DropSlot destination, Item item, int sourceItemIndex = 0)
     {
         Source = source;
         Destination = destination;
         Item = item;
         SourceItemIndex = sourceItemIndex;
-        DestinationItemIndex = destinationItemIndex;
     }
 }
 public class Quant

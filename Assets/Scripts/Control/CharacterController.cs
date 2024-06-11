@@ -12,6 +12,7 @@ public class CharacterController : AvatarController
     [SerializeField] private ContainerPresenter _containerPresenter;
     [SerializeField] private Transform _originInventoryPlaceHolder;
     [SerializeField] private Transform _containerInventoryPlaceHolder;
+    [SerializeField] private GameObject _FinishBattleButton;
 
     [SerializeField] private PointerController _pointer;
     //   [SerializeField] protected LineRenderer _pathDrawer;
@@ -23,6 +24,9 @@ public class CharacterController : AvatarController
 
     private Vector3 _lastPoint;
     private Vector3 _lastAngle;
+
+    private Item _itemDragging;
+    private DropSlot _slotDraggingFrom;
 
     private bool _mouseOverUI;
 
@@ -61,6 +65,15 @@ public class CharacterController : AvatarController
         {
             item.MouseOver += UIMouseInteract;
         }
+
+        _inventoryPanel.Inventory.ItemLeave += ItemLeave;
+        _inventoryPanel.Inventory.ItemSet += ItemSet;
+        foreach (var itemSlot in _inventoryPanel.ItemSlots)
+        {
+            itemSlot.ItemLeave += ItemLeave;
+            itemSlot.ItemSet += ItemSet;
+        }
+            
     }
 
     public void UIMouseInteract(bool mouseOverUI)
@@ -70,6 +83,9 @@ public class CharacterController : AvatarController
 
     private void Update()
     {
+        _FinishBattleButton.SetActive(!(_containerPresenter.gameObject.activeSelf ||
+                                        (_inventoryPanel.gameObject.activeSelf && _inventoryPanel.transform.parent == _originInventoryPlaceHolder)));
+
         if (Input.GetMouseButtonDown(0))
         {
             var itemObject = GetItemUnderMousePoint();
@@ -238,6 +254,36 @@ public class CharacterController : AvatarController
                     itemObject.Drop();
                     break;
                 }
+            case EntityAction.TransferItem:
+                {
+                    var transferItemInfo = quant.Object as TransferItemInfo;
+                    var sourceSlot = transferItemInfo.Source;
+                    var destinationSlot = transferItemInfo.Destination;
+                    var item = transferItemInfo.Item;
+
+                    if (sourceSlot is CharacterItemSlot sourceItemSlot)
+                    {
+                        sourceItemSlot.Character.Equip(item, sourceItemSlot);
+                        sourceItemSlot.InitSlot(item);
+                    }
+                    if(destinationSlot is CharacterItemSlot destinationItemSlot)
+                    {
+                        destinationItemSlot.Character.UnEquip(item, destinationItemSlot);
+                        destinationItemSlot.InitSlot(null);
+                    }
+                    if (sourceSlot is StorageSlot sourceStorageSlotSlot)
+                    {
+                        sourceStorageSlotSlot.Storage.AddItem(item);
+                        sourceStorageSlotSlot.FillSlots();
+                    }
+                    if (destinationSlot is StorageSlot destinationStorageSlot)
+                    {
+                        destinationStorageSlot.Storage.RemoveItem(item);
+                        destinationStorageSlot.FillSlots();
+                    }
+
+                    break;
+                }
         }
     }
 
@@ -315,5 +361,15 @@ public class CharacterController : AvatarController
         else
             _inventoryPanel.gameObject.SetActive(!_inventoryPanel.gameObject.activeSelf);
     }
+    private void ItemLeave(Item item, DropSlot slot)
+    {
+        _itemDragging = item;
+        _slotDraggingFrom = slot;
+    }
 
+    private void ItemSet(Item item, DropSlot slot)
+    {
+        var transferItemInfo = new TransferItemInfo(_slotDraggingFrom, slot, item);
+        _playerAvatar.AddItemtransferQuant(transferItemInfo);
+    }
 }

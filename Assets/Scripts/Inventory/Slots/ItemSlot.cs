@@ -1,6 +1,7 @@
 using UnityEngine;
 public enum SlotType
 {
+    Undefined,
     MainWeapon,
     SecondaryWeapon,
     Shoulder,
@@ -14,6 +15,8 @@ public class ItemSlot : DropSlot
 {
     [SerializeField] protected SlotType _slotType;
     [SerializeField] protected GameObject _backgroungImage;
+
+    private ItemPresenter _presenter;
 
     protected bool _isOccuped;
     public virtual void SetFree()
@@ -49,6 +52,7 @@ public class ItemSlot : DropSlot
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
         base.DropProcess(itemPresenter);
+        _presenter = itemPresenter;
         _backgroungImage.SetActive(false);
         _isOccuped = true;
     }
@@ -56,7 +60,14 @@ public class ItemSlot : DropSlot
     public void InitSlot(Item item)
     {
         if (item == null)
+        {
+            if (_presenter != null)
+                Destroy(_presenter.gameObject);
+            _backgroungImage.SetActive(true);
+            _isOccuped = false;
             return;
+        }
+
         var itemPresenter = ItemFactory.CreateItemPresenter(item);
         itemPresenter.HideName();
         itemPresenter.transform.SetParent(this.transform);
@@ -67,5 +78,6 @@ public class ItemSlot : DropSlot
         }
         _backgroungImage.SetActive(false);
         _isOccuped = true;
+        _presenter = itemPresenter;
     }
 }
