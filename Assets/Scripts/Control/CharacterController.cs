@@ -98,7 +98,8 @@ public class CharacterController : AvatarController
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && !_mouseOverUI && _canMove && PlayerCanReach(AllignPoint.ToMid(GetPointerPositionOnMap())) && !AvatarBusy)
+        if (Input.GetMouseButtonDown(0) && !_mouseOverUI && _canMove && PlayerCanReach(AllignPoint.ToMid(GetPointerPositionOnMap())) 
+                   && !AvatarBusy &&!_containerPresenter.gameObject.activeSelf)
         {
             var navPoint = Instantiate(Global.NavPointPrefab);
             navPoint.transform.position = _pointer.position;
