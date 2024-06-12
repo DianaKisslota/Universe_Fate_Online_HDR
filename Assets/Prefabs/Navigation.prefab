@@ -1950,8 +1950,8 @@ MonoBehaviour:
   SouthWest: {fileID: 8468733351890324243}
   SouthEast: {fileID: 5166661030382617817}
   Buttons: []
-  ZStep: 10
-  XStep: 10
+  ZStep: 7
+  XStep: 7
   Speed: 3
 --- !u!114 &7131991744252371199
 MonoBehaviour:
