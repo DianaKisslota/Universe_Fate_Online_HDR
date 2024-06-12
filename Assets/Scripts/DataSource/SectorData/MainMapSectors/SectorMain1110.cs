@@ -7,6 +7,10 @@ public class SectorMain1110 : SectorData
         
         var cabinet = new Cabinet();
         cabinet.AddItem(new AK47());
-        AddContainer(cabinet);
+        AddStaticContainer(cabinet);
+
+        var biohazzardCase = new BiohazzardCase();
+        biohazzardCase.AddItem(new DogMeat());
+        AddSmallContainer(biohazzardCase);
     }
 }

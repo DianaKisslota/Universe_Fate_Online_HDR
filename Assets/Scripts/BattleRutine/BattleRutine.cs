@@ -32,7 +32,7 @@ public class BattleRutine : MonoBehaviour
         _source = new DataSource();
         _sectorData = _source.GetSectorData(Global.CurrentSectorID);
 
-        foreach(Container container in _sectorData.Containers)
+        foreach(StaticContainer container in _sectorData.StaticContainers)
         {
             if (_staticContainersPoints.Count == 0)
                 break;
@@ -40,6 +40,16 @@ public class BattleRutine : MonoBehaviour
             var staticContainerPoint = _staticContainersPoints[staticContainerPointIndex];
             var staticContainer = ContainerFactory.CreateContainer(container, staticContainerPoint);
             _staticContainersPoints.Remove(staticContainerPoint);
+        }
+
+        foreach (SmallContainer container in _sectorData.SmallContainers)
+        {
+            if (_spawnPoints.Count == 0)
+                break;
+            var smallContainerPointIndex = Random.Range(0, _spawnPoints.Count);
+            var smallContainerPoint = _spawnPoints[smallContainerPointIndex];
+            var smallContainer = ContainerFactory.CreateContainer(container, smallContainerPoint);
+            _spawnPoints.Remove(smallContainerPoint);
         }
 
         foreach (ItemSpawner spawner in _sectorData.Items)
