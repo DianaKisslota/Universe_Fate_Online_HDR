@@ -29,6 +29,7 @@ public class DataSource : IDataSource
         AddSector(new SectorMain1209(12, 9));
         AddSector(new SectorMain1010(10, 10));  // Start- Kladovshik
         AddSector(new SectorMain1009(10, 9));
+        AddSector(new SectorMain0904(9, 04));
         AddSector(new SectorMain0906(9, 06));  // Labolatoriy
         AddSector(new SectorMain0907(9, 7));
         AddSector(new SectorMain0910(9, 10));
@@ -38,9 +39,12 @@ public class DataSource : IDataSource
         AddSector(new SectorMain0914(9, 14));
         AddSector(new SectorMain0915(9, 15));
         AddSector(new SectorMain0810(8, 10));
+        AddSector(new SectorMain0804(8, 4));
         AddSector(new SectorMain0806(8, 6));
         AddSector(new SectorMain0807(8, 7));
         AddSector(new SectorMain0808(8, 8));
+        AddSector(new SectorMain1004(10, 4));
+        AddSector(new SectorMain1005(10, 5));
         AddSector(new SectorMain1006(10, 6));
         AddSector(new SectorMain1007(10, 7));
         AddSector(new SectorMain1008(10, 8));
