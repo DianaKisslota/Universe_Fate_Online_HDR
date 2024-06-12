@@ -1485,6 +1485,7 @@ MonoBehaviour:
   - {fileID: 473883800}
   _character: {fileID: 2092137370}
   _cameraHolder: {fileID: 858756162}
+  _camera: {fileID: 917130510}
   _cameraScrollSpeed: 10
   _cameraRotateSpeed: 50
   _frontFrontier: 17

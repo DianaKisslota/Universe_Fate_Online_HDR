@@ -10,6 +10,7 @@ public class BattleRutine : MonoBehaviour
     [SerializeField] List<Transform> _staticContainersPoints;
     [SerializeField] Transform _character;
     [SerializeField] Transform _cameraHolder;
+    [SerializeField] Transform _camera;
 
     [SerializeField] private int _cameraScrollSpeed = 10;
     [SerializeField] private int _cameraRotateSpeed = 50;
@@ -129,7 +130,7 @@ public class BattleRutine : MonoBehaviour
             _rotationX += Input.GetAxis("Mouse X") * _cameraRotateSpeed * 5 * Time.deltaTime;
             _rotationY += Input.GetAxis("Mouse Y") * _cameraRotateSpeed * 5 * Time.deltaTime;
 
-            _cameraHolder.localEulerAngles = new Vector3(-_rotationY, _rotationX, 0);
+            _camera.localEulerAngles = new Vector3(-_rotationY, _rotationX, 0);
         }
     }
 
