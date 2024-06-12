@@ -140,7 +140,8 @@ public class BattleRutine : MonoBehaviour
             _rotationX += Input.GetAxis("Mouse X") * _cameraRotateSpeed * 5 * Time.deltaTime;
             _rotationY += Input.GetAxis("Mouse Y") * _cameraRotateSpeed * 5 * Time.deltaTime;
 
-            _camera.localEulerAngles = new Vector3(-_rotationY, _rotationX, 0);
+            _camera.localEulerAngles = new Vector3(-_rotationY, 0, 0);
+            _cameraHolder.localEulerAngles = new Vector3(0, _rotationX, 0);
         }
     }
 
