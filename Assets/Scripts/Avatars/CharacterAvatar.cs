@@ -137,6 +137,11 @@ public class CharacterAvatar : EntityAvatar
                         quantEnded = true;
                     }
                     break;
+                case EntityAction.TransferItem:
+                    {
+                        quantEnded = true;
+                        break;
+                    }
                 default:
                     Debug.LogError("Неизвестный тип действия");
                     break;

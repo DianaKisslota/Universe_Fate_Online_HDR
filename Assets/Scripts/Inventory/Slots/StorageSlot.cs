@@ -49,6 +49,7 @@ public abstract class StorageSlot : DropSlot
     {
         base.DropProcess(itemPresenter);
         _children.Add(itemPresenter.gameObject);
+        OnItemSet(itemPresenter.Item, this);
     }
 
     public override void OnItemLeave(Item item)
