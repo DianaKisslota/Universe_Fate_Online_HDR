@@ -74,6 +74,7 @@ public static class Global
     {
         Character = new Character();
         Character.Inventory.AddItem(new AK47());
+        Character.Inventory.AddItem(new PM());
         Character.Inventory.AddItem(new KitchenKnife());
     }
         

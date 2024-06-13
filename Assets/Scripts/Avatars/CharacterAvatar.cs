@@ -48,32 +48,43 @@ public class CharacterAvatar : EntityAvatar
         {
             case SlotType.MainWeapon:
                 {
+                    _animator.ResetTrigger("Idle");
+                    //_animator.ResetTrigger("RemoveWeapon");
+                    //_animator.SetTrigger("RemoveWeapon");
                     itemObject.gameObject.transform.parent = _weaponPoint;
                     switch ((item as Weapon).WeaponType)
                     {
                         case WeaponType.Rifle:
                         case WeaponType.AssaultRifle:
                         case WeaponType.SMG:
-                            _animator.SetTrigger("TakeRifle");
+                            _animator.SetInteger("HasWeapon", 2);
                             break;
                         case WeaponType.Pistol:
-                            _animator.SetTrigger("TakePistol");
+                            _animator.SetInteger("HasWeapon", 1);
                             break;
                     }
                     break; 
                 }
             case SlotType.SecondaryWeapon:
-                itemObject.gameObject.transform.parent = _weaponBackPoint;
+                itemObject.gameObject.transform.parent = _weaponSidePoint;
                 break;
             case SlotType.Shoulder:
-                itemObject.gameObject.transform.parent = _weaponSidePoint;
+                itemObject.gameObject.transform.parent = _weaponBackPoint;
                 break;
         }
         itemObject.gameObject.transform.localPosition = Vector3.zero;
         itemObject.gameObject.transform.localRotation = Quaternion.identity;
         itemObject.Take();
     }
-    private void OnUnEquip(Item item) { }
+    private void OnUnEquip(Item item, SlotType slotType) 
+    { 
+        if (slotType == SlotType.MainWeapon)
+        {
+            var itemObject = GetItemObject(item);
+            itemObject.gameObject.SetActive(false);
+            _animator.SetInteger("HasWeapon", 0);
+        }
+    }
 
     public void TakeItem(ItemObject itemObject)
     {

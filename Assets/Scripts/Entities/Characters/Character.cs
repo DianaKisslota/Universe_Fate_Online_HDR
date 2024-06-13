@@ -12,7 +12,7 @@ public class Character : BaseEntity
     }
 
     public event Action<Item, SlotType> OnEquip;
-    public event Action<Item> OnUnEquip;
+    public event Action<Item, SlotType> OnUnEquip;
 
     public List<Skill> Skills { get; set; } = new List<Skill>();
     public Weapon MainWeapon { get; set; }
@@ -54,6 +54,9 @@ public class Character : BaseEntity
                     ShoulderWeapon = null;
                 else
                     Inventory.RemoveItem(item);
-        OnUnEquip?.Invoke(item);
+        if (slot is ItemSlot itemSlot)
+            OnUnEquip?.Invoke(item, itemSlot.SlotType);
+        else
+            OnUnEquip?.Invoke(item, SlotType.Undefined);
     }
 }
