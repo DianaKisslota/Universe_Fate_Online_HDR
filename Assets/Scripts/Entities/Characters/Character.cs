@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class Character : BaseEntity
@@ -10,6 +11,9 @@ public class Character : BaseEntity
         set { _expirience = value; }
     }
 
+    public event Action<Item, SlotType> OnEquip;
+    public event Action<Item> OnUnEquip;
+
     public List<Skill> Skills { get; set; } = new List<Skill>();
     public Weapon MainWeapon { get; set; }
     public Weapon SecondaryWeapon { get; set; }
@@ -19,7 +23,9 @@ public class Character : BaseEntity
 
     public void Equip(Item item, DropSlot slot)
     {
-        switch ((slot as CharacterItemSlot).SlotType)
+        var slotType = (slot as ItemSlot).SlotType;
+
+        switch (slotType)
         {
             case SlotType.MainWeapon:
                 MainWeapon = (Weapon)item;
@@ -32,6 +38,8 @@ public class Character : BaseEntity
                 ShoulderWeapon = (Weapon)item;
                 break;
         }
+
+        OnEquip?.Invoke(item, slotType);
     }
 
     public void UnEquip(Item item, DropSlot slot)
@@ -46,5 +54,6 @@ public class Character : BaseEntity
                     ShoulderWeapon = null;
                 else
                     Inventory.RemoveItem(item);
+        OnUnEquip?.Invoke(item);
     }
 }

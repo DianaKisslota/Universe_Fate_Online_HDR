@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class AvatarController : MonoBehaviour
 {
-    [SerializeField] protected EntityAvatar _avatar;
+    protected EntityAvatar _avatar;
 
-
+    public void BindAvatar(EntityAvatar avatar)
+    {
+        _avatar = avatar;
+    }
 }

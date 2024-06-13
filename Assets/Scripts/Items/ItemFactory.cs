@@ -5,7 +5,15 @@ public static class ItemFactory
 {
     public static ItemObject CreateItem(Type itemType, GameObject parent = null)
     {
-        var modelPrefab = Global.GetPrefabForItem(itemType);
+        var item = Activator.CreateInstance(itemType) as Item;
+        var itemObject = CreateItem(item, parent);
+
+        return itemObject;
+    }
+
+    public static ItemObject CreateItem(Item item, GameObject parent = null)
+    {
+        var modelPrefab = Global.GetPrefabForItem(item.GetType());
         var model = GameObject.Instantiate<GameObject>(modelPrefab);
         var itemObject = model.AddComponent<ItemObject>();
         model.AddComponent<Rigidbody>();
@@ -14,7 +22,6 @@ public static class ItemFactory
         highLighter.transform.localPosition = Vector3.zero;
         itemObject.Light = highLighter;
         itemObject.LightOff();
-        var item = Activator.CreateInstance(itemType) as Item;
         itemObject.Item = item;
 
         return itemObject;

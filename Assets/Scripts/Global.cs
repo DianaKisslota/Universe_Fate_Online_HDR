@@ -46,6 +46,7 @@ public static class Global
 
     static Global()
     {
+        EntityPrefabs.Add(typeof(Character), Resources.Load<GameObject>("EntityModels/Character/Character"));
         EntityPrefabs.Add(typeof(FeralDog), Resources.Load<GameObject>("EntityModels/Wolf_Animated/Prefabs/Wolf"));
         EntityPrefabs.Add(typeof(Reptiloid), Resources.Load<GameObject>("EntityModels/Rake/Perfabs/Rake_A"));
 
@@ -72,7 +73,7 @@ public static class Global
     public static void InitCharacter()
     {
         Character = new Character();
-        Character.Inventory.AddItem(new PM());
+        Character.Inventory.AddItem(new AK47());
         Character.Inventory.AddItem(new KitchenKnife());
     }
         

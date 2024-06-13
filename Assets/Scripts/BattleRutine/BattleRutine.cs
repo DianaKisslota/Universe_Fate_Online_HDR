@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class BattleRutine : MonoBehaviour
 {
-    [SerializeField] List<Transform> _spawnPoints;
-    [SerializeField] List<Transform> _staticContainersPoints;
-    [SerializeField] Transform _character;
-    [SerializeField] Transform _cameraHolder;
-    [SerializeField] Transform _camera;
+    [SerializeField] private List<Transform> _spawnPoints;
+    [SerializeField] private List<Transform> _staticContainersPoints;
+    [SerializeField] private List<Transform> _characterSpawnPoints;
+    [SerializeField] private Transform _cameraHolder;
+    [SerializeField] private Transform _camera;
+    [SerializeField] private CharacterController _characterController;
 
     [SerializeField] private int _cameraScrollSpeed = 10;
     [SerializeField] private int _cameraRotateSpeed = 50;
@@ -20,6 +21,8 @@ public class BattleRutine : MonoBehaviour
     [SerializeField] private float _rightFrontier = 2.5f;
     [SerializeField] private float _maxHeigh = 20;
     [SerializeField] private float _minHeigh = 1;
+
+    private CharacterAvatar _character;
 
     private float _rotationX;
     private float _rotationY;
@@ -32,7 +35,11 @@ public class BattleRutine : MonoBehaviour
         _source = new DataSource();
         _sectorData = _source.GetSectorData(Global.CurrentSectorID);
 
-        foreach(StaticContainer container in _sectorData.StaticContainers)
+        _character = AvatarFactory.CreateCharacter(Global.Character, _characterSpawnPoints[0]);
+
+        _characterController.BindAvatar(_character);
+
+        foreach (StaticContainer container in _sectorData.StaticContainers)
         {
             if (_staticContainersPoints.Count == 0)
                 break;
@@ -79,8 +86,7 @@ public class BattleRutine : MonoBehaviour
                     break;
                 var spawnPointIndex = Random.Range(0, _spawnPoints.Count);
                 var spawnPoint = _spawnPoints[spawnPointIndex];
-                var avatar = AvatarFactory.CreateMob(spawner.EntityType);
-                avatar.transform.position = spawnPoint.position;
+                var avatar = AvatarFactory.CreateMob(spawner.EntityType, spawnPoint);                
                 avatar.transform.LookAt(_character.transform);
                 _spawnPoints.Remove(spawnPoint);
             }

@@ -6,6 +6,16 @@ using UnityEngine;
 public class ItemObject : MonoBehaviour
 {
     private Rigidbody _rigidBody;
+
+    private Rigidbody RigidBody
+    {
+        get
+        {
+            if ( _rigidBody == null )
+                _rigidBody = GetComponent<Rigidbody>();
+            return _rigidBody;
+        }
+    }
     public Item Item {  get; set; }
     public GameObject Light {  get; set; }
 
@@ -14,7 +24,6 @@ public class ItemObject : MonoBehaviour
 
     private void Start()
     {
-        _rigidBody = GetComponent<Rigidbody>();
         Light.SetActive(false);
     }
 
@@ -33,7 +42,7 @@ public class ItemObject : MonoBehaviour
 
     public void SetKinematic(bool kinematic)
     {
-        _rigidBody.isKinematic = kinematic;
+        RigidBody.isKinematic = kinematic;
     }
 
     public void LightOff()

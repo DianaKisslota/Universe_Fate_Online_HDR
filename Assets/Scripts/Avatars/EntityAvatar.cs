@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class EntityAvatar : MonoBehaviour
+public abstract class EntityAvatar : MonoBehaviour
 {
     public BaseEntity Entity { get; set; }
     protected Animator _animator;
@@ -22,7 +22,10 @@ public class EntityAvatar : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+        Init();
     }
+
+    protected abstract void Init();
 
     public void MoveTo(Vector3 movePoint)
     {
