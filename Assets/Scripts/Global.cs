@@ -52,7 +52,7 @@ public static class Global
 
         ItemPrefabs.Add(typeof(AK47), Resources.Load<GameObject>("WeaponModels/Modern Weapons Pack/Ak-47/Prefab/Ak-47"));
         ItemPrefabs.Add(typeof(PM), Resources.Load<GameObject>("WeaponModels/PM Makarov/Makarov (PM)/Makarov"));
-        ItemPrefabs.Add(typeof(KitchenKnife), Resources.Load<GameObject>("WeaponModels/kitchen-knife/lp"));
+        ItemPrefabs.Add(typeof(KitchenKnife), Resources.Load<GameObject>("WeaponModels/kitchen-knife/Knife_prefab"));
 
         ContainerPrefabs.Add(typeof(Cabinet), Resources.Load<GameObject>("OtherModels/Cabinet/Cabinet"));
         ContainerPrefabs.Add(typeof(BiohazzardCase), Resources.Load<GameObject>("OtherModels/BiohazzardCase/BiohazzardCase"));

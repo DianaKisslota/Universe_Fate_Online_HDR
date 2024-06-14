@@ -62,6 +62,10 @@ public class CharacterAvatar : EntityAvatar
                         case WeaponType.Pistol:
                             _animator.SetInteger("HasWeapon", 1);
                             break;
+                        case WeaponType.Knife:
+                            _animator.SetInteger("HasWeapon", 3);
+                            break;
+
                     }
                     break; 
                 }
