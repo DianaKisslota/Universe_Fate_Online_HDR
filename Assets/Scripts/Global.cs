@@ -46,7 +46,7 @@ public static class Global
 
     static Global()
     {
-        EntityPrefabs.Add(typeof(Character), Resources.Load<GameObject>("EntityModels/Character/Character"));
+        EntityPrefabs.Add(typeof(Character), Resources.Load<GameObject>("EntityModels/Character/Character2"));
         EntityPrefabs.Add(typeof(FeralDog), Resources.Load<GameObject>("EntityModels/Wolf_Animated/Prefabs/Wolf"));
         EntityPrefabs.Add(typeof(Reptiloid), Resources.Load<GameObject>("EntityModels/Rake/Perfabs/Rake_A"));
 
