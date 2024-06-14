@@ -44,6 +44,8 @@ public class CharacterAvatar : EntityAvatar
     private void OnEquip(Item item, SlotType slotType) 
     { 
         var itemObject = GetItemObject(item);
+        Quaternion rotation = Quaternion.identity;
+        Vector3 position = Vector3.zero;
         switch (slotType)
         {
             case SlotType.MainWeapon:
@@ -63,29 +65,40 @@ public class CharacterAvatar : EntityAvatar
                             _animator.SetInteger("HasWeapon", 1);
                             break;
                         case WeaponType.Knife:
-                            _animator.SetInteger("HasWeapon", 3);
+                            {
+                                _animator.SetInteger("HasWeapon", 3);
+                                rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+                            }
                             break;
 
                     }
                     break; 
                 }
             case SlotType.SecondaryWeapon:
-                itemObject.gameObject.transform.parent = _weaponSidePoint;
+                {
+                    if ((item as Weapon).WeaponType == WeaponType.Knife)
+                    {
+                        rotation = Quaternion.Euler(new Vector3(90, 90, 0));
+                        position = new Vector3(0, -0.1f, -0.25f);
+                    }
+                    itemObject.gameObject.transform.parent = _weaponSidePoint;
+                }
                 break;
             case SlotType.Shoulder:
                 itemObject.gameObject.transform.parent = _weaponBackPoint;
                 break;
         }
-        itemObject.gameObject.transform.localPosition = Vector3.zero;
-        itemObject.gameObject.transform.localRotation = Quaternion.identity;
+        itemObject.gameObject.transform.localPosition = position;
+        itemObject.gameObject.transform.localRotation = rotation;
+        itemObject.gameObject.SetActive(true);
         itemObject.Take();
     }
     private void OnUnEquip(Item item, SlotType slotType) 
-    { 
+    {
+        var itemObject = GetItemObject(item);
+        itemObject.gameObject.SetActive(false);
         if (slotType == SlotType.MainWeapon)
         {
-            var itemObject = GetItemObject(item);
-            itemObject.gameObject.SetActive(false);
             _animator.SetInteger("HasWeapon", 0);
         }
     }
