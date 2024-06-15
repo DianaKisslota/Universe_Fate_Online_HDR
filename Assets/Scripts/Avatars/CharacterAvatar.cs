@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class CharacterAvatar : EntityAvatar
 {
@@ -10,6 +8,7 @@ public class CharacterAvatar : EntityAvatar
     [SerializeField] Transform _weaponBackPoint;
     [SerializeField] Transform _weaponSidePoint;
     public CharacterInventoryPresenter InventoryPresenter {  get; set; }
+
     private List<Quant> _quants = new List<Quant>();
     private Character Character => Entity as Character;
 
@@ -85,6 +84,7 @@ public class CharacterAvatar : EntityAvatar
             case SlotType.Shoulder:
                 itemObject.gameObject.transform.parent = _weaponBackPoint;
                 break;
+            default:return;
         }
         itemObject.gameObject.transform.localPosition = position;
         itemObject.gameObject.transform.localRotation = rotation;
@@ -95,7 +95,8 @@ public class CharacterAvatar : EntityAvatar
     private void OnUnEquip(Item item, SlotType slotType) 
     {
         var itemObject = GetItemObject(item);
-        itemObject.gameObject.SetActive(false);
+        if(itemObject != null) 
+            itemObject.gameObject.SetActive(false);
         if (slotType == SlotType.MainWeapon)
         {
             _animator.SetInteger("HasWeapon", 0);
