@@ -21,10 +21,8 @@ public class Character : BaseEntity
 
     public CharacterInventory Inventory { get; private set; }  = new CharacterInventory();
 
-    public void Equip(Item item, DropSlot slot)
+    public void Equip(Item item, SlotType slotType)
     {
-        var slotType = (slot as ItemSlot).SlotType;
-
         switch (slotType)
         {
             case SlotType.MainWeapon:
@@ -40,6 +38,11 @@ public class Character : BaseEntity
         }
 
         OnEquip?.Invoke(item, slotType);
+    }
+    public void Equip(Item item, DropSlot slot)
+    {
+        var slotType = (slot as ItemSlot).SlotType;
+        Equip(item, slotType);
     }
 
     public void UnEquip(Item item, DropSlot slot)

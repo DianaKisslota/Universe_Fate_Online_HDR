@@ -9,6 +9,7 @@ public class CharacterAvatar : EntityAvatar
     [SerializeField] Transform _weaponPoint;
     [SerializeField] Transform _weaponBackPoint;
     [SerializeField] Transform _weaponSidePoint;
+    public CharacterInventoryPresenter InventoryPresenter {  get; set; }
     private List<Quant> _quants = new List<Quant>();
     private Character Character => Entity as Character;
 
@@ -51,8 +52,6 @@ public class CharacterAvatar : EntityAvatar
             case SlotType.MainWeapon:
                 {
                     _animator.ResetTrigger("Idle");
-                    //_animator.ResetTrigger("RemoveWeapon");
-                    //_animator.SetTrigger("RemoveWeapon");
                     itemObject.gameObject.transform.parent = _weaponPoint;
                     switch ((item as Weapon).WeaponType)
                     {
@@ -70,7 +69,6 @@ public class CharacterAvatar : EntityAvatar
                                 rotation = Quaternion.Euler(new Vector3(0, 0, -90));
                             }
                             break;
-
                     }
                     break; 
                 }
@@ -92,6 +90,7 @@ public class CharacterAvatar : EntityAvatar
         itemObject.gameObject.transform.localRotation = rotation;
         itemObject.gameObject.SetActive(true);
         itemObject.Take();
+        InventoryPresenter.RefreshItemSlots();
     }
     private void OnUnEquip(Item item, SlotType slotType) 
     {
@@ -105,19 +104,44 @@ public class CharacterAvatar : EntityAvatar
 
     public void TakeItem(ItemObject itemObject)
     {
-
-        if (itemObject.Item is Weapon)
+        _itemObjects.Add(itemObject.Item, itemObject);
+        if (itemObject.Item is Weapon weapon)
         {
-            if ((itemObject.Item as Weapon).WeaponType == WeaponType.Rifle || (itemObject.Item as Weapon).WeaponType == WeaponType.AssaultRifle)
-                itemObject.gameObject.transform.parent = _weaponBackPoint;
+            if (Character.MainWeapon == null)
+            {
+                Character.Equip(weapon, SlotType.MainWeapon);
+            }
             else
-                itemObject.gameObject.transform.parent = _weaponSidePoint;
-            itemObject.gameObject.transform.localPosition = Vector3.zero;
-            itemObject.gameObject.transform.localRotation = Quaternion.identity;
+            {
+                if (weapon.WeaponType == WeaponType.Rifle || weapon.WeaponType == WeaponType.AssaultRifle)
+                {
+                    if (Character.ShoulderWeapon == null)
+                    {
+                        Character.Equip(weapon, SlotType.Shoulder);
+                    }
+                    else
+                    {
+                        Character.Inventory.AddItem(weapon);
+                        itemObject.Take();
+                        itemObject.gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (Character.SecondaryWeapon == null)
+                    {
+                        Character.Equip(weapon, SlotType.SecondaryWeapon);
+                    }
+                    else
+                    {
+                        Character.Inventory.AddItem(weapon);
+                        itemObject.Take();
+                        itemObject.gameObject.SetActive(false);
+                    }
+                }
+            }
         }
-        itemObject.Take();
     }
-
     public void AddQuant(EntityAction action, object _object, Vector3? lastPosition, Quaternion lastRotation)
     {
         _quants.Add(new Quant(action, _object, lastPosition, lastRotation));

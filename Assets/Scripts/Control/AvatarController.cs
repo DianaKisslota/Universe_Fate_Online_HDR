@@ -6,7 +6,7 @@ public class AvatarController : MonoBehaviour
 {
     protected EntityAvatar _avatar;
 
-    public void BindAvatar(EntityAvatar avatar)
+    public virtual void BindAvatar(EntityAvatar avatar)
     {
         _avatar = avatar;
     }
