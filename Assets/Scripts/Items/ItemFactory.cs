@@ -14,6 +14,8 @@ public static class ItemFactory
     public static ItemObject CreateItem(Item item, GameObject parent = null)
     {
         var modelPrefab = Global.GetPrefabForItem(item.GetType());
+        if (modelPrefab == null)
+            return null;
         var model = GameObject.Instantiate<GameObject>(modelPrefab);
         var itemObject = model.AddComponent<ItemObject>();
         model.AddComponent<Rigidbody>();

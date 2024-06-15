@@ -76,6 +76,12 @@ public class CharacterController : AvatarController
             
     }
 
+    public override void BindAvatar(EntityAvatar avatar)
+    {
+        base.BindAvatar(avatar);
+        _playerAvatar.InventoryPresenter = _inventoryPanel;
+    }
+
     public void UIMouseInteract(bool mouseOverUI)
     {
         _mouseOverUI = mouseOverUI;

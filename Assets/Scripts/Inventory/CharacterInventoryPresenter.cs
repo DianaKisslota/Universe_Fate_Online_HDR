@@ -20,6 +20,11 @@ public class CharacterInventoryPresenter : MonoBehaviour
         {
             _mainWeapon, _secondaryWeapon, _shoulder
         };
+        RefreshItemSlots();
+    }
+
+    public void RefreshItemSlots()
+    {
         _mainWeapon.InitSlot(Character.MainWeapon);
         _secondaryWeapon.InitSlot(Character.SecondaryWeapon);
         _shoulder.InitSlot(Character.ShoulderWeapon);

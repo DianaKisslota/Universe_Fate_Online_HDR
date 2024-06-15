@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 public abstract class RangeWeapon : Weapon
 {
-
+    public Caliber Caliber { get; set; }
+    public int AmmoCapacity {  get; set; }
+    public Type CurrentAmmoType { get; set; } 
+    public int AmmoCount {  get; set; }
 }
 

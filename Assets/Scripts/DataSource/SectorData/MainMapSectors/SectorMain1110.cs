@@ -4,7 +4,8 @@ public class SectorMain1110 : SectorData
     {
         AddMonster(new EntitySpawner(typeof(FeralDog), 1, 3));
         AddItem(typeof(PM));
-        
+        AddItem(typeof(AK47));
+
         var cabinet = new Cabinet();
         cabinet.AddItem(new AK47());
         AddStaticContainer(cabinet);

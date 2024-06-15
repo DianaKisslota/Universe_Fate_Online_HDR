@@ -61,6 +61,8 @@ public static class Global
         Icons.Add(typeof(PM), Resources.Load<Sprite>("WeaponModels/PM Makarov/Makarov (PM)/pm_icon"));
         Icons.Add(typeof(KitchenKnife), Resources.Load<Sprite>("WeaponModels/kitchen-knife/KitchenKnife"));
         Icons.Add(typeof(DogMeat), Resources.Load<Sprite>("Icons/dogmeat"));
+        Icons.Add(typeof(Ammo9x18mm), Resources.Load<Sprite>("Icons/Ammo9x18mm"));
+        Icons.Add(typeof(Ammo545x39mm), Resources.Load<Sprite>("Icons/Ammo545x39mm"));
 
         NavPointPrefab = Resources.Load<GameObject>("ControlPrefabs/Nav");
         ItemPresenterPrefab = Resources.Load<GameObject>("Presenters/ItemPresenter");
@@ -76,6 +78,9 @@ public static class Global
         Character.Inventory.AddItem(new AK47());
         Character.Inventory.AddItem(new PM());
         Character.Inventory.AddItem(new KitchenKnife());
+
+        Character.Inventory.AddItem(new Ammo9x18mm(), 50);
+        Character.Inventory.AddItem(new Ammo545x39mm(), 30);
     }
         
 }
