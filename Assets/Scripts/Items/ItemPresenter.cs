@@ -36,7 +36,12 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             if (value > 1)
                 _countText.text = value.ToString();
             else
-                _countText.text = string.Empty;
+                if (Item is RangeWeapon rangeWeapon)
+                {
+                    _countText.text = rangeWeapon.AmmoCount.ToString() + "/" + rangeWeapon.AmmoCapacity.ToString();
+                }
+                else
+                    _countText.text = string.Empty;
         }
     }
 

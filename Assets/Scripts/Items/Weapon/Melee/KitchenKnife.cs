@@ -1,4 +1,4 @@
-﻿public class KitchenKnife : RangeWeapon
+﻿public class KitchenKnife : MeleeWeapon
 {
     public KitchenKnife()
     {
