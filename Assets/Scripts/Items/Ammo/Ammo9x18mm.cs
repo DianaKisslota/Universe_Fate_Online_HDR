@@ -12,7 +12,7 @@ public class Ammo9x18mm : Ammo
         Caliber = Caliber.bullet9x18;
         Weight = 0.099f;
         Volume = 0.017f;
-        BaseDamage = 10;
+        BaseDamage = 20;
         ArmorPiercing = 1;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class ItemFactory
@@ -46,7 +47,21 @@ public static class ItemFactory
         presenter.Count = 1;
         presenter.Name = item.Name;
 
+        if (item is RangeWeapon)
+        {
+            presenter.AddComponent<ReloadSlot>();
+        }
+
         return presenter;
     }
+
+    public static ItemPresenter CreateItemPresenter(StoragePosition storagePosition, Transform parent = null)
+    {
+        var presenter = CreateItemPresenter(storagePosition.Item, parent);
+        presenter.SetStoragePosition(storagePosition);
+
+        return presenter;
+    }
+
 }
 

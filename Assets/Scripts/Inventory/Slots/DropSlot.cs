@@ -7,6 +7,8 @@ public class DropSlot : MonoBehaviour, IDropHandler
     public event Action<Item, DropSlot> ItemLeave;
     public event Action<Item, DropSlot> ItemSet;
 
+    [SerializeField] protected SlotType _slotType;
+    public SlotType SlotType => _slotType;
     public virtual void OnItemLeave(Item item)
     {
         ItemLeave?.Invoke(item, this);
@@ -20,7 +22,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
     {
         var transferredObject = eventData.pointerDrag;
         var transferredItemPresenter = transferredObject.GetComponent<ItemPresenter>();
-        if (transferredItemPresenter != null && IsItemAccessible(transferredItemPresenter.Item) && ItemAccepted(transferredItemPresenter.Item))
+        if (transferredItemPresenter != null && IsItemAccessible(transferredItemPresenter.Item) && ItemAccepted(transferredItemPresenter))
         {
             DropProcess(transferredItemPresenter);
         }
@@ -31,7 +33,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         return true;
     }
 
-    protected virtual bool ItemAccepted(Item item)
+    protected virtual bool ItemAccepted(ItemPresenter itemPresenter)
     {
         return true;
     }

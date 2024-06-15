@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 public enum Caliber
 {
     bullet9x18,
-    bullet545x39
+    bullet545x39,
+    bullet762x39
 }
 public abstract class Ammo : Item
 {

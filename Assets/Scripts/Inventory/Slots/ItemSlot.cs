@@ -13,7 +13,6 @@ public enum SlotType
 
 public class ItemSlot : DropSlot
 {
-    [SerializeField] protected SlotType _slotType;
     [SerializeField] protected GameObject _backgroungImage;
 
     private ItemPresenter _presenter;
@@ -25,7 +24,7 @@ public class ItemSlot : DropSlot
         _backgroungImage.SetActive(true);
     }
 
-    public SlotType SlotType => _slotType;
+
 
     protected override bool IsItemAccessible(Item item)
     {
@@ -44,7 +43,7 @@ public class ItemSlot : DropSlot
         return false;
     }
 
-    protected override bool ItemAccepted(Item item)
+    protected override bool ItemAccepted(ItemPresenter itemPresenter)
     {
         return !_isOccuped;
     }
@@ -55,6 +54,12 @@ public class ItemSlot : DropSlot
         _presenter = itemPresenter;
         _backgroungImage.SetActive(false);
         _isOccuped = true;
+    }
+
+    public override void OnItemLeave(Item item)
+    {
+        _presenter = null;
+        base.OnItemLeave(item);
     }
 
     public void InitSlot(Item item)

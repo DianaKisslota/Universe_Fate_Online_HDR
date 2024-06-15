@@ -63,6 +63,7 @@ public static class Global
         Icons.Add(typeof(DogMeat), Resources.Load<Sprite>("Icons/dogmeat"));
         Icons.Add(typeof(Ammo9x18mm), Resources.Load<Sprite>("Icons/Ammo9x18mm"));
         Icons.Add(typeof(Ammo545x39mm), Resources.Load<Sprite>("Icons/Ammo545x39mm"));
+        Icons.Add(typeof(Ammo762x39mm), Resources.Load<Sprite>("Icons/Ammo762x39mm"));
 
         NavPointPrefab = Resources.Load<GameObject>("ControlPrefabs/Nav");
         ItemPresenterPrefab = Resources.Load<GameObject>("Presenters/ItemPresenter");
@@ -81,6 +82,7 @@ public static class Global
 
         Character.Inventory.AddItem(new Ammo9x18mm(), 50);
         Character.Inventory.AddItem(new Ammo545x39mm(), 30);
+        Character.Inventory.AddItem(new Ammo762x39mm(), 30);
     }
         
 }

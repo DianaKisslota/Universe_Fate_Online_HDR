@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -16,6 +17,7 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     protected RectTransform _rectTransform;
 
     private int _count;
+    private StoragePosition _storagePosition;
     public Item Item { get; set; }
 
     public Transform OldParent => _oldParent;
@@ -33,15 +35,29 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         set
         {
             _count = value;
-            if (value > 1)
-                _countText.text = value.ToString();
+            if(_storagePosition != null)
+                _storagePosition.Count = value;
+            if (_count == 0)
+                Destroy(gameObject);
             else
-                if (Item is RangeWeapon rangeWeapon)
-                {
-                    _countText.text = rangeWeapon.AmmoCount.ToString() + "/" + rangeWeapon.AmmoCapacity.ToString();
-                }
-                else
-                    _countText.text = string.Empty;
+                RefreshInfo();
+        }
+    }
+
+    public void SetStoragePosition(StoragePosition storagePosition)
+    {
+        _storagePosition = storagePosition;
+    }
+
+    public void RefreshInfo()
+    {
+        if (_count > 1)
+            _countText.text = _count.ToString();
+        else
+           _countText.text = string.Empty;
+        if (Item is RangeWeapon rangeWeapon)
+        {
+            _countText.text = rangeWeapon.AmmoCount.ToString() + "/" + rangeWeapon.AmmoCapacity.ToString();
         }
     }
 

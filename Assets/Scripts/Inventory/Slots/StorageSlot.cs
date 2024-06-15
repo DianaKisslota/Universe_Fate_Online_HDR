@@ -32,16 +32,16 @@ public abstract class StorageSlot : DropSlot
 
         foreach (StoragePosition position in _storage.Items)
         {
-            var itemPresenter = ItemFactory.CreateItemPresenter(position.Item, _itemsParent.transform);
+            var itemPresenter = ItemFactory.CreateItemPresenter(position, _itemsParent.transform);
             itemPresenter.Count = position.Count;
 
             _children.Add(itemPresenter.gameObject);
         }
     }
 
-    protected override bool ItemAccepted(Item item)
+    protected override bool ItemAccepted(ItemPresenter itemPresenter)
     {
-        Storage.AddItem(item);
+        Storage.AddItem(itemPresenter.Item);
         return true;
     }
 

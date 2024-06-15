@@ -848,7 +848,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 80, y: 80}
+  m_CellSize: {x: 100, y: 100}
   m_Spacing: {x: 3, y: 3}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -864,6 +864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a681d72359ddb48b6558f9d12de4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _slotType: 0
   _itemsParent: {fileID: 4040325505128132499}
 --- !u!1 &4295701501505753831
 GameObject:

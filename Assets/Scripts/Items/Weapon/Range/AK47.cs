@@ -4,7 +4,7 @@
     {
         Name = "АК-47";
         WeaponType = WeaponType.AssaultRifle;
-        Caliber = Caliber.bullet545x39;
+        Caliber = Caliber.bullet762x39;
         AmmoCapacity = 30;
         Weight = 3.3f;
         Volume = 10;
