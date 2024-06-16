@@ -10,11 +10,16 @@ public class CharacterInventorySlot : StorageSlot
     {
         Character = Global.Character;
         Storage = Character.Inventory;
-        ItemLeave += Character.UnEquip;
+        ItemLeave += OnUnequip;
     }
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
         base.DropProcess(itemPresenter);
         OnItemSet(itemPresenter.Item, this);
+    }
+
+    private void OnUnequip(Item item, DropSlot slot)
+    {
+        Character.UnEquip(item);
     }
 }

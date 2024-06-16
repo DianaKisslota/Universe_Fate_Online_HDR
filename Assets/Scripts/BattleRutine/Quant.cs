@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public enum EntityAction
 {
     Move,
     DistantAttack,
     PickObject,
-    TransferItem
+    TransferItem,
+    ReloadWeapon
 }
 
 public class TransferItemInfo
@@ -21,6 +23,24 @@ public class TransferItemInfo
         Destination = destination;
         Item = item;
         SourceItemIndex = sourceItemIndex;
+    }
+}
+
+public class ReloadWeaponInfo
+{
+    public ItemPresenter WeaponPresenter { get; private set; }
+    public ItemPresenter AmmoPresenter { get; private set; }
+    public Type AmmoType {  get; private set; }
+    public int AmmoUsed {  get; private set; }
+    public StorageSlot SourceSlot {  get; private set; }
+
+    public ReloadWeaponInfo(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int ammoUsed, StorageSlot sourceSlot)
+    {
+        WeaponPresenter = weaponPresenter;
+        AmmoPresenter = ammoPresenter;
+        AmmoType = ammoPresenter.Item.GetType();
+        AmmoUsed = ammoUsed;
+        SourceSlot = sourceSlot;
     }
 }
 public class Quant

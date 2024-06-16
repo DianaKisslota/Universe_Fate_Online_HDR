@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Rendering;
@@ -73,7 +74,18 @@ public class CharacterController : AvatarController
             itemSlot.ItemLeave += ItemLeave;
             itemSlot.ItemSet += ItemSet;
         }
-            
+
+        _inventoryPanel.Inventory.WeaponReloaded += OnWeaponReloaded;
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var itemSlot in _inventoryPanel.ItemSlots)
+        {
+            itemSlot.ItemLeave -= ItemLeave;
+            itemSlot.ItemSet -= ItemSet;
+        }
+        _inventoryPanel.Inventory.WeaponReloaded -= OnWeaponReloaded;
     }
 
     public override void BindAvatar(EntityAvatar avatar)
@@ -118,6 +130,7 @@ public class CharacterController : AvatarController
                 _containerPresenter.gameObject.SetActive(true);
                 _containerPresenter.Slot.ItemLeave += ItemLeave;
                 _containerPresenter.Slot.ItemSet += ItemSet;
+                _containerPresenter.Slot.WeaponReloaded += OnWeaponReloaded;
                 return;
             }
         }
@@ -252,11 +265,13 @@ public class CharacterController : AvatarController
                 }
             case EntityAction.PickObject:
                 {
-                    var itemObject = quant.Object as ItemObject;
+                    var itemObject = quant.Object as ItemObject;                    
                     itemObject.transform.SetParent(null);
                     itemObject.transform.position = quant.LastPosition.Value;
                     itemObject.transform.rotation = quant.LastRotation;
                     itemObject.Drop();
+                    _playerAvatar.Character.UnEquip(itemObject.Item);
+                    itemObject.gameObject.SetActive(true);
                     break;
                 }
             case EntityAction.TransferItem:
@@ -267,6 +282,29 @@ public class CharacterController : AvatarController
                     var item = transferItemInfo.Item;
 
                     _playerAvatar.TransferItem(destinationSlot, sourceSlot, item);
+
+                    break;
+                }
+                case EntityAction.ReloadWeapon:
+                {
+                    var reloadWeaponInfo = quant.Object as ReloadWeaponInfo;
+                    var weapon = reloadWeaponInfo.WeaponPresenter.Item as RangeWeapon;
+                    var loadedAmmo = reloadWeaponInfo.AmmoUsed;
+                    var sourceSlot = reloadWeaponInfo.SourceSlot;
+                    var ammoPresenter = reloadWeaponInfo.AmmoPresenter;
+                    if (ammoPresenter == null)
+                    {
+                        ammoPresenter = ItemFactory.CreateItemPresenter(reloadWeaponInfo.AmmoType);
+                        ammoPresenter.Count = loadedAmmo;
+                        sourceSlot.InsertItem(ammoPresenter);
+                    }
+                    else
+                    {
+                        ammoPresenter.Count += loadedAmmo;
+                        sourceSlot.Storage.AddItem(ammoPresenter.Item, loadedAmmo);
+                    }
+                    weapon.UnLoad(loadedAmmo);
+                    sourceSlot.FillSlots();
 
                     break;
                 }
@@ -363,5 +401,12 @@ public class CharacterController : AvatarController
     {
         _containerPresenter.Slot.ItemLeave -= ItemLeave;
         _containerPresenter.Slot.ItemSet -= ItemSet;
+        _containerPresenter.Slot.WeaponReloaded -= OnWeaponReloaded;
+    }
+
+    public void OnWeaponReloaded(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int num, StorageSlot slot)
+    {
+        var quantInfo = new ReloadWeaponInfo(weaponPresenter, ammoPresenter, num, slot);
+        _playerAvatar.AddReloadWeaponQuant(quantInfo);
     }
 }

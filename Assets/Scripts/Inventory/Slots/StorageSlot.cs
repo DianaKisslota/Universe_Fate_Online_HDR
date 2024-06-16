@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ public abstract class StorageSlot : DropSlot
     private Storage _storage;
     private List<GameObject> _children = new List<GameObject>();
 
+    public event Action<ItemPresenter, ItemPresenter, int, StorageSlot> WeaponReloaded;
+
     public Storage Storage
     {
         get { return _storage; }
@@ -19,6 +22,11 @@ public abstract class StorageSlot : DropSlot
     private void OnEnable()
     {
         FillSlots();
+    }
+
+    public void OnWeaponReloaded(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int num)
+    {
+        WeaponReloaded?.Invoke(weaponPresenter, ammoPresenter, num, this);
     }
 
     public virtual void FillSlots()

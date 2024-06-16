@@ -10,7 +10,7 @@ public class CharacterAvatar : EntityAvatar
     public CharacterInventoryPresenter InventoryPresenter {  get; set; }
 
     private List<Quant> _quants = new List<Quant>();
-    private Character Character => Entity as Character;
+    public Character Character => Entity as Character;
 
     private Dictionary<Item, ItemObject> _itemObjects = new Dictionary<Item, ItemObject>();
     public List<Quant> Quants { get { return _quants; } }
@@ -111,7 +111,8 @@ public class CharacterAvatar : EntityAvatar
 
     public void TakeItem(ItemObject itemObject)
     {
-        _itemObjects.Add(itemObject.Item, itemObject);
+        if(!_itemObjects.ContainsKey(itemObject.Item))
+            _itemObjects.Add(itemObject.Item, itemObject);
         if (itemObject.Item is Weapon weapon)
         {
             if (Character.MainWeapon == null)
@@ -167,6 +168,11 @@ public class CharacterAvatar : EntityAvatar
     public void AddItemtransferQuant(TransferItemInfo transferItemInfo)
     {
         AddQuant(EntityAction.TransferItem, transferItemInfo, transform.position, transform.rotation);
+    }
+
+    public void AddReloadWeaponQuant(ReloadWeaponInfo reloadWeaponInfo)
+    {
+        AddQuant(EntityAction.ReloadWeapon, reloadWeaponInfo, transform.position, transform.rotation);
     }
 
     public void RemoveLastQuant()
@@ -258,6 +264,11 @@ public class CharacterAvatar : EntityAvatar
                         quantEnded = true;
                         break;
                     }
+                case EntityAction.ReloadWeapon:
+                    {
+                        quantEnded = true;
+                        break;
+                    }
                 default:
                     Debug.LogError("Неизвестный тип действия");
                     break;
@@ -280,7 +291,7 @@ public class CharacterAvatar : EntityAvatar
     {
         if (sourceSlot is CharacterItemSlot sourceItemSlot)
         {
-            sourceItemSlot.Character.UnEquip(item, sourceItemSlot);
+            sourceItemSlot.Character.UnEquip(item);
             sourceItemSlot.InitSlot(null);
         }
         if (destinationSlot is CharacterItemSlot destinationItemSlot)
@@ -301,5 +312,7 @@ public class CharacterAvatar : EntityAvatar
 
         }
     }
+
+
 
 }

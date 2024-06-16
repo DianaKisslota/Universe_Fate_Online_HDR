@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+//using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class ReloadSlot : DropSlot
 {
@@ -19,14 +20,23 @@ public class ReloadSlot : DropSlot
             if (itemPresenter.Item is Ammo ammo)
             {
                 if (weapon.Caliber == ammo.Caliber)
-                { 
+                {
+                    if (weapon.CurrentAmmoType != null && weapon.CurrentAmmoType != ammo.GetType())
+                    {
+                        Debug.LogError("Не тот вид боеприпаса");  //TODO: Если перезаряжаем другим видом патронов, выгрузить старые патроны
+                    }
                     var amountToLoad = weapon.AmmoCapacity - weapon.AmmoCount;
                     if (itemPresenter.Count < amountToLoad)
-                        amountToLoad = itemPresenter.Count;
-                    weapon.AmmoCount += amountToLoad;
+                        amountToLoad = itemPresenter.Count;                    
                     itemPresenter.Count -= amountToLoad;
                     if (TryGetComponent<ItemPresenter>(out var weaponPresenter))
+                    {
+                        weapon.Reload(ammo, amountToLoad);
                         weaponPresenter.RefreshInfo();
+                    }
+                        
+                    var oldSlot = itemPresenter.OldParent.GetComponent<StorageSlot>();                    
+                    oldSlot?.OnWeaponReloaded(slotItem, itemPresenter, amountToLoad);
                 }
             }            
         }

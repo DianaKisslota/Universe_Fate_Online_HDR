@@ -48,22 +48,31 @@ public class Character : BaseEntity
         Equip(item, slotType);
     }
 
-    public void UnEquip(Item item, DropSlot slot)
+    public void UnEquip(Item item)
     {
+        SlotType slot = SlotType.Undefined;
         if (item == MainWeapon)
+        {
             MainWeapon = null;
+            slot = SlotType.MainWeapon;
+        }
         else
-            if (item == SecondaryWeapon)
-                SecondaryWeapon = null;
-            else
-                if (item == ShoulderWeapon)
-                    ShoulderWeapon = null;
-                else
-                    Inventory.RemoveItem(item);
-        if (slot is ItemSlot itemSlot)
-            OnUnEquip?.Invoke(item, itemSlot.SlotType);
+        if (item == SecondaryWeapon)
+        {
+            SecondaryWeapon = null;
+            slot = SlotType.SecondaryWeapon;
+        }
         else
-            OnUnEquip?.Invoke(item, SlotType.Undefined);
+        if (item == ShoulderWeapon)
+        {
+            ShoulderWeapon = null;
+            slot = SlotType.Shoulder;
+        }
+        else
+        {
+            Inventory.RemoveItem(item);
+        }
+        OnUnEquip?.Invoke(item, slot);
     }
 
     public void AddToInventory(Item item, int num)

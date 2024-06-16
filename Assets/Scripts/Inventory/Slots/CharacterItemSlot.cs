@@ -10,13 +10,18 @@ public class CharacterItemSlot : ItemSlot
     private void Awake()
     {
         ItemSet += Character.Equip;
-        ItemLeave += Character.UnEquip;        
+        ItemLeave += OnUnequip;        
     }
 
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
         base.DropProcess(itemPresenter);
         OnItemSet(itemPresenter.Item, this);
+    }
+
+    private void OnUnequip(Item item, DropSlot slot)
+    {
+        Character.UnEquip(item);
     }
 
 
