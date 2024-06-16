@@ -25,7 +25,8 @@ public class ReloadSlot : DropSlot
                         amountToLoad = itemPresenter.Count;
                     weapon.AmmoCount += amountToLoad;
                     itemPresenter.Count -= amountToLoad;
-                    slotItem.RefreshInfo();
+                    if (TryGetComponent<ItemPresenter>(out var weaponPresenter))
+                        weaponPresenter.RefreshInfo();
                 }
             }            
         }

@@ -35,6 +35,9 @@ public class Character : BaseEntity
             case SlotType.Shoulder:
                 ShoulderWeapon = (Weapon)item;
                 break;
+            case SlotType.Undefined:
+                Inventory.AddItem(item);
+                break;
         }
 
         OnEquip?.Invoke(item, slotType);
@@ -61,5 +64,10 @@ public class Character : BaseEntity
             OnUnEquip?.Invoke(item, itemSlot.SlotType);
         else
             OnUnEquip?.Invoke(item, SlotType.Undefined);
+    }
+
+    public void AddToInventory(Item item, int num)
+    {
+        Inventory.AddItem(item, num);
     }
 }

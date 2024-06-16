@@ -26,6 +26,12 @@ public class CharacterAvatar : EntityAvatar
         Character.OnUnEquip += OnUnEquip;
     }
 
+    private void OnDestroy()
+    {
+        Character.OnEquip -= OnEquip;
+        Character.OnUnEquip -= OnUnEquip;
+    }
+
     private ItemObject GetItemObject(Item item)
     {
         ItemObject resultObject = null;

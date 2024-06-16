@@ -36,5 +36,16 @@ public class Storage
         }
     }
 
+    public void DecreaseItemCount(Item item, int number)
+    {
+        var position = Items.FirstOrDefault(x => x.Item == item);
+        if (position != null)
+        { 
+            position.Count -= number;
+            if (position.Count < 1)
+                RemoveItem(item);
+        }
+    }
+
 }
 

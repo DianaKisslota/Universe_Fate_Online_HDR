@@ -55,13 +55,5 @@ public static class ItemFactory
         return presenter;
     }
 
-    public static ItemPresenter CreateItemPresenter(StoragePosition storagePosition, Transform parent = null)
-    {
-        var presenter = CreateItemPresenter(storagePosition.Item, parent);
-        presenter.SetStoragePosition(storagePosition);
-
-        return presenter;
-    }
-
 }
 
