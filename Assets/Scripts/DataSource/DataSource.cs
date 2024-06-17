@@ -92,14 +92,36 @@ public class DataSource : IDataSource
         AddSector(new SectorMain1413(14, 13));
         AddSector(new SectorMain1414(14, 14));  // Shahta
         AddSector(new SectorMain1415(14, 15));
+        AddSector(new SectorMain1416(14, 16));
+        AddSector(new SectorMain1417(14, 17));
+        AddSector(new SectorMain1504(15, 04));
+        AddSector(new SectorMain1505(15, 05));
         AddSector(new SectorMain1506(15, 06));
         AddSector(new SectorMain1507(15, 07));
         AddSector(new SectorMain1508(15, 08));
         AddSector(new SectorMain1509(15, 09));
+        AddSector(new SectorMain1510(15, 10));
+        AddSector(new SectorMain1511(15, 11));
+        AddSector(new SectorMain1512(15, 12));
+        AddSector(new SectorMain1513(15, 13));
+        AddSector(new SectorMain1514(15, 14));
+        AddSector(new SectorMain1515(15, 15));
+        AddSector(new SectorMain1516(15, 16));
+        AddSector(new SectorMain1517(15, 17));
+        AddSector(new SectorMain1604(16, 04));
+        AddSector(new SectorMain1605(16, 05));
         AddSector(new SectorMain1606(16, 06));
         AddSector(new SectorMain1607(16, 07));
         AddSector(new SectorMain1608(16, 08));
         AddSector(new SectorMain1609(16, 09));
+        AddSector(new SectorMain1610(16, 10));
+        AddSector(new SectorMain1611(16, 11));
+        AddSector(new SectorMain1612(16, 12));
+        AddSector(new SectorMain1613(16, 13));
+        AddSector(new SectorMain1614(16, 14));
+        AddSector(new SectorMain1615(16, 15));
+        AddSector(new SectorMain1616(16, 16));
+        AddSector(new SectorMain1617(16, 17));
     }
     public SectorData GetSectorData(string sectorID)
     {
