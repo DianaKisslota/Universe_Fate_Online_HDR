@@ -158,6 +158,7 @@ public class BattleRutine : MonoBehaviour
 
     public void FinishBattle()
     {
+        _characterController.ClearAllQuants();
         SceneManager.LoadScene(Global.CurrentMapName);
     }
 }

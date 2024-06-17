@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UIElements;
 
 public class Storage
 {
@@ -12,19 +13,33 @@ public class Storage
         _positionCapacity = positionCapacity;
     }
 
-    public void AddItem(Item item, int number = 1)
+    private void AddPosition(StoragePosition position)
     {
+        position.Empty += CheckStoragePosition;
+        Items.Add(position);
+    }
+
+    private void RemovePosition(StoragePosition position)
+    {
+        position.Empty -= CheckStoragePosition;
+        Items.Remove(position);
+    }
+
+    public StoragePosition AddItem(Item item, int number = 1)
+    {
+        StoragePosition position = null;
         while (number > 0)
         { 
-            var position = Items.FirstOrDefault(x => x.Item.GetType() == item.GetType() && x.Count < x.MaxCount);
+            position = Items.FirstOrDefault(x => x.Item.GetType() == item.GetType() && x.Count < x.MaxCount);
             if (position == null)
             {
                 position = new StoragePosition(item, _positionCapacity);
-                Items.Add(position);
+                AddPosition(position);
             }
 
             number = position.TryAddItem(item, number);
         }
+        return position;
     }
 
     public void RemoveItem(Item item)
@@ -32,7 +47,7 @@ public class Storage
         var position = Items.FirstOrDefault(x => x.Item == item);
         if (position != null)
         {
-            Items.Remove(position);
+            RemovePosition(position);
         }
     }
 
@@ -44,6 +59,14 @@ public class Storage
             position.Count -= number;
             if (position.Count < 1)
                 RemoveItem(item);
+        }
+    }
+
+    private void CheckStoragePosition(StoragePosition storagePosition) 
+    { 
+        if (storagePosition.Count == 0)
+        {
+            RemovePosition(storagePosition);
         }
     }
 

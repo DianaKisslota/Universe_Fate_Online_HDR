@@ -43,11 +43,26 @@ public static class ItemFactory
         var presenter = presenterObject.GetComponent<ItemPresenter>();
 
         presenter.Icon = Global.GetIconFor(item.GetType());
-        presenter.Item = item;
-        presenter.Count = 1;
-        presenter.Name = item.Name;
+        presenter.StoragePosition = new StoragePosition(item, 1);
 
         if (item is RangeWeapon)
+        {
+            presenter.AddComponent<ReloadSlot>();
+        }
+
+        return presenter;
+    }
+
+    public static ItemPresenter CreateItemPresenter(StoragePosition storagePosition, Transform parent = null)
+    {
+        var presenterObject = GameObject.Instantiate<GameObject>(Global.ItemPresenterPrefab, parent);
+
+        var presenter = presenterObject.GetComponent<ItemPresenter>();
+
+        presenter.Icon = Global.GetIconFor(storagePosition.Item.GetType());
+        presenter.StoragePosition = storagePosition;
+
+        if (storagePosition.Item is RangeWeapon)
         {
             presenter.AddComponent<ReloadSlot>();
         }

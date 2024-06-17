@@ -299,11 +299,11 @@ public class CharacterController : AvatarController
                         ammoPresenter = ItemFactory.CreateItemPresenter(reloadWeaponInfo.AmmoType);
                         ammoPresenter.Count = loadedAmmo;
                         sourceSlot.InsertItem(ammoPresenter);
+                        reloadWeaponInfo.AmmoPresenter = ammoPresenter;
                     }
                     else
                     {
                         ammoPresenter.Count += loadedAmmo;
-                        sourceSlot.Storage.AddItem(ammoPresenter.Item, loadedAmmo);
                     }
                     weapon.UnLoad(loadedAmmo);
                     sourceSlot.FillSlots();
@@ -339,7 +339,7 @@ public class CharacterController : AvatarController
         _playerAvatar.RemoveLastQuant();
     }
 
-    private void ClearAllQuants()
+    public void ClearAllQuants()
     {
         if (AvatarBusy)
             return;

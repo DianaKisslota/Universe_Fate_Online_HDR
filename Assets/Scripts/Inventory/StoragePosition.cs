@@ -6,9 +6,23 @@ using System.Threading.Tasks;
 
 public class StoragePosition
 {
+    private int _count;
     public Item Item { get; private set; }
     public int MaxCount { get; private set; }
-    public int Count { get; set; }
+    public int Count 
+    { 
+        get => _count; 
+        set
+        {
+            _count = value;
+            if (_count == 0)
+            { 
+                Empty?.Invoke(this);
+            }
+        } 
+    }
+
+    public event Action<StoragePosition> Empty;
 
     public StoragePosition(Item item, int _capacity)
     {

@@ -15,11 +15,20 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     private Transform _oldParent;
     protected CanvasGroup _canvasGroup;
     protected RectTransform _rectTransform;
+    private StoragePosition _storagePosition;
+    public StoragePosition StoragePosition 
+    { 
+        get => _storagePosition;
+        set
+        {
+            _storagePosition = value;
+            RefreshInfo();
+        } 
+    }
 
-    private int _count;
+    public Item Item => StoragePosition.Item;
 
-    public Item Item { get; set; }
-
+    public string Name => Item.Name;
     public Transform OldParent => _oldParent;
 
     public void HideName()
@@ -31,11 +40,11 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public int Count
     {
-        get => _count;
+        get => StoragePosition.Count;
         set
         {
-            _count = value;
-            if (_count == 0)
+            StoragePosition.Count = value;
+            if (StoragePosition.Count == 0)
                 Destroy(gameObject);
             else
                 RefreshInfo();
@@ -44,8 +53,8 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public void RefreshInfo()
     {
-        if (_count > 1)
-            _countText.text = _count.ToString();
+        if (Count > 1)
+            _countText.text = Count.ToString();
         else
            _countText.text = string.Empty;
         if (Item is RangeWeapon rangeWeapon)
@@ -53,17 +62,12 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             _countText.text = rangeWeapon.AmmoCount.ToString() + "/" + rangeWeapon.AmmoCapacity.ToString();
         }
     }
-
-    public string Name
-    {
-        set { _nameText.text = value; }
-    }
-
     private void Start()
     {
         _transportPanel = GameObject.Find("TransportPanel").transform;
         _canvasGroup = gameObject.AddComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
+        _nameText.text = Name;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

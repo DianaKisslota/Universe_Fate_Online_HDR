@@ -29,7 +29,7 @@ public class TransferItemInfo
 public class ReloadWeaponInfo
 {
     public ItemPresenter WeaponPresenter { get; private set; }
-    public ItemPresenter AmmoPresenter { get; private set; }
+    public ItemPresenter AmmoPresenter { get; set; }
     public Type AmmoType {  get; private set; }
     public int AmmoUsed {  get; private set; }
     public StorageSlot SourceSlot {  get; private set; }

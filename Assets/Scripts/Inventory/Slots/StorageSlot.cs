@@ -40,8 +40,7 @@ public abstract class StorageSlot : DropSlot
 
         foreach (StoragePosition position in _storage.Items)
         {
-            var itemPresenter = ItemFactory.CreateItemPresenter(position.Item, _itemsParent.transform);
-            itemPresenter.Count = position.Count;
+            var itemPresenter = ItemFactory.CreateItemPresenter(position, _itemsParent.transform);
 
             _children.Add(itemPresenter.gameObject);
         }
@@ -62,7 +61,7 @@ public abstract class StorageSlot : DropSlot
 
     public void InsertItem(ItemPresenter itemPresenter)
     {
-        Storage.AddItem(itemPresenter.Item, itemPresenter.Count);
+        itemPresenter.StoragePosition = Storage.AddItem(itemPresenter.Item, itemPresenter.Count);
         _children.Add(itemPresenter.gameObject);
     }
 

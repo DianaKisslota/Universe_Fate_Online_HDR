@@ -208,6 +208,20 @@ public class CharacterAvatar : EntityAvatar
                     TransferItem(sourceSlot, destinationSlot, item);
                 }
                 break;
+            case EntityAction.ReloadWeapon:
+                {
+                    var reloadWeaponInfo = _quants[0].Object as ReloadWeaponInfo;
+                    var sourceSlot = reloadWeaponInfo.SourceSlot;
+                    var ammoPresenter = reloadWeaponInfo.AmmoPresenter;
+                    var ammoUsed = reloadWeaponInfo.AmmoUsed;
+                    var weaponPresenter = reloadWeaponInfo.WeaponPresenter;
+                    var weapon = weaponPresenter.Item as RangeWeapon;
+                    weapon.Reload(ammoPresenter.Item as Ammo, ammoUsed);
+                    weaponPresenter.RefreshInfo();
+                    ammoPresenter.Count -= ammoUsed;
+                    sourceSlot.FillSlots();
+                    break;
+                }
                 
             default:
                 Debug.LogError("Неизвестный тип действия");
