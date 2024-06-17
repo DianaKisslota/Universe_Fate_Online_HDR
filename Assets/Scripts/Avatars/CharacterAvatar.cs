@@ -56,7 +56,7 @@ public class CharacterAvatar : EntityAvatar
         {
             case SlotType.MainWeapon:
                 {
-                    _animator.ResetTrigger("Idle");
+                    //_animator.ResetTrigger("Idle");
                     itemObject.gameObject.transform.parent = _weaponPoint;
                     switch ((item as Weapon).WeaponType)
                     {
@@ -249,13 +249,13 @@ public class CharacterAvatar : EntityAvatar
             {
                 case EntityAction.Move:
                     {
-                        quantEnded = _walkingTo == null;
+                        quantEnded = _walkingTo == null;                       
                     }
                     break;
                 case EntityAction.PickObject:
                     {
-                        var itemObject = _quants[0].Object as ItemObject;
-                        TakeItem(itemObject);
+                        //var itemObject = _quants[0].Object as ItemObject;
+                        //TakeItem(itemObject);
                         quantEnded = true;
                     }
                     break;

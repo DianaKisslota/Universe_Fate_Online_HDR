@@ -74,7 +74,8 @@ public abstract class EntityAvatar : MonoBehaviour
 
     protected bool InPoint(Vector3 point)
     {
-        return Mathf.Round(gameObject.transform.position.x) == point.x && Mathf.Round(gameObject.transform.position.z) == point.z;
+        return Mathf.Abs(gameObject.transform.position.x - point.x) < 0.01
+                        && Mathf.Abs(gameObject.transform.position.z - point.z) < 0.01;
     }
 
     public bool CalculateCompletePath(Vector3 targetPoint, NavMeshPath path)

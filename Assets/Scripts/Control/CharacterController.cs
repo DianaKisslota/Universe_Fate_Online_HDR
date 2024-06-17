@@ -101,6 +101,8 @@ public class CharacterController : AvatarController
 
     private void Update()
     {
+        if (AvatarBusy)
+            return;
         _FinishBattleButton.SetActive(!(_containerPresenter.gameObject.activeSelf ||
                                         (_inventoryPanel.gameObject.activeSelf && _inventoryPanel.transform.parent == _originInventoryPlaceHolder)));
 
