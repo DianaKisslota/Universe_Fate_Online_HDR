@@ -7,8 +7,32 @@ public class DataSource : IDataSource
     {
         AddSector(new SectorMain0404(4, 4));
         AddSector(new SectorMain0405(4, 5));
+        AddSector(new SectorMain0406(4, 6));
+        AddSector(new SectorMain0407(4, 7));
+        AddSector(new SectorMain0408(4, 8));
+        AddSector(new SectorMain0409(4, 9));
+        AddSector(new SectorMain0410(4, 10));
+        AddSector(new SectorMain0411(4, 11));
+        AddSector(new SectorMain0412(4, 12));
+        AddSector(new SectorMain0413(4, 13));
+        AddSector(new SectorMain0414(4, 14));
+        AddSector(new SectorMain0415(4, 15));
+        AddSector(new SectorMain0416(4, 16));
+        AddSector(new SectorMain0417(4, 17));
         AddSector(new SectorMain0504(5, 4));
         AddSector(new SectorMain0505(5, 5));
+        AddSector(new SectorMain0506(5, 6));
+        AddSector(new SectorMain0507(5, 7));
+        AddSector(new SectorMain0508(5, 8));
+        AddSector(new SectorMain0509(5, 9));
+        AddSector(new SectorMain0510(5, 10));
+        AddSector(new SectorMain0511(5, 11));
+        AddSector(new SectorMain0512(5, 12));
+        AddSector(new SectorMain0513(5, 13));
+        AddSector(new SectorMain0514(5, 14));
+        AddSector(new SectorMain0515(5, 15));
+        AddSector(new SectorMain0516(5, 16));
+        AddSector(new SectorMain0517(5, 17));
         AddSector(new SectorMain0604(6, 4));
         AddSector(new SectorMain0605(6, 5));
         AddSector(new SectorMain0606(6, 6));
@@ -21,6 +45,8 @@ public class DataSource : IDataSource
         AddSector(new SectorMain0613(6, 13));
         AddSector(new SectorMain0614(6, 14));
         AddSector(new SectorMain0615(6, 15));
+        AddSector(new SectorMain0616(6, 16));
+        AddSector(new SectorMain0617(6, 17));
         AddSector(new SectorMain0704(7, 4));
         AddSector(new SectorMain0705(7, 5));
         AddSector(new SectorMain0706(7, 6));
@@ -32,6 +58,8 @@ public class DataSource : IDataSource
         AddSector(new SectorMain0713(07, 13));
         AddSector(new SectorMain0714(07, 14));
         AddSector(new SectorMain0715(07, 15));
+        AddSector(new SectorMain0716(07, 16));
+        AddSector(new SectorMain0717(07, 17));
         AddSector(new SectorMain1110(11, 10));
         AddSector(new SectorMain1210(12, 10));
         AddSector(new SectorMain1209(12, 9));
@@ -47,6 +75,8 @@ public class DataSource : IDataSource
         AddSector(new SectorMain0913(9, 13));
         AddSector(new SectorMain0914(9, 14));
         AddSector(new SectorMain0915(9, 15));
+        AddSector(new SectorMain0916(9, 16));
+        AddSector(new SectorMain0917(9, 17));
         AddSector(new SectorMain0810(8, 10));
         AddSector(new SectorMain0804(8, 4));  // Labolatoriy
         AddSector(new SectorMain0805(8, 5));
@@ -76,6 +106,8 @@ public class DataSource : IDataSource
         AddSector(new SectorMain0813(08, 13));
         AddSector(new SectorMain0814(08, 14));
         AddSector(new SectorMain0815(08, 15));
+        AddSector(new SectorMain0816(08, 16));
+        AddSector(new SectorMain0817(08, 17));
         AddSector(new SectorMain0711(07, 11));
         AddSector(new SectorMain0809(08, 09));
         AddSector(new SectorMain1204(12, 04));
