@@ -3,9 +3,14 @@ guid: 020442d175838814f8b51cbbad2f630b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rook
+    second: {fileID: 2100000, guid: cd7bf5748656a3941a353bb76bbbbeec, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
