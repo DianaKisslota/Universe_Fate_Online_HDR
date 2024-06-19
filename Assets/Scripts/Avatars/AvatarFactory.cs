@@ -13,7 +13,10 @@ public static class AvatarFactory
         var modelPrefab = Global.GetPrefabForEntity(entityType);
         var model = GameObject.Instantiate<GameObject>(modelPrefab);
         var avatar = model.AddComponent<MobAvatar>();
-        model.AddComponent<NavMeshAgent>();
+        var agent = model.AddComponent<NavMeshAgent>();
+        agent.isStopped = true;
+        var rigidBody = model.AddComponent<Rigidbody>();
+        rigidBody.isKinematic = true;
         avatar.Entity = Activator.CreateInstance(entityType) as BaseEntity;
         avatar.transform.position = parent.position;
 

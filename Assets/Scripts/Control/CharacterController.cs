@@ -106,6 +106,19 @@ public class CharacterController : AvatarController
         _FinishBattleButton.SetActive(!(_containerPresenter.gameObject.activeSelf ||
                                         (_inventoryPanel.gameObject.activeSelf && _inventoryPanel.transform.parent == _originInventoryPlaceHolder)));
 
+        var entityAvatar = GetEntityAvatarUnderMousePoint();
+        if (entityAvatar != null)
+        {
+            _pointer.SetPointerType(PointerType.Target);
+            _pointer.SetActive(true);
+            _pointer.position = entityAvatar.transform.position;
+            return;
+        }
+        else
+        {
+            _pointer.SetPointerType(PointerType.Nav);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             var itemObject = GetItemUnderMousePoint();
@@ -196,6 +209,18 @@ public class CharacterController : AvatarController
         if (hit.rigidbody != null && hit.rigidbody.gameObject.TryGetComponent<ContainerObject>(out var containerObject))
         {
             return containerObject;
+        }
+        return null;
+    }
+
+    private EntityAvatar GetEntityAvatarUnderMousePoint()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit);
+        if (hit.rigidbody != null && hit.rigidbody.gameObject.TryGetComponent<EntityAvatar>(out var entityAvatar))
+        {
+            return entityAvatar;
         }
         return null;
     }
