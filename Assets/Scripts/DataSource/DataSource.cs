@@ -138,8 +138,8 @@ public class DataSource : IDataSource
         AddSector(new SectorMain1410(14, 10));
         AddSector(new SectorMain1411(14, 11));
         AddSector(new SectorMain1412(14, 12));
-        AddSector(new SectorMain1413(14, 13));
-        AddSector(new SectorMain1414(14, 14));  // Shahta
+        AddSector(new SectorMain1413(14, 13));  // Shahta
+        AddSector(new SectorMain1414(14, 14));  
         AddSector(new SectorMain1415(14, 15));
         AddSector(new SectorMain1416(14, 16));
         AddSector(new SectorMain1417(14, 17));
