@@ -59,6 +59,7 @@ public class ItemSlot : DropSlot
     public override void OnItemLeave(Item item)
     {
         _presenter = null;
+        SetFree();
         base.OnItemLeave(item);
     }
 

@@ -11,15 +11,24 @@ public class CharacterInventoryPresenter : MonoBehaviour
     [SerializeField] CharacterInventorySlot _inventory;
 
     public CharacterInventorySlot Inventory => _inventory;
-    public List<CharacterItemSlot> ItemSlots;
+    public List<CharacterItemSlot> _itemSlots = null;
+    public List<CharacterItemSlot> ItemSlots
+    {
+        get
+        {
+            if (_itemSlots == null || _itemSlots.Count == 0) 
+                _itemSlots = new List<CharacterItemSlot>()
+                {
+                    _mainWeapon, _secondaryWeapon, _shoulder
+                };
+            return _itemSlots;
+
+        }
+    }
     private Character Character => Global.Character;
 
     private void Awake()
     {
-        ItemSlots = new List<CharacterItemSlot>()
-        {
-            _mainWeapon, _secondaryWeapon, _shoulder
-        };
         RefreshItemSlots();
     }
 

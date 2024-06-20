@@ -18,6 +18,8 @@ public class CharacterController : AvatarController
     [SerializeField] private Toggle _SetFireMode1;
     [SerializeField] private Toggle _SetFireMode2;
     [SerializeField] private Toggle _SetFireMode3;
+    [SerializeField] private Image _mainWeaponImage;
+    [SerializeField] private Image _mainWeaponAmmo;
 
     [SerializeField] private PointerController _pointer;
     //   [SerializeField] protected LineRenderer _pathDrawer;
@@ -463,12 +465,45 @@ public class CharacterController : AvatarController
     {
         _itemDragging = item;
         _slotDraggingFrom = slot;
+        if (slot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
+        {
+            _mainWeaponImage.sprite = null;
+            _mainWeaponImage.gameObject.SetActive(false);
+            if (item is RangeWeapon rangeWeapon)
+            {
+                rangeWeapon.AmmoChanged -= ChangeAmmo;
+                _mainWeaponAmmo.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void ItemSet(Item item, DropSlot slot)
     {
         var transferItemInfo = new TransferItemInfo(_slotDraggingFrom, slot, item);
         _playerAvatar.AddItemtransferQuant(transferItemInfo);
+        if (slot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
+        {
+            _mainWeaponImage.sprite = Global.GetIconFor(item.GetType());
+            _mainWeaponImage.gameObject.SetActive(true);
+            if (item is RangeWeapon rangeWeapon)
+            {
+                rangeWeapon.AmmoChanged += ChangeAmmo;
+                ChangeAmmo(rangeWeapon, rangeWeapon.CurrentAmmoType);
+            }
+            else
+                _mainWeaponAmmo.gameObject.SetActive(false);
+        }
+    }
+
+    private void ChangeAmmo(RangeWeapon weapon, Type ammoType)
+    {
+        if (ammoType != null)
+        {
+            _mainWeaponAmmo.sprite = Global.GetIconFor(ammoType);
+            _mainWeaponAmmo.gameObject.SetActive(true);
+        }
+        else
+            _mainWeaponAmmo.gameObject.SetActive(false);
     }
 
     public void ContainerCloseClick()
