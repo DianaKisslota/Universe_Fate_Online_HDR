@@ -17,8 +17,11 @@ public class CharacterAvatar : EntityAvatar
 
     public event Action StartApplainQuants;
     public event Action EndApplainQuants;
+    public event Action<FireMode> FireModeSet;
 
     private bool _quantsApplaying = false;
+
+    public FireMode FireMode { get; set; }
 
     protected override void Init()
     {
@@ -52,6 +55,19 @@ public class CharacterAvatar : EntityAvatar
         var itemObject = GetItemObject(item);
         Quaternion rotation = Quaternion.identity;
         Vector3 position = Vector3.zero;
+        if (slotType == SlotType.MainWeapon) {
+            if (item is RangeWeapon rangeWeapon)
+            {
+                FireMode = rangeWeapon.SingleShot != null ? FireMode.SingleShot :
+                                            rangeWeapon.ShortBurst != null ? FireMode.ShortBurst :
+                                            rangeWeapon.LongBurst != null ? FireMode.LongBurst :
+                                            0;
+            }
+            else
+                FireMode = FireMode.Undefined;
+            FireModeSet?.Invoke(FireMode);
+        }
+
         switch (slotType)
         {
             case SlotType.MainWeapon:
@@ -173,6 +189,11 @@ public class CharacterAvatar : EntityAvatar
     public void AddReloadWeaponQuant(ReloadWeaponInfo reloadWeaponInfo)
     {
         AddQuant(EntityAction.ReloadWeapon, reloadWeaponInfo, transform.position, transform.rotation);
+    }
+
+    public void AddAttackQuant(AttackInfo attackInfo) 
+    {
+        AddQuant(EntityAction.Attack, attackInfo, transform.position, transform.rotation);
     }
 
     public void RemoveLastQuant()

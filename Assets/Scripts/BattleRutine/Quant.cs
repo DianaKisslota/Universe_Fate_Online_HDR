@@ -4,10 +4,10 @@ using UnityEngine;
 public enum EntityAction
 {
     Move,
-    DistantAttack,
+    Attack,
     PickObject,
     TransferItem,
-    ReloadWeapon
+    ReloadWeapon,
 }
 
 public class TransferItemInfo
@@ -43,6 +43,20 @@ public class ReloadWeaponInfo
         SourceSlot = sourceSlot;
     }
 }
+
+public class AttackInfo
+{
+    public FireMode FireMode { get; private set; }
+    public int AmmoCount {  get; private set; }
+
+    public AttackInfo(FireMode fireMode, int ammoCount)
+    {
+        FireMode = fireMode;
+        AmmoCount = ammoCount;
+    }
+
+}
+
 public class Quant
 {
     public EntityAction Action { get; private set; }

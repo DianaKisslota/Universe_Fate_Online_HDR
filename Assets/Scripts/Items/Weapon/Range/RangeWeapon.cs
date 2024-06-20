@@ -5,6 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+
+public enum FireMode
+{
+    Undefined,
+    SingleShot,
+    ShortBurst,
+    LongBurst
+}
+
 public abstract class RangeWeapon : Weapon
 {
     private int _ammoCount;
@@ -14,6 +23,24 @@ public abstract class RangeWeapon : Weapon
     public int AmmoCount 
     {
         get => _ammoCount;
+    }
+    public int? SingleShot { get; set; } = 1;
+    public int? ShortBurst { get; set; } = null;
+    public int? LongBurst { get; set; } = null;
+
+    public int? GetFireModeAmmo(FireMode fireMode)
+    {
+        switch (fireMode)
+        {
+            case FireMode.SingleShot:
+                return SingleShot;
+            case FireMode.ShortBurst:
+                return ShortBurst;
+            case FireMode.LongBurst:
+                return LongBurst;
+            default: 
+                return 0;
+        }
     }
 
     public void Reload(Ammo ammo, int num)

@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class CharacterController : AvatarController
 {
@@ -14,6 +15,9 @@ public class CharacterController : AvatarController
     [SerializeField] private Transform _originInventoryPlaceHolder;
     [SerializeField] private Transform _containerInventoryPlaceHolder;
     [SerializeField] private GameObject _FinishBattleButton;
+    [SerializeField] private Toggle _SetFireMode1;
+    [SerializeField] private Toggle _SetFireMode2;
+    [SerializeField] private Toggle _SetFireMode3;
 
     [SerializeField] private PointerController _pointer;
     //   [SerializeField] protected LineRenderer _pathDrawer;
@@ -34,6 +38,7 @@ public class CharacterController : AvatarController
     private CharacterAvatar _playerAvatar => _avatar as CharacterAvatar;
 
     private List<GameObject> _navPoints = new List<GameObject>();
+    private List<GameObject> _targets = new List<GameObject>();
 
 
     private bool _canMove;
@@ -76,6 +81,7 @@ public class CharacterController : AvatarController
         }
 
         _inventoryPanel.Inventory.WeaponReloaded += OnWeaponReloaded;
+        _playerAvatar.FireModeSet += OnFireModeSet;
     }
 
     private void OnDestroy()
@@ -86,6 +92,7 @@ public class CharacterController : AvatarController
             itemSlot.ItemSet -= ItemSet;
         }
         _inventoryPanel.Inventory.WeaponReloaded -= OnWeaponReloaded;
+        _playerAvatar.FireModeSet -= OnFireModeSet;
     }
 
     public override void BindAvatar(EntityAvatar avatar)
@@ -112,6 +119,24 @@ public class CharacterController : AvatarController
             _pointer.SetPointerType(PointerType.Target);
             _pointer.SetActive(true);
             _pointer.position = entityAvatar.transform.position;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                var target = Instantiate(Global.TargetPrefab);
+                target.transform.position = _pointer.position;
+                _targets.Add(target);
+                AttackInfo attackInfo;
+                if (_playerAvatar.Character.MainWeapon != null && _playerAvatar.Character.MainWeapon is RangeWeapon rangedWeapon)
+                {
+                    attackInfo = new AttackInfo(_playerAvatar.FireMode, rangedWeapon.GetFireModeAmmo(_playerAvatar.FireMode).Value);
+                }
+                else
+                {
+                    attackInfo = new AttackInfo(FireMode.Undefined, 0);
+                }
+                _playerAvatar.AddAttackQuant(attackInfo);
+            }
+
             return;
         }
         else
@@ -436,4 +461,17 @@ public class CharacterController : AvatarController
         var quantInfo = new ReloadWeaponInfo(weaponPresenter, ammoPresenter, num, slot);
         _playerAvatar.AddReloadWeaponQuant(quantInfo);
     }
+
+    public void OnFireModeSet(FireMode fireMode)
+    {
+        _SetFireMode1.isOn = fireMode == FireMode.SingleShot;
+        _SetFireMode2.isOn = fireMode == FireMode.ShortBurst;
+        _SetFireMode3.isOn = fireMode == FireMode.LongBurst;
+    }
+
+    public void SetFireMode(int fireMode)
+    {
+        _playerAvatar.FireMode = (FireMode)fireMode;
+    }
+
 }

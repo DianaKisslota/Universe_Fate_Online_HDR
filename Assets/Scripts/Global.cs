@@ -39,6 +39,7 @@ public static class Global
     }
 
     public static GameObject NavPointPrefab { get; set; }
+    public static GameObject TargetPrefab { get; set; }
     public static GameObject ItemPresenterPrefab { get; set; }
     public static GameObject ItemHighlighterPrefab { get; set; }
     public static GameObject ContainerHighlighterPrefab { get; set; }
@@ -66,6 +67,7 @@ public static class Global
         Icons.Add(typeof(Ammo762x39mm), Resources.Load<Sprite>("Icons/Ammo762x39mm"));
 
         NavPointPrefab = Resources.Load<GameObject>("ControlPrefabs/Nav");
+        TargetPrefab = Resources.Load<GameObject>("ControlPrefabs/Target");
         ItemPresenterPrefab = Resources.Load<GameObject>("Presenters/ItemPresenter");
         ItemHighlighterPrefab = Resources.Load<GameObject>("ItemHighLighter");
         ContainerHighlighterPrefab = Resources.Load<GameObject>("ContainerHighLighter");
