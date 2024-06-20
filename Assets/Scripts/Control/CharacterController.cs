@@ -128,13 +128,17 @@ public class CharacterController : AvatarController
                 AttackInfo attackInfo;
                 if (_playerAvatar.Character.MainWeapon != null && _playerAvatar.Character.MainWeapon is RangeWeapon rangedWeapon)
                 {
-                    attackInfo = new AttackInfo(_playerAvatar.FireMode, rangedWeapon.GetFireModeAmmo(_playerAvatar.FireMode).Value);
+                    var ammoUsed = Mathf.Min(rangedWeapon.GetFireModeAmmo(_playerAvatar.FireMode).Value, rangedWeapon.AmmoCount);
+                    rangedWeapon.UnLoad(ammoUsed);
+                    _playerAvatar.InventoryPresenter.RefreshItemSlots();
+                    attackInfo = new AttackInfo(_playerAvatar.FireMode, rangedWeapon.CurrentAmmoType, ammoUsed);
                 }
                 else
                 {
-                    attackInfo = new AttackInfo(FireMode.Undefined, 0);
+                    attackInfo = new AttackInfo(FireMode.Undefined, null, 0);
                 }
                 _playerAvatar.AddAttackQuant(attackInfo);
+                _playerAvatar.transform.LookAt(entityAvatar.transform);
             }
 
             return;
@@ -356,8 +360,26 @@ public class CharacterController : AvatarController
                         ammoPresenter.Count += loadedAmmo;
                     }
                     weapon.UnLoad(loadedAmmo);
+                    _playerAvatar.InventoryPresenter.RefreshItemSlots();
                     sourceSlot.FillSlots();
 
+                    break;
+                }
+            case EntityAction.Attack:
+                {
+                    var attackInfo = quant.Object as AttackInfo;
+                    if (_playerAvatar.Character.MainWeapon is RangeWeapon rangedWeapon)
+                    {
+                        rangedWeapon.Reload(attackInfo.AmmoType, attackInfo.AmmoCount);
+                        _playerAvatar.InventoryPresenter.RefreshItemSlots();
+                    }
+                    if (quant.LastPosition != null)
+                    {
+                        _playerAvatar.SetToPosition(quant.LastPosition.Value);
+                        _playerAvatar.transform.rotation = quant.LastRotation;
+                    }
+                    Destroy(_targets[_targets.Count - 1]);
+                    _targets.RemoveAt(_targets.Count - 1);
                     break;
                 }
         }

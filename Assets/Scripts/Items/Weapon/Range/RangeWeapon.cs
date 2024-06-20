@@ -50,6 +50,13 @@ public abstract class RangeWeapon : Weapon
       //  AmmoChanged?.Invoke(this, CurrentAmmoType, num, source);
     }
 
+    public void Reload(Type ammoType, int num)
+    {
+        _ammoCount += num;
+        CurrentAmmoType = ammoType;
+        //  AmmoChanged?.Invoke(this, CurrentAmmoType, num, source);
+    }
+
     public void UnLoad(int num)
     {
         _ammoCount -= num;

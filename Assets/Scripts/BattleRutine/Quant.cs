@@ -47,11 +47,13 @@ public class ReloadWeaponInfo
 public class AttackInfo
 {
     public FireMode FireMode { get; private set; }
+    public Type AmmoType { get; private set; }
     public int AmmoCount {  get; private set; }
 
-    public AttackInfo(FireMode fireMode, int ammoCount)
+    public AttackInfo(FireMode fireMode, Type ammoType, int ammoCount)
     {
         FireMode = fireMode;
+        AmmoType = ammoType;
         AmmoCount = ammoCount;
     }
 
