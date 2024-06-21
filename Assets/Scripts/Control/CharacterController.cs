@@ -341,6 +341,14 @@ public class CharacterController : AvatarController
 
                     _playerAvatar.TransferItem(destinationSlot, sourceSlot, item);
 
+                    if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
+                        _mainWeaponImage.gameObject.SetActive(false);
+                    if (sourceSlot is CharacterItemSlot characterItemSlot1 && characterItemSlot1.SlotType == SlotType.MainWeapon)
+                    {
+                        _mainWeaponImage.gameObject.SetActive(true);
+                        _mainWeaponImage.sprite = Global.GetIconFor(item.GetType());
+                    }
+
                     break;
                 }
                 case EntityAction.ReloadWeapon:
@@ -488,16 +496,16 @@ public class CharacterController : AvatarController
             if (item is RangeWeapon rangeWeapon)
             {
                 rangeWeapon.AmmoChanged += ChangeAmmo;
-                ChangeAmmo(rangeWeapon, rangeWeapon.CurrentAmmoType);
+                ChangeAmmo(rangeWeapon, rangeWeapon.CurrentAmmoType, rangeWeapon.AmmoCount);
             }
             else
                 _mainWeaponAmmo.gameObject.SetActive(false);
         }
     }
 
-    private void ChangeAmmo(RangeWeapon weapon, Type ammoType)
+    private void ChangeAmmo(RangeWeapon weapon, Type ammoType, int num)
     {
-        if (ammoType != null)
+        if (ammoType != null && weapon.AmmoCount + num > 0)
         {
             _mainWeaponAmmo.sprite = Global.GetIconFor(ammoType);
             _mainWeaponAmmo.gameObject.SetActive(true);

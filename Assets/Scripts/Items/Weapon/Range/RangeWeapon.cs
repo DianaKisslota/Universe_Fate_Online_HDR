@@ -46,14 +46,14 @@ public abstract class RangeWeapon : Weapon
     {
         _ammoCount += num;
         CurrentAmmoType = ammo.GetType();
-        AmmoChanged?.Invoke(this, CurrentAmmoType);
+        AmmoChanged?.Invoke(this, CurrentAmmoType, num);
     }
 
     public void Reload(Type ammoType, int num)
     {
         _ammoCount += num;
         CurrentAmmoType = ammoType;
-          AmmoChanged?.Invoke(this, CurrentAmmoType);
+          AmmoChanged?.Invoke(this, CurrentAmmoType, num);
     }
 
     public void UnLoad(int num)
@@ -63,9 +63,9 @@ public abstract class RangeWeapon : Weapon
         {
             Debug.LogError("Количество боеприпасов меньше нуля");
         }
-        AmmoChanged?.Invoke(this, CurrentAmmoType);
+        AmmoChanged?.Invoke(this, CurrentAmmoType, -num);
     }
 
-    public event Action<RangeWeapon, Type> AmmoChanged;
+    public event Action<RangeWeapon, Type, int> AmmoChanged;
 }
 
