@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CharacterAvatar : EntityAvatar
 {
     [SerializeField] Transform _weaponPoint;
     [SerializeField] Transform _weaponBackPoint;
     [SerializeField] Transform _weaponSidePoint;
-    public CharacterInventoryPresenter InventoryPresenter {  get; set; }
+    public CharacterInventoryPresenter InventoryPresenter { get; set; }
 
     private List<Quant> _quants = new List<Quant>();
     public Character Character => Entity as Character;
@@ -52,8 +53,8 @@ public class CharacterAvatar : EntityAvatar
 
         return resultObject;
     }
-    private void OnEquip(Item item, SlotType slotType) 
-    { 
+    private void OnEquip(Item item, SlotType slotType)
+    {
         var itemObject = GetItemObject(item);
         Quaternion rotation = Quaternion.identity;
         Vector3 position = Vector3.zero;
@@ -93,7 +94,7 @@ public class CharacterAvatar : EntityAvatar
                             }
                             break;
                     }
-                    break; 
+                    break;
                 }
             case SlotType.SecondaryWeapon:
                 {
@@ -108,7 +109,7 @@ public class CharacterAvatar : EntityAvatar
             case SlotType.Shoulder:
                 itemObject.gameObject.transform.parent = _weaponBackPoint;
                 break;
-            default:return;
+            default: return;
         }
         itemObject.gameObject.transform.localPosition = position;
         itemObject.gameObject.transform.localRotation = rotation;
@@ -116,10 +117,10 @@ public class CharacterAvatar : EntityAvatar
         itemObject.Take();
         InventoryPresenter.RefreshItemSlots();
     }
-    private void OnUnEquip(Item item, SlotType slotType) 
+    private void OnUnEquip(Item item, SlotType slotType)
     {
         var itemObject = GetItemObject(item);
-        if(itemObject != null) 
+        if (itemObject != null)
             itemObject.gameObject.SetActive(false);
         if (slotType == SlotType.MainWeapon)
         {
@@ -129,7 +130,7 @@ public class CharacterAvatar : EntityAvatar
 
     public void TakeItem(ItemObject itemObject)
     {
-        if(!_itemObjects.ContainsKey(itemObject.Item))
+        if (!_itemObjects.ContainsKey(itemObject.Item))
             _itemObjects.Add(itemObject.Item, itemObject);
         if (itemObject.Item is Weapon weapon)
         {
@@ -193,7 +194,7 @@ public class CharacterAvatar : EntityAvatar
         AddQuant(EntityAction.ReloadWeapon, reloadWeaponInfo, transform.position, transform.rotation);
     }
 
-    public void AddAttackQuant(AttackInfo attackInfo) 
+    public void AddAttackQuant(AttackInfo attackInfo)
     {
         AddQuant(EntityAction.Attack, attackInfo, transform.position, transform.rotation);
     }
@@ -207,6 +208,14 @@ public class CharacterAvatar : EntityAvatar
     public void RemoveAllQuants()
     {
         _quants.Clear();
+    }
+
+    public void LookForShoot(EntityAvatar avatar)
+    {
+        var type = Character.MainWeapon.WeaponType;
+        transform.LookAt(avatar.transform);
+        if (type == WeaponType.SMG || type == WeaponType.Rifle || type == WeaponType.AssaultRifle || type == WeaponType.MG)
+            transform.Rotate(0, 55, 0);
     }
 
     private void StartCurrentQuant()
@@ -251,8 +260,7 @@ public class CharacterAvatar : EntityAvatar
                     var target = attackInfo.Target;
                     if (Character.MainWeapon is RangeWeapon)
                     {
-                        transform.LookAt(target.transform);
-                        transform.Rotate(0, 55, 0);
+                        LookForShoot(target);
                         _animator.SetTrigger("Shoot");
                         _isFiring = 0.75f;
                         StopAgent(1.5f);

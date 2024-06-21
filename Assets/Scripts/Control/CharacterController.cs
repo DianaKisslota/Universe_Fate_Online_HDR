@@ -139,9 +139,8 @@ public class CharacterController : AvatarController
                 {
                     attackInfo = new AttackInfo(FireMode.Undefined, null, 0, entityAvatar);
                 }
-                _playerAvatar.AddAttackQuant(attackInfo);                
-                _playerAvatar.transform.LookAt(entityAvatar.transform);
-                _playerAvatar.transform.Rotate(0, 55, 0);
+                _playerAvatar.AddAttackQuant(attackInfo);
+                _playerAvatar.LookForShoot(entityAvatar);
             }
 
             return;
