@@ -49,12 +49,14 @@ public class AttackInfo
     public FireMode FireMode { get; private set; }
     public Type AmmoType { get; private set; }
     public int AmmoCount {  get; private set; }
+    public EntityAvatar Target {  get; private set; }
 
-    public AttackInfo(FireMode fireMode, Type ammoType, int ammoCount)
+    public AttackInfo(FireMode fireMode, Type ammoType, int ammoCount, EntityAvatar target)
     {
         FireMode = fireMode;
         AmmoType = ammoType;
         AmmoCount = ammoCount;
+        Target = target;
     }
 
 }

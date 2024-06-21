@@ -21,6 +21,8 @@ public class CharacterAvatar : EntityAvatar
 
     private bool _quantsApplaying = false;
 
+    private float _isFiring = 0f;
+
     public FireMode FireMode { get; set; }
 
     protected override void Init()
@@ -243,7 +245,21 @@ public class CharacterAvatar : EntityAvatar
                     sourceSlot.FillSlots();
                     break;
                 }
-                
+            case EntityAction.Attack:
+                {
+                    var attackInfo = _quants[0].Object as AttackInfo;
+                    var target = attackInfo.Target;
+                    if (Character.MainWeapon is RangeWeapon)
+                    {
+                        transform.LookAt(target.transform);
+                        transform.Rotate(0, 55, 0);
+                        _animator.SetTrigger("Shoot");
+                        _isFiring = 0.75f;
+                        StopAgent(1.5f);
+                    }
+                    break;
+                }
+
             default:
                 Debug.LogError("Неизвестный тип действия");
                 break;
@@ -302,6 +318,12 @@ public class CharacterAvatar : EntityAvatar
                 case EntityAction.ReloadWeapon:
                     {
                         quantEnded = true;
+                        break;
+                    }
+                case EntityAction.Attack:
+                    {
+                        _isFiring -= Time.deltaTime;
+                        quantEnded = _isFiring <= 0;
                         break;
                     }
                 default:

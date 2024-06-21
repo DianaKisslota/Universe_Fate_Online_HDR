@@ -133,14 +133,15 @@ public class CharacterController : AvatarController
                     var ammoUsed = Mathf.Min(rangedWeapon.GetFireModeAmmo(_playerAvatar.FireMode).Value, rangedWeapon.AmmoCount);
                     rangedWeapon.UnLoad(ammoUsed);
                     _playerAvatar.InventoryPresenter.RefreshItemSlots();
-                    attackInfo = new AttackInfo(_playerAvatar.FireMode, rangedWeapon.CurrentAmmoType, ammoUsed);
+                    attackInfo = new AttackInfo(_playerAvatar.FireMode, rangedWeapon.CurrentAmmoType, ammoUsed, entityAvatar);
                 }
                 else
                 {
-                    attackInfo = new AttackInfo(FireMode.Undefined, null, 0);
+                    attackInfo = new AttackInfo(FireMode.Undefined, null, 0, entityAvatar);
                 }
-                _playerAvatar.AddAttackQuant(attackInfo);
+                _playerAvatar.AddAttackQuant(attackInfo);                
                 _playerAvatar.transform.LookAt(entityAvatar.transform);
+                _playerAvatar.transform.Rotate(0, 55, 0);
             }
 
             return;
