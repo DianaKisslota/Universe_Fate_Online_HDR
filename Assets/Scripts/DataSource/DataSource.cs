@@ -5,7 +5,15 @@ public class DataSource : IDataSource
     private Dictionary<string, SectorData> _sectors = new Dictionary<string, SectorData>();
     public DataSource()
     {
-        AddSector(new SectorMain0404(4, 4));
+        // Mine_A
+
+        AddSector(new SectorMine99100(99,100));
+        AddSector(new SectorMine100100(100,100));// Ўахта- ¬ход
+        AddSector(new SectorMine100101(100,101));
+        AddSector(new SectorMine101100(101,100));
+
+
+        // Global_Map_A
         AddSector(new SectorMain0405(4, 5));
         AddSector(new SectorMain0406(4, 6));
         AddSector(new SectorMain0407(4, 7));
