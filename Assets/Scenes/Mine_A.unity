@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -433,6 +433,21 @@ PrefabInstance:
       propertyPath: ZStep
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2864996304230607189, guid: 292291fa4c0c8664db6bdc431faab669,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356181724062636494, guid: 292291fa4c0c8664db6bdc431faab669,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908630977396162832, guid: 292291fa4c0c8664db6bdc431faab669,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4085385812400647288, guid: 292291fa4c0c8664db6bdc431faab669,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -487,6 +502,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Navigation
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973793530643807208, guid: 292291fa4c0c8664db6bdc431faab669,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -708,7 +728,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 073c8b2c9e4c99f4cad65cc7f5f5fb83, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1469c5888ca756c4f8405e0ddccb9607, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.079
   m_Pitch: 1
@@ -1058,10 +1078,10 @@ RectTransform:
   - {fileID: 1004709272}
   m_Father: {fileID: 1601075725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -40}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977607374
 MonoBehaviour:
@@ -1343,7 +1363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1054516284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2187,10 +2207,10 @@ RectTransform:
   - {fileID: 2103961650}
   m_Father: {fileID: 1601075725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -40}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2052620964
 MonoBehaviour:
