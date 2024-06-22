@@ -47,6 +47,7 @@ public class CharacterController : AvatarController
 
     private bool _avatarMoving;
     private bool _avatarApplyingQants;
+    private bool _quantsReverting;
     private bool AvatarBusy => _avatarMoving || _avatarApplyingQants;
 
     private void Start()
@@ -405,12 +406,14 @@ public class CharacterController : AvatarController
     {
         if (AvatarBusy)
             return;
+        _quantsReverting = true;
         _playerAvatar.Quants.Reverse();
         foreach (var quant in _playerAvatar.Quants) 
         {
             RevertQuant(quant);
         }
         _playerAvatar.Quants.Reverse();
+        _quantsReverting = false;
     }
 
     private void ClearLastQuant()
@@ -425,11 +428,13 @@ public class CharacterController : AvatarController
     {
         if (AvatarBusy)
             return;
+        _quantsReverting = true;
         do
         {
             ClearLastQuant();
         }
         while (_playerAvatar.Quants.Any());
+        _quantsReverting = false;
     }
 
     public void ButtonApplyQuantsClick()
@@ -487,8 +492,11 @@ public class CharacterController : AvatarController
 
     private void ItemSet(Item item, DropSlot slot)
     {
-        var transferItemInfo = new TransferItemInfo(_slotDraggingFrom, slot, item);
-        _playerAvatar.AddItemtransferQuant(transferItemInfo);
+        if (!_avatarApplyingQants && !_quantsReverting)
+        {
+            var transferItemInfo = new TransferItemInfo(_slotDraggingFrom, slot, item);
+            _playerAvatar.AddItemtransferQuant(transferItemInfo);
+        }
         if (slot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
         {
             _mainWeaponImage.sprite = Global.GetIconFor(item.GetType());

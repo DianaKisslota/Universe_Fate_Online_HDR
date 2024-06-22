@@ -44,7 +44,7 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         set
         {
             StoragePosition.Count = value;
-            if (StoragePosition.Count == 0)
+            if (StoragePosition.Count == 0 && gameObject != null)
                 Destroy(gameObject);
             else
                 RefreshInfo();

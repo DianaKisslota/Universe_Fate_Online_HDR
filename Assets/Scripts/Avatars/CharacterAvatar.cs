@@ -238,6 +238,7 @@ public class CharacterAvatar : EntityAvatar
                     var item = transferItemInfo.Item;
 
                     TransferItem(sourceSlot, destinationSlot, item);
+
                 }
                 break;
             case EntityAction.ReloadWeapon:
@@ -376,6 +377,7 @@ public class CharacterAvatar : EntityAvatar
             destinationStorageSlot.FillSlots();
 
         }
+        destinationSlot.OnItemSet(item, destinationSlot);
     }
 
 
