@@ -5,9 +5,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class CharacterAvatar : EntityAvatar
 {
-    [SerializeField] Transform _weaponPoint;
-    [SerializeField] Transform _weaponBackPoint;
-    [SerializeField] Transform _weaponSidePoint;
+    [SerializeField] private Transform _weaponPoint;
+    [SerializeField] private Transform _weaponBackPoint;
+    [SerializeField] private Transform _weaponSidePoint;
     public CharacterInventoryPresenter InventoryPresenter { get; set; }
 
     private List<Quant> _quants = new List<Quant>();
@@ -261,6 +261,9 @@ public class CharacterAvatar : EntityAvatar
                     var target = attackInfo.Target;
                     if (Character.MainWeapon is RangeWeapon)
                     {
+                        var sound = Global.GetSoundFor(Character.MainWeapon.GetType());
+                        if (sound != null)
+                            PlaySound(sound, 0.5f);
                         LookForShoot(target);
                         _animator.SetTrigger("Shoot");
                         _isFiring = 0.75f;

@@ -17,6 +17,7 @@ public static class AvatarFactory
         agent.isStopped = true;
         var rigidBody = model.AddComponent<Rigidbody>();
         rigidBody.isKinematic = true;
+        model.AddComponent<AudioSource>();
         avatar.Entity = Activator.CreateInstance(entityType) as BaseEntity;
         avatar.transform.position = parent.position;
 
@@ -28,6 +29,7 @@ public static class AvatarFactory
         var modelPrefab = Global.GetPrefabForEntity(typeof(Character));
         var model = GameObject.Instantiate<GameObject>(modelPrefab);
         var avatar = model.GetComponent<CharacterAvatar>();
+        model.AddComponent<AudioSource>();
         avatar.Entity = character;
         avatar.transform.position = parent.position;
 

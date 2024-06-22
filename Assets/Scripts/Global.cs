@@ -14,6 +14,7 @@ public static class Global
     private static Dictionary<Type, GameObject> ItemPrefabs = new Dictionary<Type, GameObject>();
     private static Dictionary<Type, GameObject> ContainerPrefabs = new Dictionary<Type, GameObject>();
     private static Dictionary<Type, Sprite> Icons = new Dictionary<Type, Sprite>();
+    private static Dictionary<Type, AudioClip> Sounds = new Dictionary<Type, AudioClip>();
     public static GameObject GetPrefabForEntity(Type entityType)
     {
         EntityPrefabs.TryGetValue(entityType, out GameObject obj);
@@ -38,6 +39,11 @@ public static class Global
         return sprite;
     }
 
+    public static AudioClip GetSoundFor(Type type)
+    {
+        Sounds.TryGetValue(type, out AudioClip sound);
+        return sound;
+    }
     public static GameObject NavPointPrefab { get; set; }
     public static GameObject TargetPrefab { get; set; }
     public static GameObject ItemPresenterPrefab { get; set; }
@@ -65,6 +71,9 @@ public static class Global
         Icons.Add(typeof(Ammo9x18mm), Resources.Load<Sprite>("Icons/Ammo9x18mm"));
         Icons.Add(typeof(Ammo545x39mm), Resources.Load<Sprite>("Icons/Ammo545x39mm"));
         Icons.Add(typeof(Ammo762x39mm), Resources.Load<Sprite>("Icons/Ammo762x39mm"));
+
+        Sounds.Add(typeof(PM), Resources.Load<AudioClip>("Sound/9x18 shot"));
+        Sounds.Add(typeof(AK47), Resources.Load<AudioClip>("Sound/762x39shot"));
 
         NavPointPrefab = Resources.Load<GameObject>("ControlPrefabs/Nav");
         TargetPrefab = Resources.Load<GameObject>("ControlPrefabs/Target");

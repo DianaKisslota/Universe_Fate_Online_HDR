@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -8,6 +9,8 @@ public abstract class EntityAvatar : MonoBehaviour
     public BaseEntity Entity { get; set; }
     protected Animator _animator;
     protected NavMeshAgent _agent;
+
+    [SerializeField] AudioSource _audioSource;
 
     protected Vector3? _walkingTo;
 
@@ -22,6 +25,7 @@ public abstract class EntityAvatar : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+        _audioSource = GetComponent<AudioSource>();
         Init();
     }
 
@@ -103,6 +107,15 @@ public abstract class EntityAvatar : MonoBehaviour
     //    return PathLength(path) <= entity.MaxDistance();
     //}
 
+    public void PlaySound(AudioClip clip, float delay = 0)
+    {
+        StartCoroutine(Play(clip, delay));
+    }
 
+    private IEnumerator Play(AudioClip clip, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _audioSource.PlayOneShot(clip);
+    }
 
 }
