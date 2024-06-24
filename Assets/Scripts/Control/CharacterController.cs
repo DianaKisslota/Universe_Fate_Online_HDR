@@ -32,8 +32,8 @@ public class CharacterController : AvatarController
     private Vector3 _lastPoint;
     private Vector3 _lastAngle;
 
-    private Item _itemDragging;
-    private DropSlot _slotDraggingFrom;
+    //private Item _itemDragging;
+    //private DropSlot _slotDraggingFrom;
 
     private bool _mouseOverUI;
 
@@ -76,11 +76,11 @@ public class CharacterController : AvatarController
         }
 
         _inventoryPanel.Inventory.ItemLeave += ItemLeave;
-        _inventoryPanel.Inventory.ItemSet += ItemSet;
+        _inventoryPanel.Inventory.ItemPresenterSet += ItemPresenterSet;
         foreach (var itemSlot in _inventoryPanel.ItemSlots)
         {
             itemSlot.ItemLeave += ItemLeave;
-            itemSlot.ItemSet += ItemSet;
+            itemSlot.ItemPresenterSet += ItemPresenterSet;
         }
 
         _inventoryPanel.Inventory.WeaponReloaded += OnWeaponReloaded;
@@ -92,7 +92,7 @@ public class CharacterController : AvatarController
         foreach (var itemSlot in _inventoryPanel.ItemSlots)
         {
             itemSlot.ItemLeave -= ItemLeave;
-            itemSlot.ItemSet -= ItemSet;
+            itemSlot.ItemPresenterSet -= ItemPresenterSet;
         }
         _inventoryPanel.Inventory.WeaponReloaded -= OnWeaponReloaded;
         _playerAvatar.FireModeSet -= OnFireModeSet;
@@ -102,6 +102,7 @@ public class CharacterController : AvatarController
     {
         base.BindAvatar(avatar);
         _playerAvatar.InventoryPresenter = _inventoryPanel;
+        _playerAvatar.ItemPresenterTransferred += ItemPresenterSet;
     }
 
     public void UIMouseInteract(bool mouseOverUI)
@@ -176,7 +177,7 @@ public class CharacterController : AvatarController
                 _inventoryPanel.gameObject.SetActive(true);
                 _containerPresenter.gameObject.SetActive(true);
                 _containerPresenter.Slot.ItemLeave += ItemLeave;
-                _containerPresenter.Slot.ItemSet += ItemSet;
+                _containerPresenter.Slot.ItemPresenterSet += ItemPresenterSet;
                 _containerPresenter.Slot.WeaponReloaded += OnWeaponReloaded;
                 return;
             }
@@ -338,16 +339,16 @@ public class CharacterController : AvatarController
                     var transferItemInfo = quant.Object as TransferItemInfo;
                     var sourceSlot = transferItemInfo.Source;
                     var destinationSlot = transferItemInfo.Destination;
-                    var item = transferItemInfo.Item;
+                    var itemPresenter = transferItemInfo.ItemPresenter;
 
-                    _playerAvatar.TransferItem(destinationSlot, sourceSlot, item);
+                    _playerAvatar.TransferItem(destinationSlot, sourceSlot, itemPresenter);
 
                     if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
                         _mainWeaponImage.gameObject.SetActive(false);
                     if (sourceSlot is CharacterItemSlot characterItemSlot1 && characterItemSlot1.SlotType == SlotType.MainWeapon)
                     {
                         _mainWeaponImage.gameObject.SetActive(true);
-                        _mainWeaponImage.sprite = Global.GetIconFor(item.GetType());
+                        _mainWeaponImage.sprite = Global.GetIconFor(itemPresenter.Item.GetType());
                     }
 
                     break;
@@ -476,8 +477,8 @@ public class CharacterController : AvatarController
     }
     private void ItemLeave(Item item, DropSlot slot)
     {
-        _itemDragging = item;
-        _slotDraggingFrom = slot;
+       // _itemDragging = item;
+       // _slotDraggingFrom = slot;
         if (slot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
         {
             _mainWeaponImage.sprite = null;
@@ -490,18 +491,20 @@ public class CharacterController : AvatarController
         }
     }
 
-    private void ItemSet(Item item, DropSlot slot)
+    public void ItemPresenterSet(DropSlot sourceSlot, DropSlot destinationSlot, ItemPresenter itemPresenter)
     {
+        if (sourceSlot == destinationSlot)
+            return;
         if (!_avatarApplyingQants && !_quantsReverting)
         {
-            var transferItemInfo = new TransferItemInfo(_slotDraggingFrom, slot, item);
+            var transferItemInfo = new TransferItemInfo(sourceSlot, destinationSlot, itemPresenter);
             _playerAvatar.AddItemtransferQuant(transferItemInfo);
         }
-        if (slot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
+        if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
         {
-            _mainWeaponImage.sprite = Global.GetIconFor(item.GetType());
+            _mainWeaponImage.sprite = Global.GetIconFor(itemPresenter.Item.GetType());
             _mainWeaponImage.gameObject.SetActive(true);
-            if (item is RangeWeapon rangeWeapon)
+            if (itemPresenter.Item is RangeWeapon rangeWeapon)
             {
                 rangeWeapon.AmmoChanged += ChangeAmmo;
                 ChangeAmmo(rangeWeapon, rangeWeapon.CurrentAmmoType, rangeWeapon.AmmoCount);
@@ -525,7 +528,7 @@ public class CharacterController : AvatarController
     public void ContainerCloseClick()
     {
         _containerPresenter.Slot.ItemLeave -= ItemLeave;
-        _containerPresenter.Slot.ItemSet -= ItemSet;
+        _containerPresenter.Slot.ItemPresenterSet -= ItemPresenterSet;
         _containerPresenter.Slot.WeaponReloaded -= OnWeaponReloaded;
     }
 
@@ -540,11 +543,13 @@ public class CharacterController : AvatarController
         _SetFireMode1.isOn = fireMode == FireMode.SingleShot;
         _SetFireMode2.isOn = fireMode == FireMode.ShortBurst;
         _SetFireMode3.isOn = fireMode == FireMode.LongBurst;
+
+        SetFireMode(fireMode);
     }
 
-    public void SetFireMode(int fireMode)
+    public void SetFireMode(FireMode fireMode)
     {
-        _playerAvatar.FireMode = (FireMode)fireMode;
+        _playerAvatar.FireMode = fireMode;
     }
 
 }

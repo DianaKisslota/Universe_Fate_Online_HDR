@@ -6,6 +6,8 @@ public class DropSlot : MonoBehaviour, IDropHandler
 {
     public event Action<Item, DropSlot> ItemLeave;
     public event Action<Item, DropSlot> ItemSet;
+    public event Action<DropSlot, DropSlot, ItemPresenter> ItemPresenterSet;
+
 
     [SerializeField] protected SlotType _slotType;
     public SlotType SlotType => _slotType;
@@ -18,6 +20,12 @@ public class DropSlot : MonoBehaviour, IDropHandler
     {
         ItemSet?.Invoke(item, slot);
     }
+
+    public void OnPresenterSet(ItemPresenter itemPresenter, DropSlot sourceSlot)
+    {
+        ItemPresenterSet?.Invoke(sourceSlot, this, itemPresenter);
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         var transferredObject = eventData.pointerDrag;
@@ -40,8 +48,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
 
     protected virtual void DropProcess(ItemPresenter itemPresenter)
     {
-        itemPresenter.transform.SetParent(transform);
-        itemPresenter.transform.localPosition = Vector3.zero;
+        itemPresenter.SetToParent(transform);
         if (itemPresenter.OldParent.gameObject.TryGetComponent<ItemSlot>(out var oldParentItemSlot))
         {
             oldParentItemSlot.SetFree();

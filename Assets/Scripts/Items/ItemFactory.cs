@@ -50,6 +50,8 @@ public static class ItemFactory
             presenter.AddComponent<ReloadSlot>();
         }
 
+        presenter.TestID = ++Global.TestID;
+
         return presenter;
     }
 
@@ -67,6 +69,7 @@ public static class ItemFactory
             presenter.AddComponent<ReloadSlot>();
         }
 
+        presenter.TestID = ++Global.TestID;
         return presenter;
     }
 

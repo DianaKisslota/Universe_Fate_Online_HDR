@@ -9,7 +9,7 @@ public abstract class StorageSlot : DropSlot
     [SerializeField] GameObject _itemsParent;
 
     private Storage _storage;
-    private List<GameObject> _children = new List<GameObject>();
+ //   private List<GameObject> _children = new List<GameObject>();
 
     public event Action<ItemPresenter, ItemPresenter, int, StorageSlot> WeaponReloaded;
 
@@ -31,18 +31,23 @@ public abstract class StorageSlot : DropSlot
 
     public virtual void FillSlots()
     {
-        while (_children.Count > 0)
-        {
-            var itemObject = _children[0];
-            _children.Remove(itemObject);
-            Destroy(itemObject);
+        //while (_children.Count > 0)
+        //{
+        //    var itemObject = _children[0];
+        //    _children.Remove(itemObject);
+        //    Destroy(itemObject);
+        //}
+
+        for (var i = 0; i < transform.childCount; i++)
+        { 
+            Destroy(transform.GetChild(i).gameObject);
         }
 
         foreach (StoragePosition position in _storage.Items)
         {
             var itemPresenter = ItemFactory.CreateItemPresenter(position, _itemsParent.transform);
 
-            _children.Add(itemPresenter.gameObject);
+         //   _children.Add(itemPresenter.gameObject);
         }
     }
 
@@ -55,23 +60,23 @@ public abstract class StorageSlot : DropSlot
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
         base.DropProcess(itemPresenter);
-        _children.Add(itemPresenter.gameObject);
+        //_children.Add(itemPresenter.gameObject);
         OnItemSet(itemPresenter.Item, this);
     }
 
     public void InsertItem(ItemPresenter itemPresenter)
     {
         itemPresenter.StoragePosition = Storage.AddItem(itemPresenter.Item, itemPresenter.Count);
-        _children.Add(itemPresenter.gameObject);
+       // _children.Add(itemPresenter.gameObject);
     }
 
     public override void OnItemLeave(Item item)
     {
-        var itemObject = _children.FirstOrDefault(x => x.TryGetComponent<ItemPresenter>(out var presenter) && presenter.Item == item);
-        if (itemObject != null)
-        {
-            _children.Remove(itemObject);
-        }
+        //var itemObject = _children.FirstOrDefault(x => x.TryGetComponent<ItemPresenter>(out var presenter) && presenter.Item == item);
+        //if (itemObject != null)
+        //{
+        //    _children.Remove(itemObject);
+        //}
         base.OnItemLeave(item);
     }
 }

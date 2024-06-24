@@ -3,8 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SoundType
+{
+    Shot,
+    Burst,
+    LongBurst,
+    Reload
+}
 public static class Global 
 {
+    public static int TestID {  get; set; }
     public static Character Character { get; private set; }
 
     public static string CurrentMapName = null;
@@ -14,7 +22,7 @@ public static class Global
     private static Dictionary<Type, GameObject> ItemPrefabs = new Dictionary<Type, GameObject>();
     private static Dictionary<Type, GameObject> ContainerPrefabs = new Dictionary<Type, GameObject>();
     private static Dictionary<Type, Sprite> Icons = new Dictionary<Type, Sprite>();
-    private static Dictionary<Type, AudioClip> Sounds = new Dictionary<Type, AudioClip>();
+    private static Dictionary<(Type, SoundType), AudioClip> Sounds = new Dictionary<(Type, SoundType), AudioClip>();
     public static GameObject GetPrefabForEntity(Type entityType)
     {
         EntityPrefabs.TryGetValue(entityType, out GameObject obj);
@@ -39,9 +47,9 @@ public static class Global
         return sprite;
     }
 
-    public static AudioClip GetSoundFor(Type type)
+    public static AudioClip GetSoundFor(Type type, SoundType soundType)
     {
-        Sounds.TryGetValue(type, out AudioClip sound);
+        Sounds.TryGetValue((type, soundType), out AudioClip sound);
         return sound;
     }
     public static GameObject NavPointPrefab { get; set; }
@@ -72,8 +80,9 @@ public static class Global
         Icons.Add(typeof(Ammo545x39mm), Resources.Load<Sprite>("Icons/Ammo545x39mm"));
         Icons.Add(typeof(Ammo762x39mm), Resources.Load<Sprite>("Icons/Ammo762x39mm"));
 
-        Sounds.Add(typeof(PM), Resources.Load<AudioClip>("Sound/9x18 shot"));
-        Sounds.Add(typeof(AK47), Resources.Load<AudioClip>("Sound/762x39shot"));
+        Sounds.Add((typeof(PM), SoundType.Shot), Resources.Load<AudioClip>("Sound/9x18 shot"));
+        Sounds.Add((typeof(AK47), SoundType.Shot), Resources.Load<AudioClip>("Sound/762x39shot"));
+        Sounds.Add((typeof(AK47), SoundType.Reload), Resources.Load<AudioClip>("Sound/AK_reload"));
 
         NavPointPrefab = Resources.Load<GameObject>("ControlPrefabs/Nav");
         TargetPrefab = Resources.Load<GameObject>("ControlPrefabs/Target");

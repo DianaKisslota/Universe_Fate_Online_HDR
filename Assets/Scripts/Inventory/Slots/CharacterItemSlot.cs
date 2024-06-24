@@ -24,5 +24,11 @@ public class CharacterItemSlot : ItemSlot
         Character.UnEquip(item);
     }
 
-
+    public void RefreshInfo()
+    {
+        if (_presenter != null)
+        {
+            _presenter.RefreshInfo();
+        }        
+    }
 }

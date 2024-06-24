@@ -19,6 +19,7 @@ public class CharacterAvatar : EntityAvatar
     public event Action StartApplainQuants;
     public event Action EndApplainQuants;
     public event Action<FireMode> FireModeSet;
+    public event Action<DropSlot, DropSlot, ItemPresenter> ItemPresenterTransferred;
 
     private bool _quantsApplaying = false;
 
@@ -115,7 +116,7 @@ public class CharacterAvatar : EntityAvatar
         itemObject.gameObject.transform.localRotation = rotation;
         itemObject.gameObject.SetActive(true);
         itemObject.Take();
-        InventoryPresenter.RefreshItemSlots();
+        InventoryPresenter.InitItemSlots();
     }
     private void OnUnEquip(Item item, SlotType slotType)
     {
@@ -235,7 +236,7 @@ public class CharacterAvatar : EntityAvatar
                     var transferItemInfo = _quants[0].Object as TransferItemInfo;
                     var sourceSlot = transferItemInfo.Source;
                     var destinationSlot = transferItemInfo.Destination;
-                    var item = transferItemInfo.Item;
+                    var item = transferItemInfo.ItemPresenter;
 
                     TransferItem(sourceSlot, destinationSlot, item);
 
@@ -253,6 +254,8 @@ public class CharacterAvatar : EntityAvatar
                     weaponPresenter.RefreshInfo();
                     ammoPresenter.Count -= ammoUsed;
                     sourceSlot.FillSlots();
+                    if (weapon.WeaponType != WeaponType.Pistol)
+                        PlaySound(Global.GetSoundFor(typeof(AK47), SoundType.Reload));
                     break;
                 }
             case EntityAction.Attack:
@@ -261,13 +264,19 @@ public class CharacterAvatar : EntityAvatar
                     var target = attackInfo.Target;
                     if (Character.MainWeapon is RangeWeapon)
                     {
-                        var sound = Global.GetSoundFor(Character.MainWeapon.GetType());
-                        if (sound != null)
-                            PlaySound(sound, 0.5f);
                         LookForShoot(target);
                         _animator.SetTrigger("Shoot");
-                        _isFiring = 0.75f;
+                        _isFiring = 1f;
                         StopAgent(1.5f);
+                        var soundType = SoundType.Shot;
+                        if (FireMode == FireMode.ShortBurst)
+                            soundType = SoundType.Burst;
+                        if (FireMode == FireMode.LongBurst)
+                            soundType = SoundType.LongBurst;
+
+                        var sound = Global.GetSoundFor(Character.MainWeapon.GetType(), soundType);
+                        if (sound != null)
+                            PlaySound(sound, 0.3f);
                     }
                     break;
                 }
@@ -317,11 +326,9 @@ public class CharacterAvatar : EntityAvatar
                     break;
                 case EntityAction.PickObject:
                     {
-                        //var itemObject = _quants[0].Object as ItemObject;
-                        //TakeItem(itemObject);
                         quantEnded = true;
+                        break;
                     }
-                    break;
                 case EntityAction.TransferItem:
                     {
                         quantEnded = true;
@@ -356,31 +363,30 @@ public class CharacterAvatar : EntityAvatar
         }
     }
 
-    public void TransferItem(DropSlot sourceSlot, DropSlot destinationSlot, Item item)
+    public void TransferItem(DropSlot sourceSlot, DropSlot destinationSlot, ItemPresenter itemPresenter)
     {
+        itemPresenter.SetToParent(destinationSlot.transform);
         if (sourceSlot is CharacterItemSlot sourceItemSlot)
         {
-            sourceItemSlot.Character.UnEquip(item);
-            sourceItemSlot.InitSlot(null);
+            sourceSlot.OnItemLeave(itemPresenter.Item);
+            sourceItemSlot.Character.UnEquip(itemPresenter.Item);
         }
         if (destinationSlot is CharacterItemSlot destinationItemSlot)
         {
-            destinationItemSlot.Character.Equip(item, destinationItemSlot);
-            destinationItemSlot.InitSlot(item);
-
+            destinationItemSlot.PresenterSet(itemPresenter);
+            destinationItemSlot.Character.Equip(itemPresenter.Item, destinationItemSlot);
         }
         if (sourceSlot is StorageSlot sourceStorageSlotSlot)
         {
-            sourceStorageSlotSlot.Storage.RemoveItem(item);
-            sourceStorageSlotSlot.FillSlots();
+            sourceStorageSlotSlot.Storage.RemoveItem(itemPresenter.Item);
         }
         if (destinationSlot is StorageSlot destinationStorageSlot)
         {
-            destinationStorageSlot.Storage.AddItem(item);
-            destinationStorageSlot.FillSlots();
+            destinationStorageSlot.Storage.AddItem(itemPresenter.Item);
 
         }
-        destinationSlot.OnItemSet(item, destinationSlot);
+        ItemPresenterTransferred?.Invoke(sourceSlot, destinationSlot, itemPresenter);
+       // destinationSlot.OnItemSet(itemPresenter.Item, destinationSlot);
     }
 
 

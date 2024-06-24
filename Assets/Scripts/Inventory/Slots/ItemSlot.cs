@@ -15,7 +15,7 @@ public class ItemSlot : DropSlot
 {
     [SerializeField] protected GameObject _backgroungImage;
 
-    private ItemPresenter _presenter;
+    protected ItemPresenter _presenter;
 
     protected bool _isOccuped;
     public virtual void SetFree()
@@ -23,9 +23,6 @@ public class ItemSlot : DropSlot
         _isOccuped = false;
         _backgroungImage.SetActive(true);
     }
-
-
-
     protected override bool IsItemAccessible(Item item)
     {
         switch (_slotType)
@@ -51,9 +48,7 @@ public class ItemSlot : DropSlot
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
         base.DropProcess(itemPresenter);
-        _presenter = itemPresenter;
-        _backgroungImage.SetActive(false);
-        _isOccuped = true;
+        PresenterSet(itemPresenter);
     }
 
     public override void OnItemLeave(Item item)
@@ -63,13 +58,25 @@ public class ItemSlot : DropSlot
         base.OnItemLeave(item);
     }
 
+    public void PresenterSet(ItemPresenter itemPresenter)
+    {
+        _presenter = itemPresenter;
+        _backgroungImage.SetActive(false);
+        _isOccuped = true;
+    }
+
     public void InitSlot(Item item)
     {
-        if (_presenter != null)
-            Destroy(_presenter.gameObject);
+        if (_presenter != null && _presenter.Item == item)
+        {
+            _presenter.RefreshInfo();
+            return;
+        }           
 
         if (item == null)
         {
+            //if (_presenter != null)
+            //    Destroy(_presenter.gameObject);
             _backgroungImage.SetActive(true);
             _isOccuped = false;
             return;
@@ -86,5 +93,6 @@ public class ItemSlot : DropSlot
         _backgroungImage.SetActive(false);
         _isOccuped = true;
         _presenter = itemPresenter;
+     //   _presenter.RefreshInfo();
     }
 }

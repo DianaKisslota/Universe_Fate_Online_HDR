@@ -11,6 +11,8 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private TMP_Text _nameText;
 
+    public int TestID;
+
     private Transform _transportPanel;
     private Transform _oldParent;
     protected CanvasGroup _canvasGroup;
@@ -57,7 +59,7 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             _countText.text = Count.ToString();
         else
            _countText.text = string.Empty;
-        if (Item is RangeWeapon rangeWeapon)
+        if (Item is RangeWeapon rangeWeapon && TestID > -1)
         {
             _countText.text = rangeWeapon.AmmoCount.ToString() + "/" + rangeWeapon.AmmoCapacity.ToString();
         }
@@ -89,23 +91,33 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     {
         if (transform.parent == _transportPanel)
         {
-            transform.SetParent(_oldParent);
-            transform.localPosition = Vector2.zero;
+            SetToParent(_oldParent);
             if (transform.parent.gameObject.TryGetComponent<StorageSlot>(out var storageSlot))
             {
                 storageSlot.InsertItem(this);
             }
         }
 
+        var sourceSlot = _oldParent.GetComponent<DropSlot>();
+        var currentSlot = transform.parent.gameObject.GetComponent<DropSlot>();
+        currentSlot.OnPresenterSet(this, sourceSlot);
+
+        _canvasGroup.blocksRaycasts = true;
+    }
+
+    public void SetToParent(Transform parent)
+    {
+        transform.SetParent(parent);
+        transform.localPosition = Vector2.zero;
+
         if (transform.parent.gameObject.TryGetComponent<ItemSlot>(out var itemSlot))
         {
             if (itemSlot.SlotType == SlotType.Shoulder)
-                eventData.pointerDrag.transform.localEulerAngles = new Vector3(0, 0, -90);
+                transform.localEulerAngles = new Vector3(0, 0, -90);
             _nameText.gameObject.SetActive(false);
         }
         else
             _nameText.gameObject.SetActive(true);
 
-        _canvasGroup.blocksRaycasts = true;
     }
 }

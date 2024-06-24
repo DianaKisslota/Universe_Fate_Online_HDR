@@ -29,13 +29,20 @@ public class CharacterInventoryPresenter : MonoBehaviour
 
     private void Awake()
     {
-        RefreshItemSlots();
+        InitItemSlots();
     }
 
-    public void RefreshItemSlots()
+    public void InitItemSlots()
     {
         _mainWeapon.InitSlot(Character.MainWeapon);
         _secondaryWeapon.InitSlot(Character.SecondaryWeapon);
         _shoulder.InitSlot(Character.ShoulderWeapon);
+    }
+
+    public void RefreshItemSlots()
+    {
+        _mainWeapon.RefreshInfo();
+        _secondaryWeapon.RefreshInfo();
+        _shoulder.RefreshInfo();
     }
 }
