@@ -10,10 +10,14 @@ public abstract class EntityAvatar : MonoBehaviour
     protected Animator _animator;
     protected NavMeshAgent _agent;
 
-    [SerializeField] AudioSource _audioSource;
+    [SerializeField] protected AudioSource _audioSource;
 
     protected Vector3? _walkingTo;
 
+    protected virtual AudioClip _rangeAttackSound
+    {
+        get { return _audioSource.clip; }
+    }
     public bool IsMoving {  get; set; }
 
     public event Action StartMoving;
@@ -107,15 +111,29 @@ public abstract class EntityAvatar : MonoBehaviour
     //    return PathLength(path) <= entity.MaxDistance();
     //}
 
-    public void PlaySound(AudioClip clip, float delay = 0)
+    public void PlaySound(AudioClip clip, float delay = 0, int numRepeat = 1)
     {
-        StartCoroutine(Play(clip, delay));
+        StartCoroutine(Play(clip, delay, numRepeat));
     }
 
-    private IEnumerator Play(AudioClip clip, float delay)
+    private IEnumerator Play(AudioClip clip, float delay, int numRepeat)
     {
-        yield return new WaitForSeconds(delay);
-        _audioSource.PlayOneShot(clip);
+        for (int i = 0; i < numRepeat; i++)
+        {
+            yield return new WaitForSeconds(delay);
+            _audioSource.PlayOneShot(clip);
+        }
+    }
+
+    protected virtual void RangeAttack(RangeAttackData attackData)
+    {
+
+
+
+
+
+        var attackResolver = new AttackResolver();
+        attackResolver.ResolveAttack();
     }
 
 }

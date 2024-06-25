@@ -9,6 +9,9 @@
         Weight = 3.3f;
         Volume = 10;
         AddSkill(SkillType.AssaultRifle, 1);
+
+        ShortBurst = 3;
+        LongBurst = 5;
     }
 }
 

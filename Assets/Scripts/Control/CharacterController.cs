@@ -32,9 +32,6 @@ public class CharacterController : AvatarController
     private Vector3 _lastPoint;
     private Vector3 _lastAngle;
 
-    //private Item _itemDragging;
-    //private DropSlot _slotDraggingFrom;
-
     private bool _mouseOverUI;
 
     private CharacterAvatar _playerAvatar => _avatar as CharacterAvatar;
@@ -477,8 +474,6 @@ public class CharacterController : AvatarController
     }
     private void ItemLeave(Item item, DropSlot slot)
     {
-       // _itemDragging = item;
-       // _slotDraggingFrom = slot;
         if (slot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
         {
             _mainWeaponImage.sprite = null;
@@ -536,6 +531,11 @@ public class CharacterController : AvatarController
     {
         var quantInfo = new ReloadWeaponInfo(weaponPresenter, ammoPresenter, num, slot);
         _playerAvatar.AddReloadWeaponQuant(quantInfo);
+    }
+
+    public void SetFireMode(int mode)
+    {
+        OnFireModeSet((FireMode)mode);
     }
 
     public void OnFireModeSet(FireMode fireMode)

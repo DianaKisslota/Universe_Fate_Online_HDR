@@ -27,6 +27,17 @@ public class CharacterAvatar : EntityAvatar
 
     public FireMode FireMode { get; set; }
 
+    protected override AudioClip _rangeAttackSound
+    {
+        get
+        {
+            if (Character.MainWeapon != null)
+                return Global.GetSoundFor(Character.MainWeapon.GetType(), SoundType.Shot);
+            else
+                return null;
+        }
+    }
+
     protected override void Init()
     {
         Character.OnEquip += OnEquip;
@@ -59,7 +70,8 @@ public class CharacterAvatar : EntityAvatar
         var itemObject = GetItemObject(item);
         Quaternion rotation = Quaternion.identity;
         Vector3 position = Vector3.zero;
-        if (slotType == SlotType.MainWeapon) {
+        if (slotType == SlotType.MainWeapon)
+        {
             if (item is RangeWeapon rangeWeapon)
             {
                 FireMode = rangeWeapon.SingleShot != null ? FireMode.SingleShot :
@@ -262,21 +274,28 @@ public class CharacterAvatar : EntityAvatar
                 {
                     var attackInfo = _quants[0].Object as AttackInfo;
                     var target = attackInfo.Target;
-                    if (Character.MainWeapon is RangeWeapon)
+                    if (Character.MainWeapon is RangeWeapon rangeWeapon)
                     {
                         LookForShoot(target);
-                        _animator.SetTrigger("Shoot");
-                        _isFiring = 1f;
-                        StopAgent(1.5f);
-                        var soundType = SoundType.Shot;
-                        if (FireMode == FireMode.ShortBurst)
-                            soundType = SoundType.Burst;
-                        if (FireMode == FireMode.LongBurst)
-                            soundType = SoundType.LongBurst;
+                        var rangeAttackData = new RangeAttackData();
+                        rangeAttackData.Target = target.Entity;
+                        rangeAttackData.AmmoType = attackInfo.AmmoType;
+                        rangeAttackData.ShotNumber = rangeWeapon.GetFireModeAmmo(attackInfo.FireMode).Value;
+                        rangeAttackData.PossibleShotNumber = Mathf.Min(rangeAttackData.ShotNumber, rangeWeapon.AmmoCount);
+                        rangeAttackData.WeaponType = rangeWeapon.GetType();
 
-                        var sound = Global.GetSoundFor(Character.MainWeapon.GetType(), soundType);
-                        if (sound != null)
-                            PlaySound(sound, 0.3f);
+                        rangeWeapon.UnLoad(rangeAttackData.PossibleShotNumber);
+
+                        InventoryPresenter.RefreshItemSlots();
+
+                        //var soundType = SoundType.Shot;
+                        //if (FireMode == FireMode.ShortBurst)
+                        //    soundType = SoundType.Burst;
+                        //if (FireMode == FireMode.LongBurst)
+                        //    soundType = SoundType.LongBurst;
+
+
+                        RangeAttack(rangeAttackData);
                     }
                     break;
                 }
@@ -311,17 +330,17 @@ public class CharacterAvatar : EntityAvatar
     }
 
     protected override void AdditionChecks()
-    {  
+    {
         base.AdditionChecks();
-        
-        if ( _quantsApplaying)        
+
+        if (_quantsApplaying)
         {
             var quantEnded = false;
             switch (_quants[0].Action)
             {
                 case EntityAction.Move:
                     {
-                        quantEnded = _walkingTo == null;                       
+                        quantEnded = _walkingTo == null;
                     }
                     break;
                 case EntityAction.PickObject:
@@ -386,9 +405,24 @@ public class CharacterAvatar : EntityAvatar
 
         }
         ItemPresenterTransferred?.Invoke(sourceSlot, destinationSlot, itemPresenter);
-       // destinationSlot.OnItemSet(itemPresenter.Item, destinationSlot);
+        // destinationSlot.OnItemSet(itemPresenter.Item, destinationSlot);
     }
 
+    protected override void RangeAttack(RangeAttackData attackData)
+    {
+        _animator.SetTrigger("Shoot");
+        _isFiring = attackData.PossibleShotNumber / 2;
+        StopAgent(1f * attackData.PossibleShotNumber);
 
+        var soundFire = Global.GetSoundFor(attackData.WeaponType, SoundType.Shot);
+        var soundFailFire = Global.GetSoundFor(attackData.WeaponType, SoundType.FailShot);
 
+        if (soundFire != null)
+            PlaySound(soundFire, 0.1f, attackData.PossibleShotNumber);
+
+        if (attackData.PossibleShotNumber == 0 && soundFailFire != null)
+            PlaySound(soundFailFire);
+
+        base.RangeAttack(attackData);
+    }
 }

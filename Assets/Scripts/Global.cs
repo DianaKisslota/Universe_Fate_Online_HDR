@@ -8,7 +8,8 @@ public enum SoundType
     Shot,
     Burst,
     LongBurst,
-    Reload
+    Reload,
+    FailShot
 }
 public static class Global 
 {
@@ -81,8 +82,11 @@ public static class Global
         Icons.Add(typeof(Ammo762x39mm), Resources.Load<Sprite>("Icons/Ammo762x39mm"));
 
         Sounds.Add((typeof(PM), SoundType.Shot), Resources.Load<AudioClip>("Sound/9x18 shot"));
+        Sounds.Add((typeof(PM), SoundType.Reload), Resources.Load<AudioClip>("Sound/PM_Reload"));
+        Sounds.Add((typeof(PM), SoundType.FailShot), Resources.Load<AudioClip>("Sound/Pistol_Fail"));
         Sounds.Add((typeof(AK47), SoundType.Shot), Resources.Load<AudioClip>("Sound/762x39shot"));
         Sounds.Add((typeof(AK47), SoundType.Reload), Resources.Load<AudioClip>("Sound/AK_reload"));
+        Sounds.Add((typeof(AK47), SoundType.FailShot), Resources.Load<AudioClip>("Sound/AK_Fail"));
 
         NavPointPrefab = Resources.Load<GameObject>("ControlPrefabs/Nav");
         TargetPrefab = Resources.Load<GameObject>("ControlPrefabs/Target");
