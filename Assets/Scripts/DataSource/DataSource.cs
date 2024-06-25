@@ -14,6 +14,7 @@ public class DataSource : IDataSource
 
 
         // Global_Map_A
+        AddSector(new SectorMain0404(4, 4));
         AddSector(new SectorMain0405(4, 5));
         AddSector(new SectorMain0406(4, 6));
         AddSector(new SectorMain0407(4, 7));
