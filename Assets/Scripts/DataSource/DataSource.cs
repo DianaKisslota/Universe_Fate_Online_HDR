@@ -7,10 +7,20 @@ public class DataSource : IDataSource
     {
         // Mine_A
 
+        AddSector(new SectorMine9898(98,98));
+        AddSector(new SectorMine9998(99,98));
+        AddSector(new SectorMine9999(99,99));
         AddSector(new SectorMine99100(99,100));
+        AddSector(new SectorMine99102(99,102));
+        AddSector(new SectorMine10097(100,97));
+        AddSector(new SectorMine10098(100,98));
         AddSector(new SectorMine100100(100,100));// Ўахта- ¬ход
         AddSector(new SectorMine100101(100,101));
+        AddSector(new SectorMine100102(100,102));
+        AddSector(new SectorMine10198(101,98));
+        AddSector(new SectorMine10199(101,99));
         AddSector(new SectorMine101100(101,100));
+        AddSector(new SectorMine10299(102,99));
 
 
         // Global_Map_A
