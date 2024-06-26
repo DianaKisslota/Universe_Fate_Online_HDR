@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CharacterController : AvatarController
@@ -20,6 +21,10 @@ public class CharacterController : AvatarController
     [SerializeField] private Toggle _SetFireMode3;
     [SerializeField] private Image _mainWeaponImage;
     [SerializeField] private Image _mainWeaponAmmo;
+
+    [SerializeField] EventTrigger _fireModeTrigger1;
+    [SerializeField] EventTrigger _fireModeTrigger2;
+    [SerializeField] EventTrigger _fireModeTrigger3;
 
     [SerializeField] private PointerController _pointer;
     //   [SerializeField] protected LineRenderer _pathDrawer;
@@ -98,6 +103,8 @@ public class CharacterController : AvatarController
     public override void BindAvatar(EntityAvatar avatar)
     {
         base.BindAvatar(avatar);
+        _playerAvatar.ReflectAllItems();
+        ReflectMainWeapon(_playerAvatar.Character.MainWeapon);
         _playerAvatar.InventoryPresenter = _inventoryPanel;
         _playerAvatar.ItemPresenterTransferred += ItemPresenterSet;
     }
@@ -497,16 +504,23 @@ public class CharacterController : AvatarController
         }
         if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
         {
-            _mainWeaponImage.sprite = Global.GetIconFor(itemPresenter.Item.GetType());
-            _mainWeaponImage.gameObject.SetActive(true);
-            if (itemPresenter.Item is RangeWeapon rangeWeapon)
-            {
-                rangeWeapon.AmmoChanged += ChangeAmmo;
-                ChangeAmmo(rangeWeapon, rangeWeapon.CurrentAmmoType, rangeWeapon.AmmoCount);
-            }
-            else
-                _mainWeaponAmmo.gameObject.SetActive(false);
+            ReflectMainWeapon(itemPresenter.Item);
         }
+    }
+
+    private void ReflectMainWeapon(Item item)
+    {
+        if (item == null) 
+            return;
+        _mainWeaponImage.sprite = Global.GetIconFor(item.GetType());
+        _mainWeaponImage.gameObject.SetActive(true);
+        if (item is RangeWeapon rangeWeapon)
+        {
+            rangeWeapon.AmmoChanged += ChangeAmmo;
+            ChangeAmmo(rangeWeapon, rangeWeapon.CurrentAmmoType, rangeWeapon.AmmoCount);
+        }
+        else
+            _mainWeaponAmmo.gameObject.SetActive(false);
     }
 
     private void ChangeAmmo(RangeWeapon weapon, Type ammoType, int num)
@@ -540,9 +554,22 @@ public class CharacterController : AvatarController
 
     public void OnFireModeSet(FireMode fireMode)
     {
+        var firemode1Available = (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon1) && rangeWeapon1.SingleShot != null;
+        var firemode2Available = (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon2) && rangeWeapon2.ShortBurst != null;
+        var firemode3Available = (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon3) && rangeWeapon3.LongBurst != null;
+
+        _SetFireMode1.GetComponent<EventTrigger>().enabled = firemode1Available;
+        _SetFireMode2.GetComponent<EventTrigger>().enabled = firemode2Available;
+        _SetFireMode3.GetComponent<EventTrigger>().enabled = firemode3Available;
+
+        _SetFireMode1.interactable = firemode1Available;
+        _SetFireMode2.interactable = firemode2Available;
+        _SetFireMode3.interactable = firemode3Available;
+
         _SetFireMode1.isOn = fireMode == FireMode.SingleShot;
         _SetFireMode2.isOn = fireMode == FireMode.ShortBurst;
         _SetFireMode3.isOn = fireMode == FireMode.LongBurst;
+
 
         SetFireMode(fireMode);
     }

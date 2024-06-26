@@ -24,6 +24,7 @@ public class CharacterAvatar : EntityAvatar
     private bool _quantsApplaying = false;
 
     private float _isFiring = 0f;
+    private float _isReloading = 0f;
 
     public FireMode FireMode { get; set; }
 
@@ -67,6 +68,22 @@ public class CharacterAvatar : EntityAvatar
     }
     private void OnEquip(Item item, SlotType slotType)
     {
+        ReflectEquipment(item, slotType);
+
+        InventoryPresenter.InitItemSlots();
+    }
+
+    public void ReflectAllItems()
+    {
+        ReflectEquipment(Character.MainWeapon, SlotType.MainWeapon);
+        ReflectEquipment(Character.SecondaryWeapon, SlotType.SecondaryWeapon);
+        ReflectEquipment(Character.ShoulderWeapon, SlotType.Shoulder);
+    }
+
+    public void ReflectEquipment(Item item, SlotType slotType)
+    {
+        if (item == null)
+            return;
         var itemObject = GetItemObject(item);
         Quaternion rotation = Quaternion.identity;
         Vector3 position = Vector3.zero;
@@ -95,14 +112,14 @@ public class CharacterAvatar : EntityAvatar
                         case WeaponType.Rifle:
                         case WeaponType.AssaultRifle:
                         case WeaponType.SMG:
-                            _animator.SetInteger("HasWeapon", 2);
+                            Animator.SetInteger("HasWeapon", 2);
                             break;
                         case WeaponType.Pistol:
-                            _animator.SetInteger("HasWeapon", 1);
+                            Animator.SetInteger("HasWeapon", 1);
                             break;
                         case WeaponType.Knife:
                             {
-                                _animator.SetInteger("HasWeapon", 3);
+                                Animator.SetInteger("HasWeapon", 3);
                                 rotation = Quaternion.Euler(new Vector3(0, 0, -90));
                             }
                             break;
@@ -128,8 +145,8 @@ public class CharacterAvatar : EntityAvatar
         itemObject.gameObject.transform.localRotation = rotation;
         itemObject.gameObject.SetActive(true);
         itemObject.Take();
-        InventoryPresenter.InitItemSlots();
     }
+
     private void OnUnEquip(Item item, SlotType slotType)
     {
         var itemObject = GetItemObject(item);
@@ -137,7 +154,7 @@ public class CharacterAvatar : EntityAvatar
             itemObject.gameObject.SetActive(false);
         if (slotType == SlotType.MainWeapon)
         {
-            _animator.SetInteger("HasWeapon", 0);
+            Animator.SetInteger("HasWeapon", 0);
         }
     }
 
@@ -268,6 +285,7 @@ public class CharacterAvatar : EntityAvatar
                     sourceSlot.FillSlots();
                     if (weapon.WeaponType != WeaponType.Pistol)
                         PlaySound(Global.GetSoundFor(typeof(AK47), SoundType.Reload));
+                    _isReloading = 0.5f;
                     break;
                 }
             case EntityAction.Attack:
@@ -355,13 +373,16 @@ public class CharacterAvatar : EntityAvatar
                     }
                 case EntityAction.ReloadWeapon:
                     {
-                        quantEnded = true;
+                        _isReloading -= Time.deltaTime;
+                        quantEnded = _isReloading <= 0;
                         break;
                     }
                 case EntityAction.Attack:
                     {
                         _isFiring -= Time.deltaTime;
                         quantEnded = _isFiring <= 0;
+                        if (quantEnded)
+                            Animator.SetTrigger("Idle");
                         break;
                     }
                 default:
@@ -410,8 +431,8 @@ public class CharacterAvatar : EntityAvatar
 
     protected override void RangeAttack(RangeAttackData attackData)
     {
-        _animator.SetTrigger("Shoot");
-        _isFiring = attackData.PossibleShotNumber / 2;
+        Animator.SetTrigger("Shoot");
+        _isFiring = attackData.PossibleShotNumber / 4f;
         StopAgent(1f * attackData.PossibleShotNumber);
 
         var soundFire = Global.GetSoundFor(attackData.WeaponType, SoundType.Shot);

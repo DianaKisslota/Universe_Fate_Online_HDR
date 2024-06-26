@@ -14,6 +14,16 @@ public abstract class EntityAvatar : MonoBehaviour
 
     protected Vector3? _walkingTo;
 
+    protected Animator Animator
+    {
+        get
+        {
+            if (_animator == null)
+                _animator = GetComponent<Animator>();
+            return _animator;
+        }
+    }
+
     protected virtual AudioClip _rangeAttackSound
     {
         get { return _audioSource.clip; }
@@ -27,7 +37,6 @@ public abstract class EntityAvatar : MonoBehaviour
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         _audioSource = GetComponent<AudioSource>();
         Init();
@@ -40,7 +49,7 @@ public abstract class EntityAvatar : MonoBehaviour
         if (InPoint(movePoint))
             return;
         _walkingTo = movePoint;
-        _animator.SetTrigger("Walk");
+        Animator.SetTrigger("Walk");
         _agent.destination = movePoint;
         StartMoving!.Invoke();
     }
@@ -50,7 +59,7 @@ public abstract class EntityAvatar : MonoBehaviour
         if (_walkingTo != null && InPoint(_walkingTo.Value))
         {
             _agent.ResetPath();
-            _animator.SetTrigger("Idle"); 
+            Animator.SetTrigger("Idle"); 
             _walkingTo = null;
             StopAgent(0.5f);
             EndMoving?.Invoke();
