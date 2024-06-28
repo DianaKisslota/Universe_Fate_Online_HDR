@@ -1,8 +1,10 @@
-﻿public abstract class BaseEntity
+﻿using UnityEngine;
+
+public abstract class BaseEntity: ITarget
 {
     public int Level { get; set; } = 1;
     public string Name {  get; set; }
-    public string Description { get; set; }
+    public string Description { get; set; }  
 
     private int _strength;
     private int _perception;
@@ -10,6 +12,19 @@
     private int _constitution;
     private int _intelligence;
     private int _will;
+
+    private float _currentHealth;
+
+    protected BaseEntity()
+    {
+        Init();
+        CurrentHealth = MaxHealth;
+    }
+
+    protected virtual void Init()
+    {
+
+    }
 
     public int Strength 
     {  
@@ -55,6 +70,20 @@
         }
     }
 
+    public float CurrentHealth
+    {
+        get => _currentHealth;
+        set
+        {
+            _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+        }
+    }
+
+    public bool IsDead
+    {
+        get => CurrentHealth > 0;
+    }
+
     public float MaxWeight
     { 
         get
@@ -63,6 +92,32 @@
         }
     }
 
+    public float BaseMeleeDamage
+    {
+        get
+        {
+            return Strength / 2f;
+        }
+    }
 
+    public float BaseRangeHitChance
+    {
+        get
+        {
+            return (Perception + 50) / 100f;
+        }
+    }
+
+    public float BaseMeleeHitChance
+    {
+        get
+        {
+            return (Agility + 70) / 100f;
+        }
+    }
+
+    public float NaturalArmor { get; set; } = 0;
+
+    public virtual float Armor => NaturalArmor;
 }
 

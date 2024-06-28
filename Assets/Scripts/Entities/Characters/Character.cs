@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class Character : BaseEntity
+public class Character : BaseEntity, IAttacker
 {
     public string ClassName {  get; set; }
     private int _expirience;
@@ -20,6 +20,34 @@ public class Character : BaseEntity
     public Weapon ShoulderWeapon { get; set; }
 
     public CharacterInventory Inventory { get; private set; }  = new CharacterInventory();
+    public float BaseHitChance 
+    {
+        get
+        {
+            if (MainWeapon != null && MainWeapon is RangeWeapon)
+            { 
+                return BaseRangeHitChance;
+            }
+            else
+            {
+                return BaseMeleeHitChance;
+            }
+        }
+    }
+    public float BaseDamage 
+    {
+        get
+        {
+            if (MainWeapon != null && MainWeapon is RangeWeapon rangeWeapon)
+            {
+                return rangeWeapon.Ammo.BaseDamage;
+            }
+            else
+            {
+                return BaseMeleeDamage;
+            }
+        }
+    }
 
     public void Equip(Item item, SlotType slotType)
     {

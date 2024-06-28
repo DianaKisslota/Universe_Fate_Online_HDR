@@ -16,9 +16,22 @@ public enum FireMode
 public abstract class RangeWeapon : Weapon
 {
     private int _ammoCount;
+    private Type _currentAmmoType;
+    private Ammo _ammo;
     public Caliber Caliber { get; set; }
     public int AmmoCapacity {  get; set; }
-    public Type CurrentAmmoType { get; set; } 
+    public Type CurrentAmmoType 
+    { get => _currentAmmoType; 
+      set
+        {
+            _currentAmmoType = value;
+            if (_currentAmmoType == null)
+                _ammo = null;
+            else
+                _ammo = Activator.CreateInstance(_currentAmmoType) as Ammo;
+        } 
+    } 
+    public Ammo Ammo => _ammo;
     public int AmmoCount 
     {
         get => _ammoCount;

@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 public interface IAttackResolver
 {
-    public void ResolveAttack();
+    public AttackResult ResolveAttack(IAttacker attacker, ITarget target, int numberAttack = 1);
 }
 

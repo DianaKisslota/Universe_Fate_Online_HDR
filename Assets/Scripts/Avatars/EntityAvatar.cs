@@ -9,6 +9,7 @@ public abstract class EntityAvatar : MonoBehaviour
     public BaseEntity Entity { get; set; }
     protected Animator _animator;
     protected NavMeshAgent _agent;
+    protected Rigidbody _rigidBody;
 
     [SerializeField] protected AudioSource _audioSource;
 
@@ -39,6 +40,7 @@ public abstract class EntityAvatar : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _audioSource = GetComponent<AudioSource>();
+        _rigidBody = GetComponent<Rigidbody>();
         Init();
     }
 
@@ -48,6 +50,7 @@ public abstract class EntityAvatar : MonoBehaviour
     {
         if (InPoint(movePoint))
             return;
+        Animator.ResetTrigger("Idle");
         _walkingTo = movePoint;
         Animator.SetTrigger("Walk");
         _agent.destination = movePoint;
@@ -74,7 +77,10 @@ public abstract class EntityAvatar : MonoBehaviour
 
     protected virtual void AdditionChecks()
     {
-
+        if (Entity.CurrentHealth <= 0)
+        {
+            Animator.SetTrigger("Die");        
+        }
     }
 
     private void Update()
@@ -84,7 +90,7 @@ public abstract class EntityAvatar : MonoBehaviour
             _timeBeforeAgentEnabled -= Time.deltaTime;
         }
 
-        _agent.isStopped = _timeBeforeAgentEnabled > 0;        
+        _agent.isStopped = !Entity.IsDead && _timeBeforeAgentEnabled > 0;        
         CheckWalking();
         AdditionChecks();
     }
@@ -137,12 +143,6 @@ public abstract class EntityAvatar : MonoBehaviour
     protected virtual void RangeAttack(RangeAttackData attackData)
     {
 
-
-
-
-
-        var attackResolver = new AttackResolver();
-        attackResolver.ResolveAttack();
     }
 
 }

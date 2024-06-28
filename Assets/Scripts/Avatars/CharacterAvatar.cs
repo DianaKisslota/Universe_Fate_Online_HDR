@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CharacterAvatar : EntityAvatar
 {
@@ -25,6 +24,7 @@ public class CharacterAvatar : EntityAvatar
 
     private float _isFiring = 0f;
     private float _isReloading = 0f;
+    private float _animationCooldown = 0f;
 
     public FireMode FireMode { get; set; }
 
@@ -379,9 +379,13 @@ public class CharacterAvatar : EntityAvatar
                     }
                 case EntityAction.Attack:
                     {
-                        _isFiring -= Time.deltaTime;
-                        quantEnded = _isFiring <= 0;
-                        if (quantEnded)
+                        if (_isFiring > 0 && _isFiring - Time.deltaTime <= 0)
+                            _animationCooldown = 1f;
+
+                         _isFiring -= Time.deltaTime;
+                        _animationCooldown -= Time.deltaTime;
+                        quantEnded = _isFiring <= 0 && _animationCooldown <= 0;
+                        if (_isFiring <= 0)
                             Animator.SetTrigger("Idle");
                         break;
                     }
@@ -433,7 +437,7 @@ public class CharacterAvatar : EntityAvatar
     {
         Animator.SetTrigger("Shoot");
         _isFiring = attackData.PossibleShotNumber / 4f;
-        StopAgent(1f * attackData.PossibleShotNumber);
+        //StopAgent(1f * attackData.PossibleShotNumber + 2f);
 
         var soundFire = Global.GetSoundFor(attackData.WeaponType, SoundType.Shot);
         var soundFailFire = Global.GetSoundFor(attackData.WeaponType, SoundType.FailShot);
@@ -444,6 +448,13 @@ public class CharacterAvatar : EntityAvatar
         if (attackData.PossibleShotNumber == 0 && soundFailFire != null)
             PlaySound(soundFailFire);
 
-        base.RangeAttack(attackData);
+        _isFiring = 1f;
+
+        var attackResolver = new AttackResolver();
+
+        var attackResult = attackResolver.ResolveAttack(Character, attackData.Target, attackData.PossibleShotNumber);
+
+        attackData.Target.CurrentHealth -= attackResult.DamageInflicted;
+
     }
 }
