@@ -1,13 +1,28 @@
 using System;
 using System.Collections.Generic;
 
+public class TransferInfo
+{
+    public string TransferToScene { get; private set; }
+    public string TransferToSector { get; private set; }
+    public string TransferCaption {  get; private set; }
+
+    public TransferInfo(string transferToScene, string transferToSector, string transferCaption)
+    {
+        TransferToScene = transferToScene;
+        TransferToSector = transferToSector;
+        TransferCaption = transferCaption;
+    }
+}
+
 public abstract class SectorData
 {
     public int X { get; }
     public int Y { get; }
     private string _prefix;
-    public string Prefix => _prefix;
 
+    public string Prefix => _prefix;
+    public TransferInfo TransferTo { get; set; } = null;
     public bool IsRestricted() => false;
     public SectorData(string prefix, int x, int y)
     {

@@ -13,8 +13,11 @@ public abstract class MapData : MonoBehaviour
     [SerializeField] protected Vector2 _startSector;
     [SerializeField] protected TMP_Text _sectorInfoText;
     [SerializeField] protected Button _cleanupSectorButton;
+    [SerializeField] protected Button _transferButton;
+    [SerializeField] protected TMP_Text _transferCaption;
     [SerializeField] protected Camera _miniMapCamera;
     [SerializeField] protected GameObject _inventoryPanel;
+    
 
     protected SectorData _currentSector;
     protected IDataSource _source;
@@ -113,6 +116,18 @@ public abstract class MapData : MonoBehaviour
             _sectorInfoText.text += "Здесь находятся НПС: \n" + npc;
         Global.CurrentSectorID = _currentSector.ID;
         CheckDirections();
+        if (_currentSector.TransferTo != null)
+        {
+            _transferCaption.text = _currentSector.TransferTo.TransferCaption;
+        }
+
+        _transferButton.gameObject.SetActive(_currentSector.TransferTo != null);
+    }
+
+    public void Transfer()
+    {
+        Global.CurrentSectorID = _currentSector.TransferTo.TransferToSector;
+        SceneManager.LoadScene(_currentSector.TransferTo.TransferToScene);
     }
 
     private bool isSectorAvailable(int x, int y)
