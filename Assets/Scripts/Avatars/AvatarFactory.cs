@@ -15,6 +15,8 @@ public static class AvatarFactory
         var avatar = model.AddComponent<MobAvatar>();
         var agent = model.AddComponent<NavMeshAgent>();
         agent.isStopped = true;
+        agent.enabled = false;
+        model.AddComponent<NavMeshObstacle>();
         var rigidBody = model.AddComponent<Rigidbody>();
         rigidBody.isKinematic = true;
         model.AddComponent<AudioSource>();
