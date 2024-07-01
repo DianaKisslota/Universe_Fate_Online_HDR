@@ -90,7 +90,8 @@ public abstract class EntityAvatar : MonoBehaviour
             _timeBeforeAgentEnabled -= Time.deltaTime;
         }
 
-        _agent.isStopped = !Entity.IsDead && _timeBeforeAgentEnabled > 0;        
+        if (_agent.enabled)
+            _agent.isStopped = !Entity.IsDead && _timeBeforeAgentEnabled > 0;        
         CheckWalking();
         AdditionChecks();
     }

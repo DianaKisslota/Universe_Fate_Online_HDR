@@ -86,8 +86,10 @@ public class BattleRutine : MonoBehaviour
                     break;
                 var spawnPointIndex = Random.Range(0, _spawnPoints.Count);
                 var spawnPoint = _spawnPoints[spawnPointIndex];
-                var avatar = AvatarFactory.CreateMob(spawner.EntityType, spawnPoint);                
-                avatar.transform.LookAt(_character.transform);
+                var avatar = AvatarFactory.CreateMob(spawner.EntityType, spawnPoint);
+                var lookAtPosition = _character.transform.position;
+                lookAtPosition.y = spawnPoint.position.y;
+                avatar.transform.LookAt(lookAtPosition);
                 _spawnPoints.Remove(spawnPoint);
             }
 
