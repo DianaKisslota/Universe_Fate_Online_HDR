@@ -21,6 +21,7 @@ public static class AvatarFactory
         rigidBody.isKinematic = true;
         model.AddComponent<AudioSource>();
         avatar.Entity = Activator.CreateInstance(entityType) as BaseEntity;
+        avatar.Entity.Die += avatar.EntityDie;
         avatar.transform.position = parent.position;
 
         return avatar;
@@ -33,6 +34,7 @@ public static class AvatarFactory
         var avatar = model.GetComponent<CharacterAvatar>();
         model.AddComponent<AudioSource>();
         avatar.Entity = character;
+        avatar.Entity.Die += avatar.EntityDie;
         avatar.transform.position = parent.position;
 
         return avatar;

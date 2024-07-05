@@ -12,12 +12,11 @@ public class Reptiloid : Mob
         Name = "Рептилоид";
         Description = "Вас много раз предупреждали об их существовании, а вы не верили.";
 
-        AddLoot("Шкура рептилоида 0-1 шт.");
+        //AddLoot("Шкура рептилоида 0-1 шт.");
     }
 
     protected override void Init()
     {
-        base.Init();
         Strength = 7;
         Perception = 5;
         Agility = 6;
@@ -27,6 +26,8 @@ public class Reptiloid : Mob
 
         GroupID = 1;
         AggressionLevel = 2;
+
+        base.Init();
     }
 
 }

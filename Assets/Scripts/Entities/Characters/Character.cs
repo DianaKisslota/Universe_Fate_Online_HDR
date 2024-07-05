@@ -11,6 +11,19 @@ public class Character : BaseEntity, IAttacker
         set { _expirience = value; }
     }
 
+
+    protected override void Init()
+    {
+        Strength = 6;
+        Perception = 7;
+        Agility = 6;
+        Constitution = 6;
+        Intelligence = 8;
+        Will = 6;
+
+        base.Init();
+    }
+
     public event Action<Item, SlotType> OnEquip;
     public event Action<Item, SlotType> OnUnEquip;
 

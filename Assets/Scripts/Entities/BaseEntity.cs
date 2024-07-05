@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public abstract class BaseEntity: ITarget
 {
@@ -18,12 +19,13 @@ public abstract class BaseEntity: ITarget
     protected BaseEntity()
     {
         Init();
-        CurrentHealth = MaxHealth;
     }
+
+    public event Action Die;
 
     protected virtual void Init()
     {
-
+        CurrentHealth = MaxHealth;
     }
 
     public int Strength 
@@ -76,12 +78,14 @@ public abstract class BaseEntity: ITarget
         set
         {
             _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+            if (_currentHealth == 0)
+                Die?.Invoke();
         }
     }
 
     public bool IsDead
     {
-        get => CurrentHealth > 0;
+        get => CurrentHealth <= 0;
     }
 
     public float MaxWeight

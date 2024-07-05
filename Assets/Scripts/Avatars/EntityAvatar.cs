@@ -77,10 +77,13 @@ public abstract class EntityAvatar : MonoBehaviour
 
     protected virtual void AdditionChecks()
     {
-        if (Entity.CurrentHealth <= 0)
-        {
-            Animator.SetTrigger("Die");        
-        }
+
+    }
+
+    public virtual void EntityDie()
+    {
+        Animator.SetTrigger("Die");
+        Entity.Die -= EntityDie;
     }
 
     private void Update()
@@ -91,7 +94,7 @@ public abstract class EntityAvatar : MonoBehaviour
         }
 
         if (_agent.enabled)
-            _agent.isStopped = !Entity.IsDead && _timeBeforeAgentEnabled > 0;        
+            _agent.isStopped = Entity.IsDead || _timeBeforeAgentEnabled > 0;        
         CheckWalking();
         AdditionChecks();
     }

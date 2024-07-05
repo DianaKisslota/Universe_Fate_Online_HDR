@@ -4,12 +4,11 @@
     {
         Name = "Одичавшая собака";
         Description = "Это больше не друг человека. Голодные злобные и очень агрессивные они сбиваются в стаи и нападают на все живое в округе.";     
-        AddLoot("Мясо собаки 1-2 шт., Шкура собаки 0-1 шт.");
+        AddLoot(typeof(DogMeat), 1, 2);
     }
 
     protected override void Init()
     {
-        base.Init();
         Strength = 3;
         Perception = 7;
         Agility = 5;
@@ -19,6 +18,8 @@
 
         GroupID = 1;
         AggressionLevel = 2;
+
+        base.Init();
     }
 }
 

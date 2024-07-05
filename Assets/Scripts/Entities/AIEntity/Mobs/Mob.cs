@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public abstract class Mob : AIEntity
 {
     public int GroupID {  get; set; }
     public int AggressionLevel { get; set; }
-    public List<string> Loot { get; set; } = new List<string>();        //Поскольку предметы пока не реализованы, на данном этапе в списке хранятся только их описание
+    public List<LootSpawner> Loot { get; set; } = new();
 
-    public void AddLoot(string loot)
+    public void AddLoot(Type lootType, int minSpawned, int maxSpawned = 0)
     {
-        Loot.Add(loot);
+        Loot.Add(new LootSpawner(lootType, minSpawned, maxSpawned));
     }
 }
 

@@ -122,7 +122,7 @@ public class CharacterController : AvatarController
                                         (_inventoryPanel.gameObject.activeSelf && _inventoryPanel.transform.parent == _originInventoryPlaceHolder)));
 
         var entityAvatar = GetEntityAvatarUnderMousePoint();
-        if (entityAvatar != null)
+        if (entityAvatar != null && !entityAvatar.Entity.IsDead)
         {
             _pointer.SetPointerType(PointerType.Target);
             _pointer.SetActive(true);
