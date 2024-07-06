@@ -85,6 +85,8 @@ public abstract class EntityAvatar : MonoBehaviour
     {
         Animator.SetTrigger("Die");
         Entity.Die -= EntityDie;
+        GetComponent<BoxCollider>().isTrigger = true;
+        GetComponent<NavMeshObstacle>().enabled = false;
     }
 
     private void Update()
