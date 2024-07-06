@@ -10,5 +10,6 @@ public abstract class Item
     public string Description { get; set; }
     public float Weight {  get; set; }
     public float Volume {  get; set; }
+    public bool Stackable => !(this is Weapon);
 }
 

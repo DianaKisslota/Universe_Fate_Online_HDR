@@ -430,14 +430,13 @@ public class CharacterAvatar : EntityAvatar
 
         }
         ItemPresenterTransferred?.Invoke(sourceSlot, destinationSlot, itemPresenter);
-        // destinationSlot.OnItemSet(itemPresenter.Item, destinationSlot);
+        //destinationSlot.OnItemSet(itemPresenter.Item, destinationSlot);
     }
 
     protected override void RangeAttack(RangeAttackData attackData)
     {
         Animator.SetTrigger("Shoot");
         _isFiring = attackData.PossibleShotNumber / 4f;
-        //StopAgent(1f * attackData.PossibleShotNumber + 2f);
 
         var soundFire = Global.GetSoundFor(attackData.WeaponType, SoundType.Shot);
         var soundFailFire = Global.GetSoundFor(attackData.WeaponType, SoundType.FailShot);

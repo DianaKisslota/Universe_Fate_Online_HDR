@@ -32,6 +32,7 @@ public class BattleRutine : MonoBehaviour
 
     private void Start()
     {
+        _rotationY = -_camera.rotation.eulerAngles.x;
         _source = new DataSource();
         _sectorData = _source.GetSectorData(Global.CurrentSectorID);
 

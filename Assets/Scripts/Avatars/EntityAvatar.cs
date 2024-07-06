@@ -61,6 +61,7 @@ public abstract class EntityAvatar : MonoBehaviour
     {
         if (_walkingTo != null && InPoint(_walkingTo.Value))
         {
+            Animator.ResetTrigger("Walk");
             _agent.ResetPath();
             Animator.SetTrigger("Idle"); 
             _walkingTo = null;

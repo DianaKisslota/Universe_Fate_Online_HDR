@@ -31,7 +31,7 @@ public class Storage
         while (number > 0)
         { 
             position = Items.FirstOrDefault(x => x.Item.GetType() == item.GetType() && x.Count < x.MaxCount);
-            if (position == null)
+            if (position == null || !position.Item.Stackable)
             {
                 position = new StoragePosition(item, _positionCapacity);
                 AddPosition(position);
