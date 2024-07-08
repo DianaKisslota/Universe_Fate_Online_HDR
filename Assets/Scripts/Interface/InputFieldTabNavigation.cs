@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 using TMPro; // Импортируем пространство имен для компонента TMP_InputField из TextMeshPro
 
 public class InputFieldTabNavigation : MonoBehaviour
