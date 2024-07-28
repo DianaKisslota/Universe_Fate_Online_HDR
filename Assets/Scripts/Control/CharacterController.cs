@@ -345,6 +345,12 @@ public class CharacterController : AvatarController
                     var destinationSlot = transferItemInfo.Destination;
                     var itemPresenter = transferItemInfo.ItemPresenter;
 
+                    if (itemPresenter == null)
+                    {
+                        itemPresenter = ItemFactory.CreateItemPresenter(transferItemInfo.ItemTemplate.ItemType);
+                        itemPresenter.Count = transferItemInfo.ItemTemplate.ItemCount;
+                    }
+
                     _playerAvatar.TransferItem(destinationSlot, sourceSlot, itemPresenter);
 
                     if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
@@ -499,7 +505,8 @@ public class CharacterController : AvatarController
             return;
         if (!_avatarApplyingQants && !_quantsReverting)
         {
-            var transferItemInfo = new TransferItemInfo(sourceSlot, destinationSlot, itemPresenter);
+            var transferItemInfo = new TransferItemInfo(sourceSlot, destinationSlot, itemPresenter,
+                                    new ItemTemplate { ItemType = itemPresenter.Item.GetType(), ItemCount = itemPresenter.Count});
             _playerAvatar.AddItemtransferQuant(transferItemInfo);
         }
         if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)

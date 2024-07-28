@@ -16,13 +16,15 @@ public class TransferItemInfo
     public DropSlot Destination { get; private set; }
     public int SourceItemIndex {  get; private set; } 
     public ItemPresenter ItemPresenter { get; private set; }
+    public ItemTemplate ItemTemplate { get; private set; }
 
-    public TransferItemInfo(DropSlot source, DropSlot destination, ItemPresenter itemPresenter, int sourceItemIndex = 0)
+    public TransferItemInfo(DropSlot source, DropSlot destination, ItemPresenter itemPresenter, ItemTemplate itemTemplate, int sourceItemIndex = 0)
     {
         Source = source;
         Destination = destination;
         ItemPresenter = itemPresenter;
         SourceItemIndex = sourceItemIndex;
+        ItemTemplate = itemTemplate;
     }
 }
 
