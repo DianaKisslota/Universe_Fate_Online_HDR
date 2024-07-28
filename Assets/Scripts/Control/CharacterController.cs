@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
@@ -98,6 +99,8 @@ public class CharacterController : AvatarController
         }
         _inventoryPanel.Inventory.WeaponReloaded -= OnWeaponReloaded;
         _playerAvatar.FireModeSet -= OnFireModeSet;
+        if (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon)
+            rangeWeapon.AmmoChanged -= ChangeAmmo;
     }
 
     public override void BindAvatar(EntityAvatar avatar)
@@ -585,5 +588,6 @@ public class CharacterController : AvatarController
     {
         _playerAvatar.FireMode = fireMode;
     }
+
 
 }
