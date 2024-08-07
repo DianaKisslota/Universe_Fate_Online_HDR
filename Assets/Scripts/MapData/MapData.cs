@@ -56,6 +56,7 @@ public abstract class MapData : MonoBehaviour
     private void StartToGo(string direction)
     {
         _cleanupSectorButton.gameObject.SetActive(false);
+        _transferButton.gameObject.SetActive(false);
         var nextSectorX = _currentSector.X;
         var nextSectorY = _currentSector.Y;
         switch (direction)
