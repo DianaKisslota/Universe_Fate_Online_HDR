@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -115,6 +114,7 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             if (itemSlot.SlotType == SlotType.Shoulder)
                 transform.localEulerAngles = new Vector3(0, 0, -90);
             _nameText.gameObject.SetActive(false);
+            itemSlot.PresenterSet(this);
         }
         else
             _nameText.gameObject.SetActive(true);
