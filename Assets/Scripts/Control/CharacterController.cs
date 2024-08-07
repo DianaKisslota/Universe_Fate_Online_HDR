@@ -138,7 +138,7 @@ public class CharacterController : AvatarController
             _pointer.SetActive(true);
             _pointer.position = entityAvatar.transform.position;
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && _playerAvatar.Character.MainWeapon is RangeWeapon)
             {
                 var target = Instantiate(Global.TargetPrefab);
                 target.transform.position = _pointer.position;
