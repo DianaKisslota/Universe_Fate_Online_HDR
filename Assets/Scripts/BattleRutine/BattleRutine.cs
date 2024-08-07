@@ -154,11 +154,6 @@ public class BattleRutine : MonoBehaviour
         }
     }
 
-    private void OnMouseOver()
-    {
-        
-    }
-
     public void FinishBattle()
     {
         _characterController.ClearAllQuants();

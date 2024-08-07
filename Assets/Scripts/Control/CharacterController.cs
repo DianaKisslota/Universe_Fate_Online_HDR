@@ -88,6 +88,13 @@ public class CharacterController : AvatarController
 
         _inventoryPanel.Inventory.WeaponReloaded += OnWeaponReloaded;
         _playerAvatar.FireModeSet += OnFireModeSet;
+        InitFireMode();
+    }
+
+    private void InitFireMode()
+    {
+        if (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon)
+            OnFireModeSet(rangeWeapon.GetLowerFireMode());
     }
 
     private void OnDestroy()

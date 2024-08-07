@@ -40,6 +40,15 @@ public abstract class RangeWeapon : Weapon
     public int? ShortBurst { get; set; } = null;
     public int? LongBurst { get; set; } = null;
 
+    public FireMode GetLowerFireMode()
+    {
+        if(SingleShot != null)
+            return FireMode.SingleShot;
+        if (ShortBurst != null)
+            return FireMode.ShortBurst;
+        return FireMode.LongBurst;
+    }
+
     public int? GetFireModeAmmo(FireMode fireMode)
     {
         switch (fireMode)
