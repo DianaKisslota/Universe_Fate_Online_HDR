@@ -53,7 +53,7 @@ public abstract class StorageSlot : DropSlot
 
     protected override bool ItemAccepted(ItemPresenter itemPresenter)
     {
-        Storage.AddItem(itemPresenter.Item);
+        Storage.AddItem(itemPresenter.Item, itemPresenter.Count);
         return true;
     }
 

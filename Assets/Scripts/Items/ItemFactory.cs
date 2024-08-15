@@ -30,6 +30,21 @@ public static class ItemFactory
         return itemObject;
     }
 
+    public static StoragePosition CreateItem(ItemTemplate itemTemplate)
+    {
+        if (itemTemplate == null) 
+            return null;
+        var item = Activator.CreateInstance(itemTemplate.ItemType) as Item;
+        if (itemTemplate is RangeWeaponTemplate rangeweapontemplate)
+        {
+            (item as RangeWeapon).CurrentAmmoType = rangeweapontemplate.AmmoType;
+            (item as RangeWeapon).Reload(rangeweapontemplate.AmmoType, rangeweapontemplate.AmmoCount);
+        }
+        var result = new StoragePosition(item, 100);
+        result.Count = itemTemplate.ItemCount;
+        return result;
+    }
+
     public static ItemPresenter CreateItemPresenter(Type itemType, Transform parent = null)
     {
         var item = Activator.CreateInstance(itemType) as Item;

@@ -348,53 +348,60 @@ public class CharacterController : AvatarController
                     itemObject.gameObject.SetActive(true);
                     break;
                 }
-            case EntityAction.TransferItem:
+            //case EntityAction.TransferItem:
+            //    {
+            //        var transferItemInfo = quant.Object as TransferItemInfo;
+            //        var sourceSlot = transferItemInfo.Source;
+            //        var destinationSlot = transferItemInfo.Destination;
+            //        var itemPresenter = transferItemInfo.ItemPresenter;
+
+            //        if (itemPresenter == null)
+            //        {
+            //            itemPresenter = ItemFactory.CreateItemPresenter(transferItemInfo.ItemTemplate.ItemType);
+            //            itemPresenter.Count = transferItemInfo.ItemTemplate.ItemCount;
+            //        }
+
+            //        _playerAvatar.TransferItem(destinationSlot, sourceSlot, itemPresenter);
+
+            //        if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
+            //            _mainWeaponImage.gameObject.SetActive(false);
+            //        if (sourceSlot is CharacterItemSlot characterItemSlot1 && characterItemSlot1.SlotType == SlotType.MainWeapon)
+            //        {
+            //            _mainWeaponImage.gameObject.SetActive(true);
+            //            _mainWeaponImage.sprite = Global.GetIconFor(itemPresenter.Item.GetType());
+            //        }
+
+            //        break;
+            //    }
+            case EntityAction.ChangeInventory:
                 {
-                    var transferItemInfo = quant.Object as TransferItemInfo;
-                    var sourceSlot = transferItemInfo.Source;
-                    var destinationSlot = transferItemInfo.Destination;
-                    var itemPresenter = transferItemInfo.ItemPresenter;
-
-                    if (itemPresenter == null)
-                    {
-                        itemPresenter = ItemFactory.CreateItemPresenter(transferItemInfo.ItemTemplate.ItemType);
-                        itemPresenter.Count = transferItemInfo.ItemTemplate.ItemCount;
-                    }
-
-                    _playerAvatar.TransferItem(destinationSlot, sourceSlot, itemPresenter);
-
-                    if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
-                        _mainWeaponImage.gameObject.SetActive(false);
-                    if (sourceSlot is CharacterItemSlot characterItemSlot1 && characterItemSlot1.SlotType == SlotType.MainWeapon)
-                    {
-                        _mainWeaponImage.gameObject.SetActive(true);
-                        _mainWeaponImage.sprite = Global.GetIconFor(itemPresenter.Item.GetType());
-                    }
-
-                    break;
+                    var stateInventoryInfo = quant.Object as InventoryStateInfo;
+                    _playerAvatar.RestoreInventory(stateInventoryInfo.PrevState);
                 }
-                case EntityAction.ReloadWeapon:
+                break;
+            case EntityAction.ReloadWeapon:
                 {
                     var reloadWeaponInfo = quant.Object as ReloadWeaponInfo;
-                    var weapon = reloadWeaponInfo.WeaponPresenter.Item as RangeWeapon;
-                    var loadedAmmo = reloadWeaponInfo.AmmoUsed;
-                    var sourceSlot = reloadWeaponInfo.SourceSlot;
-                    var ammoPresenter = reloadWeaponInfo.AmmoPresenter;
-                    if (ammoPresenter == null)
-                    {
-                        ammoPresenter = ItemFactory.CreateItemPresenter(reloadWeaponInfo.AmmoType);
-                        ammoPresenter.Count = loadedAmmo;
-                        sourceSlot.InsertItem(ammoPresenter);
-                        reloadWeaponInfo.AmmoPresenter = ammoPresenter;
-                    }
-                    else
-                    {
-                        ammoPresenter.Count += loadedAmmo;
-                    }
-                    weapon.UnLoad(loadedAmmo);
-                    _playerAvatar.InventoryPresenter.RefreshItemSlots();
-                    sourceSlot.FillSlots();
+                    //var weapon = reloadWeaponInfo.WeaponPresenter.Item as RangeWeapon;
+                    //var loadedAmmo = reloadWeaponInfo.AmmoUsed;
+                    //var sourceSlot = reloadWeaponInfo.SourceSlot;
+                    //var ammoPresenter = reloadWeaponInfo.AmmoPresenter;
+                    //if (ammoPresenter == null)
+                    //{
+                    //    ammoPresenter = ItemFactory.CreateItemPresenter(reloadWeaponInfo.AmmoType);
+                    //    ammoPresenter.Count = loadedAmmo;
+                    //    sourceSlot.InsertItem(ammoPresenter);
+                    //    reloadWeaponInfo.AmmoPresenter = ammoPresenter;
+                    //}
+                    //else
+                    //{
+                    //    ammoPresenter.Count += loadedAmmo;
+                    //}
+                    //weapon.UnLoad(loadedAmmo);
+                    //_playerAvatar.InventoryPresenter.RefreshItemSlots();
+                    //sourceSlot.FillSlots();
 
+                    _playerAvatar.RestoreInventory(reloadWeaponInfo.InventoryStateInfo.PrevState);
                     break;
                 }
             case EntityAction.Attack:
@@ -515,9 +522,14 @@ public class CharacterController : AvatarController
             return;
         if (!_avatarApplyingQants && !_quantsReverting)
         {
-            var transferItemInfo = new TransferItemInfo(sourceSlot, destinationSlot, itemPresenter,
-                                    new ItemTemplate { ItemType = itemPresenter.Item.GetType(), ItemCount = itemPresenter.Count});
-            _playerAvatar.AddItemtransferQuant(transferItemInfo);
+            //var transferItemInfo = new TransferItemInfo(sourceSlot, destinationSlot, itemPresenter,
+            //                        new ItemTemplate { ItemType = itemPresenter.Item.GetType(), ItemCount = itemPresenter.Count});
+            //_playerAvatar.AddItemtransferQuant(transferItemInfo);
+            var inventoryStateInfo = new InventoryStateInfo();
+            inventoryStateInfo.PrevState = _playerAvatar.InventoryInfo;
+            _playerAvatar.RefreshInventoryInfo();
+            inventoryStateInfo.CurrentState = _playerAvatar.InventoryInfo;
+            _playerAvatar.AddInventoryChangeQuant(inventoryStateInfo);
         }
         if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
         {
@@ -560,7 +572,11 @@ public class CharacterController : AvatarController
 
     public void OnWeaponReloaded(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int num, StorageSlot slot)
     {
-        var quantInfo = new ReloadWeaponInfo(weaponPresenter, ammoPresenter, num, slot);
+        var inventoryStateInfo = new InventoryStateInfo();
+        inventoryStateInfo.PrevState = _playerAvatar.InventoryInfo;
+        _playerAvatar.RefreshInventoryInfo();
+        inventoryStateInfo.CurrentState = _playerAvatar.InventoryInfo;
+        var quantInfo = new ReloadWeaponInfo(inventoryStateInfo);
         _playerAvatar.AddReloadWeaponQuant(quantInfo);
     }
 

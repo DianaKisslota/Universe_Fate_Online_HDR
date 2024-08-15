@@ -75,8 +75,8 @@ public class ItemSlot : DropSlot
 
         if (item == null)
         {
-            //if (_presenter != null)
-            //    Destroy(_presenter.gameObject);
+            if (_presenter != null)
+                Destroy(_presenter.gameObject);
             _backgroungImage.SetActive(true);
             _isOccuped = false;
             return;

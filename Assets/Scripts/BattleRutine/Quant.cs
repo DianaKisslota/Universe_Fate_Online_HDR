@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum EntityAction
@@ -7,7 +8,22 @@ public enum EntityAction
     Attack,
     PickObject,
     TransferItem,
+    ChangeInventory,
     ReloadWeapon,
+}
+
+public class InventoryInfo
+{
+    public List<ItemTemplate> InventorySnapshot;
+    public ItemTemplate MainWeaponTemplate;
+    public ItemTemplate SecondaryWeaponTemplate;
+    public ItemTemplate ShoulderWeaponTemplate;
+}
+
+public class InventoryStateInfo
+{
+    public InventoryInfo PrevState;
+    public InventoryInfo CurrentState;
 }
 
 public class TransferItemInfo
@@ -30,19 +46,26 @@ public class TransferItemInfo
 
 public class ReloadWeaponInfo
 {
-    public ItemPresenter WeaponPresenter { get; private set; }
-    public ItemPresenter AmmoPresenter { get; set; }
-    public Type AmmoType {  get; private set; }
-    public int AmmoUsed {  get; private set; }
-    public StorageSlot SourceSlot {  get; private set; }
+    //public ItemPresenter WeaponPresenter { get; private set; }
+    //public ItemPresenter AmmoPresenter { get; set; }
+    //public Type AmmoType {  get; private set; }
+    //public int AmmoUsed {  get; private set; }
+    //public StorageSlot SourceSlot {  get; private set; }
 
-    public ReloadWeaponInfo(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int ammoUsed, StorageSlot sourceSlot)
+    //public ReloadWeaponInfo(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int ammoUsed, StorageSlot sourceSlot)
+    //{
+    //    WeaponPresenter = weaponPresenter;
+    //    AmmoPresenter = ammoPresenter;
+    //    AmmoType = ammoPresenter.Item.GetType();
+    //    AmmoUsed = ammoUsed;
+    //    SourceSlot = sourceSlot;
+    //}
+
+    public InventoryStateInfo InventoryStateInfo;
+
+    public ReloadWeaponInfo(InventoryStateInfo inventoryStateInfo)
     {
-        WeaponPresenter = weaponPresenter;
-        AmmoPresenter = ammoPresenter;
-        AmmoType = ammoPresenter.Item.GetType();
-        AmmoUsed = ammoUsed;
-        SourceSlot = sourceSlot;
+        InventoryStateInfo = inventoryStateInfo;
     }
 }
 

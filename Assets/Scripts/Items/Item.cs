@@ -11,5 +11,10 @@ public abstract class Item
     public float Weight {  get; set; }
     public float Volume {  get; set; }
     public bool Stackable => !(this is Weapon);
+
+    public virtual ItemTemplate GetTemplate()
+    {
+        return new ItemTemplate() { ItemType = this.GetType() };
+    }
 }
 

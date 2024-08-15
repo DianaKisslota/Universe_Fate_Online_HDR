@@ -4,7 +4,7 @@
     {
         Name = "Одичавшая собака";
         Description = "Это больше не друг человека. Голодные злобные и очень агрессивные они сбиваются в стаи и нападают на все живое в округе.";     
-        AddLoot(typeof(DogMeat), 1, 2);
+        AddLoot(typeof(DogMeat), 2, 3);
     }
 
     protected override void Init()

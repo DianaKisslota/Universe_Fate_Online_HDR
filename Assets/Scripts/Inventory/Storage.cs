@@ -13,7 +13,7 @@ public class Storage
         _positionCapacity = positionCapacity;
     }
 
-    private void AddPosition(StoragePosition position)
+    public void AddPosition(StoragePosition position)
     {
         position.Empty += CheckStoragePosition;
         Items.Add(position);
@@ -49,6 +49,12 @@ public class Storage
         {
             RemovePosition(position);
         }
+    }
+
+    public void Clear()
+    {
+        for(var i = Items.Count - 1; i > -1; i--)
+            RemovePosition(Items[i]);
     }
 
     public void DecreaseItemCount(Item item, int number)

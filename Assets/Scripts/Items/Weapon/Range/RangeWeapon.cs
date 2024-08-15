@@ -89,5 +89,10 @@ public abstract class RangeWeapon : Weapon
     }
 
     public event Action<RangeWeapon, Type, int> AmmoChanged;
+
+    public override ItemTemplate GetTemplate()
+    {
+        return new RangeWeaponTemplate() { ItemType = this.GetType(), AmmoType = CurrentAmmoType, AmmoCount = this.AmmoCount };
+    }
 }
 

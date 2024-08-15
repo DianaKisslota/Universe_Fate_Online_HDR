@@ -13,6 +13,9 @@ public class CharacterAvatar : EntityAvatar
     public Character Character => Entity as Character;
 
     private Dictionary<Item, ItemObject> _itemObjects = new Dictionary<Item, ItemObject>();
+
+    private InventoryInfo _inventoryInfo = new InventoryInfo();
+    public InventoryInfo InventoryInfo => _inventoryInfo;
     public List<Quant> Quants { get { return _quants; } }
 
     public event Action StartApplainQuants;
@@ -41,6 +44,7 @@ public class CharacterAvatar : EntityAvatar
 
     protected override void Init()
     {
+        RefreshInventoryInfo();
         Character.OnEquip += OnEquip;
         Character.OnUnEquip += OnUnEquip;
     }
@@ -73,6 +77,23 @@ public class CharacterAvatar : EntityAvatar
         InventoryPresenter.InitItemSlots();
     }
 
+    public void RefreshInventoryInfo()
+    {
+        _inventoryInfo = new InventoryInfo()
+        {
+            MainWeaponTemplate = Character.MainWeapon == null ? null : Character.MainWeapon.GetTemplate(),
+            SecondaryWeaponTemplate = Character.SecondaryWeapon == null ? null : Character.SecondaryWeapon.GetTemplate(),
+            ShoulderWeaponTemplate = Character.ShoulderWeapon == null ? null : Character.ShoulderWeapon.GetTemplate(),
+            InventorySnapshot = new List<ItemTemplate>()
+        };
+
+        foreach (StoragePosition storagePosition in Character.Inventory.Items) 
+        {
+            var template = storagePosition.Item.GetTemplate();
+            template.ItemCount = storagePosition.Count;
+            _inventoryInfo.InventorySnapshot.Add(template);
+        }
+    }
     public void ReflectAllItems()
     {
         ReflectEquipment(Character.MainWeapon, SlotType.MainWeapon);
@@ -83,7 +104,9 @@ public class CharacterAvatar : EntityAvatar
     public void ReflectEquipment(Item item, SlotType slotType)
     {
         if (item == null)
+        {
             return;
+        }
         var itemObject = GetItemObject(item);
         Quaternion rotation = Quaternion.identity;
         Vector3 position = Vector3.zero;
@@ -91,10 +114,7 @@ public class CharacterAvatar : EntityAvatar
         {
             if (item is RangeWeapon rangeWeapon)
             {
-                FireMode = rangeWeapon.SingleShot != null ? FireMode.SingleShot :
-                                            rangeWeapon.ShortBurst != null ? FireMode.ShortBurst :
-                                            rangeWeapon.LongBurst != null ? FireMode.LongBurst :
-                                            0;
+                FireMode = rangeWeapon.GetLowerFireMode();
             }
             else
                 FireMode = FireMode.Undefined;
@@ -219,6 +239,11 @@ public class CharacterAvatar : EntityAvatar
         AddQuant(EntityAction.TransferItem, transferItemInfo, transform.position, transform.rotation);
     }
 
+    public void AddInventoryChangeQuant(InventoryStateInfo inventoryStateInfo)
+    {
+        AddQuant(EntityAction.ChangeInventory, inventoryStateInfo, transform.position, transform.rotation);
+    }
+
     public void AddReloadWeaponQuant(ReloadWeaponInfo reloadWeaponInfo)
     {
         AddQuant(EntityAction.ReloadWeapon, reloadWeaponInfo, transform.position, transform.rotation);
@@ -248,6 +273,31 @@ public class CharacterAvatar : EntityAvatar
             transform.Rotate(0, 55, 0);
     }
 
+    public void RestoreInventory(InventoryInfo inventoryInfo)
+    {
+        InventoryPresenter.ClearItemSlots();
+
+        var mainWeaponPosition = ItemFactory.CreateItem(inventoryInfo.MainWeaponTemplate);
+        Character.Equip(mainWeaponPosition == null? null : mainWeaponPosition.Item as Weapon, SlotType.MainWeapon);
+        var secondaryWeaponPosition = ItemFactory.CreateItem(inventoryInfo.SecondaryWeaponTemplate);
+        Character.Equip(secondaryWeaponPosition == null ? null : secondaryWeaponPosition.Item as Weapon, SlotType.SecondaryWeapon);
+        var shoulderWeaponPosition = ItemFactory.CreateItem(inventoryInfo.ShoulderWeaponTemplate);
+        Character.Equip(shoulderWeaponPosition == null ? null : shoulderWeaponPosition.Item as Weapon, SlotType.Shoulder);
+
+        Character.Inventory.Clear();
+        foreach(var itemTemplate in inventoryInfo.InventorySnapshot)
+        {
+            Character.Inventory.AddPosition(ItemFactory.CreateItem(itemTemplate));
+        }
+
+        InventoryPresenter.InitItemSlots();
+        InventoryPresenter.Inventory.FillSlots();
+
+        ReflectAllItems();
+
+        RefreshInventoryInfo();
+    }
+
     private void StartCurrentQuant()
     {
         if (_quants.Count == 0)
@@ -260,34 +310,42 @@ public class CharacterAvatar : EntityAvatar
             case EntityAction.PickObject:
                 TakeItem(_quants[0].Object as ItemObject);
                 break;
-            case EntityAction.TransferItem:
+            //case EntityAction.TransferItem:
+            //    {
+            //        var transferItemInfo = _quants[0].Object as TransferItemInfo;
+            //        var sourceSlot = transferItemInfo.Source;
+            //        var destinationSlot = transferItemInfo.Destination;
+            //        var item = transferItemInfo.ItemPresenter;
+
+            //        TransferItem(sourceSlot, destinationSlot, item);
+
+            //    }
+            //    break;
+            case EntityAction.ChangeInventory:
                 {
-                    var transferItemInfo = _quants[0].Object as TransferItemInfo;
-                    var sourceSlot = transferItemInfo.Source;
-                    var destinationSlot = transferItemInfo.Destination;
-                    var item = transferItemInfo.ItemPresenter;
-
-                    TransferItem(sourceSlot, destinationSlot, item);
-
+                    var stateInventoryInfo = _quants[0].Object as InventoryStateInfo;
+                    RestoreInventory(stateInventoryInfo.CurrentState);
                 }
                 break;
             case EntityAction.ReloadWeapon:
                 {
                     var reloadWeaponInfo = _quants[0].Object as ReloadWeaponInfo;
-                    var sourceSlot = reloadWeaponInfo.SourceSlot;
-                    var ammoPresenter = reloadWeaponInfo.AmmoPresenter;
-                    var ammoUsed = reloadWeaponInfo.AmmoUsed;
-                    var weaponPresenter = reloadWeaponInfo.WeaponPresenter;
-                    var weapon = weaponPresenter.Item as RangeWeapon;
-                    weapon.Reload(ammoPresenter.Item as Ammo, ammoUsed);
-                    weaponPresenter.RefreshInfo();
-                    ammoPresenter.Count -= ammoUsed;
-                    sourceSlot.FillSlots();
-                    if (weapon.WeaponType != WeaponType.Pistol)
-                        PlaySound(Global.GetSoundFor(typeof(AK47), SoundType.Reload));
+                    //var sourceSlot = reloadWeaponInfo.SourceSlot;
+                    //var ammoPresenter = reloadWeaponInfo.AmmoPresenter;
+                    //var ammoUsed = reloadWeaponInfo.AmmoUsed;
+                    //var weaponPresenter = reloadWeaponInfo.WeaponPresenter;
+                    //var weapon = weaponPresenter.Item as RangeWeapon;
+                    //weapon.Reload(ammoPresenter.Item as Ammo, ammoUsed);
+                    //weaponPresenter.RefreshInfo();
+                    //ammoPresenter.Count -= ammoUsed;
+                    //sourceSlot.FillSlots();
+                    //if (weapon.WeaponType != WeaponType.Pistol)
+
+                    RestoreInventory(reloadWeaponInfo.InventoryStateInfo.CurrentState);
+                    PlaySound(Global.GetSoundFor(typeof(AK47), SoundType.Reload));
                     _isReloading = 0.5f;
-                    break;
                 }
+                break;
             case EntityAction.Attack:
                 {
                     var attackInfo = _quants[0].Object as AttackInfo;
@@ -306,17 +364,10 @@ public class CharacterAvatar : EntityAvatar
 
                         InventoryPresenter.RefreshItemSlots();
 
-                        //var soundType = SoundType.Shot;
-                        //if (FireMode == FireMode.ShortBurst)
-                        //    soundType = SoundType.Burst;
-                        //if (FireMode == FireMode.LongBurst)
-                        //    soundType = SoundType.LongBurst;
-
-
                         RangeAttack(rangeAttackData);
                     }
-                    break;
                 }
+                break;
 
             default:
                 Debug.LogError("Неизвестный тип действия");
@@ -366,7 +417,12 @@ public class CharacterAvatar : EntityAvatar
                         quantEnded = true;
                         break;
                     }
-                case EntityAction.TransferItem:
+                //case EntityAction.TransferItem:
+                //    {
+                //        quantEnded = true;
+                //        break;
+                //    }
+                case EntityAction.ChangeInventory:
                     {
                         quantEnded = true;
                         break;

@@ -32,7 +32,7 @@ public class Character : BaseEntity, IAttacker
     public Weapon SecondaryWeapon { get; set; }
     public Weapon ShoulderWeapon { get; set; }
 
-    public CharacterInventory Inventory { get; private set; }  = new CharacterInventory();
+    public CharacterInventory Inventory { get; set; }  = new CharacterInventory();
     public float BaseHitChance 
     {
         get
@@ -64,6 +64,27 @@ public class Character : BaseEntity, IAttacker
 
     public void Equip(Item item, SlotType slotType)
     {
+        if (item == null)
+        {
+            Item unequipedItem = null;
+            switch (slotType)
+            {
+                case SlotType.MainWeapon:
+                    unequipedItem = MainWeapon;
+                    break;
+                case SlotType.SecondaryWeapon:
+                    unequipedItem = SecondaryWeapon;
+                    break;
+
+                case SlotType.Shoulder:
+                    unequipedItem = ShoulderWeapon;
+                    break;
+            }
+
+            if (unequipedItem != null)
+                UnEquip(unequipedItem);
+            return;
+        }
         switch (slotType)
         {
             case SlotType.MainWeapon:

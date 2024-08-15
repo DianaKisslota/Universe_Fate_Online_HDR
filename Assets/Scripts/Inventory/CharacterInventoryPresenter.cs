@@ -32,6 +32,14 @@ public class CharacterInventoryPresenter : MonoBehaviour
         InitItemSlots();
     }
 
+    public void ClearItemSlots()
+    {
+        foreach(var slot in _itemSlots)
+        {
+            slot.InitSlot(null);
+        }
+    }
+
     public void InitItemSlots()
     {
         _mainWeapon.InitSlot(Character.MainWeapon);
