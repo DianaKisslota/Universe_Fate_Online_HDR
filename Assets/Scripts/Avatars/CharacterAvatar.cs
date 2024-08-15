@@ -22,6 +22,7 @@ public class CharacterAvatar : EntityAvatar
     public event Action EndApplainQuants;
     public event Action<FireMode> FireModeSet;
     public event Action<DropSlot, DropSlot, ItemPresenter> ItemPresenterTransferred;
+    public event Action<Item> MainWeaponChanged;
 
     private bool _quantsApplaying = false;
 
@@ -187,6 +188,7 @@ public class CharacterAvatar : EntityAvatar
             if (Character.MainWeapon == null)
             {
                 Character.Equip(weapon, SlotType.MainWeapon);
+                MainWeaponChanged?.Invoke(weapon);
             }
             else
             {
@@ -217,6 +219,7 @@ public class CharacterAvatar : EntityAvatar
                     }
                 }
             }
+            ReflectAllItems();
         }
     }
     public void AddQuant(EntityAction action, object _object, Vector3? lastPosition, Quaternion lastRotation)

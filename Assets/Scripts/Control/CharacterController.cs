@@ -88,6 +88,7 @@ public class CharacterController : AvatarController
 
         _inventoryPanel.Inventory.WeaponReloaded += OnWeaponReloaded;
         _playerAvatar.FireModeSet += OnFireModeSet;
+        _playerAvatar.MainWeaponChanged += ReflectMainWeapon;
         InitFireMode();
     }
 
@@ -108,6 +109,7 @@ public class CharacterController : AvatarController
         _playerAvatar.FireModeSet -= OnFireModeSet;
         if (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon)
             rangeWeapon.AmmoChanged -= ChangeAmmo;
+        _playerAvatar.MainWeaponChanged -= ReflectMainWeapon;
     }
 
     public override void BindAvatar(EntityAvatar avatar)
@@ -346,6 +348,7 @@ public class CharacterController : AvatarController
                     itemObject.Drop();
                     _playerAvatar.Character.UnEquip(itemObject.Item);
                     itemObject.gameObject.SetActive(true);
+                    ReflectMainWeapon(_playerAvatar.Character.MainWeapon);
                     break;
                 }
             //case EntityAction.TransferItem:
@@ -539,8 +542,12 @@ public class CharacterController : AvatarController
 
     private void ReflectMainWeapon(Item item)
     {
-        if (item == null) 
+        if (item == null)
+        {
+            _mainWeaponImage.gameObject.SetActive(false);
+            _mainWeaponAmmo.gameObject.SetActive(false);
             return;
+        }
         _mainWeaponImage.sprite = Global.GetIconFor(item.GetType());
         _mainWeaponImage.gameObject.SetActive(true);
         if (item is RangeWeapon rangeWeapon)
