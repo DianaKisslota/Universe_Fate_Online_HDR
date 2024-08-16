@@ -242,7 +242,7 @@ public class CharacterAvatar : EntityAvatar
         AddQuant(EntityAction.TransferItem, transferItemInfo, transform.position, transform.rotation);
     }
 
-    public void AddInventoryChangeQuant(InventoryStateInfo inventoryStateInfo)
+    public void AddInventoryChangeQuant(InventoryChangeInfo inventoryStateInfo)
     {
         AddQuant(EntityAction.ChangeInventory, inventoryStateInfo, transform.position, transform.rotation);
     }
@@ -276,7 +276,7 @@ public class CharacterAvatar : EntityAvatar
             transform.Rotate(0, 55, 0);
     }
 
-    public void RestoreInventory(InventoryInfo inventoryInfo)
+    public void RestoreInventory(InventoryInfo inventoryInfo, ContainerSlot containerSlot, List<ItemTemplate> containerStorage)
     {
         InventoryPresenter.ClearItemSlots();
 
@@ -299,6 +299,12 @@ public class CharacterAvatar : EntityAvatar
         ReflectAllItems();
 
         RefreshInventoryInfo();
+
+        if (containerSlot != null)
+        {
+            containerSlot.RestoreStorage(containerStorage);
+            containerSlot.FillSlots();
+        }
     }
 
     private void StartCurrentQuant()
@@ -326,8 +332,10 @@ public class CharacterAvatar : EntityAvatar
             //    break;
             case EntityAction.ChangeInventory:
                 {
-                    var stateInventoryInfo = _quants[0].Object as InventoryStateInfo;
-                    RestoreInventory(stateInventoryInfo.CurrentState);
+                    var stateInventoryInfo = _quants[0].Object as InventoryChangeInfo;
+                    RestoreInventory(stateInventoryInfo.InventoryState.CurrentState, stateInventoryInfo.ChangedContainerSlot,
+                                            stateInventoryInfo.ContainerNextStateInfo);
+
                 }
                 break;
             case EntityAction.ReloadWeapon:
@@ -344,7 +352,9 @@ public class CharacterAvatar : EntityAvatar
                     //sourceSlot.FillSlots();
                     //if (weapon.WeaponType != WeaponType.Pistol)
 
-                    RestoreInventory(reloadWeaponInfo.InventoryStateInfo.CurrentState);
+                    RestoreInventory(reloadWeaponInfo.InventoryChangeInfo.InventoryState.CurrentState, 
+                                            reloadWeaponInfo.InventoryChangeInfo.ChangedContainerSlot,
+                                            reloadWeaponInfo.InventoryChangeInfo.ContainerNextStateInfo);
                     PlaySound(Global.GetSoundFor(typeof(AK47), SoundType.Reload));
                     _isReloading = 0.5f;
                 }

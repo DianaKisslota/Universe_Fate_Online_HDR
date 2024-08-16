@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public abstract class StorageSlot : DropSlot
@@ -9,7 +7,9 @@ public abstract class StorageSlot : DropSlot
     [SerializeField] GameObject _itemsParent;
 
     private Storage _storage;
- //   private List<GameObject> _children = new List<GameObject>();
+    //   private List<GameObject> _children = new List<GameObject>();
+
+    public List<ItemTemplate> StorageInfo { get; set; } = new List<ItemTemplate>();
 
     public event Action<ItemPresenter, ItemPresenter, int, StorageSlot> WeaponReloaded;
 
@@ -21,6 +21,7 @@ public abstract class StorageSlot : DropSlot
 
     private void OnEnable()
     {
+        RefreshStorageInfo();
         FillSlots();
     }
 
@@ -78,5 +79,33 @@ public abstract class StorageSlot : DropSlot
         //    _children.Remove(itemObject);
         //}
         base.OnItemLeave(item);
+    }
+
+    public void RefreshStorageInfo()
+    {
+        StorageInfo = GetItemsSnapshot();
+    }
+    private List<ItemTemplate> GetItemsSnapshot()
+    {
+        var result = new List<ItemTemplate>();
+        foreach (StoragePosition storagePosition in Storage.Items)
+        {
+            var template = storagePosition.Item.GetTemplate();
+            template.ItemCount = storagePosition.Count;
+            result.Add(template);
+        }
+
+        return result;
+    }
+
+    public void RestoreStorage(List<ItemTemplate> storageInfo)
+    {
+        Storage.Clear();
+        foreach (var itemTemplate in storageInfo)
+        {
+            Storage.AddPosition(ItemFactory.CreateItem(itemTemplate));
+        }
+
+        RefreshStorageInfo();
     }
 }

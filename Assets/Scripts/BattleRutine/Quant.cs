@@ -26,6 +26,19 @@ public class InventoryStateInfo
     public InventoryInfo CurrentState;
 }
 
+public class InventoryChangeInfo
+{
+    public InventoryStateInfo InventoryState;
+    public ContainerSlot ChangedContainerSlot;
+    public List<ItemTemplate> ContainerPrevStateInfo;
+    public List<ItemTemplate> ContainerNextStateInfo;
+
+    public InventoryChangeInfo()
+    {
+        InventoryState = new();
+    }
+}
+
 public class TransferItemInfo
 {
     public DropSlot Source {  get; private set; }
@@ -61,11 +74,11 @@ public class ReloadWeaponInfo
     //    SourceSlot = sourceSlot;
     //}
 
-    public InventoryStateInfo InventoryStateInfo;
+    public InventoryChangeInfo InventoryChangeInfo;
 
-    public ReloadWeaponInfo(InventoryStateInfo inventoryStateInfo)
+    public ReloadWeaponInfo(InventoryChangeInfo inventoryChangeInfo)
     {
-        InventoryStateInfo = inventoryStateInfo;
+        InventoryChangeInfo = inventoryChangeInfo;
     }
 }
 
