@@ -96,6 +96,8 @@ public class CharacterController : AvatarController
     {
         if (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon)
             OnFireModeSet(rangeWeapon.GetLowerFireMode());
+        else
+            OnFireModeSet(FireMode.Undefined);
     }
 
     private void OnDestroy()
@@ -498,7 +500,7 @@ public class CharacterController : AvatarController
 
     public void InventoryPanelSwitch()
     {
-        if (_containerPresenter.gameObject.activeSelf)
+        if (_containerPresenter.gameObject.activeSelf || _avatarApplyingQants || _avatarMoving)
             return;
         
 
@@ -626,6 +628,8 @@ public class CharacterController : AvatarController
 
     public void OnFireModeSet(FireMode fireMode)
     {
+        //if (_avatarApplyingQants || _avatarMoving)
+        //    return;
         var firemode1Available = (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon1) && rangeWeapon1.SingleShot != null;
         var firemode2Available = (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon2) && rangeWeapon2.ShortBurst != null;
         var firemode3Available = (_playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon3) && rangeWeapon3.LongBurst != null;
