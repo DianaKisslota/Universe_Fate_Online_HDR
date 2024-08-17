@@ -16,7 +16,7 @@ public class CharacterItemSlot : ItemSlot
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
         base.DropProcess(itemPresenter);
-        OnItemSet(itemPresenter.Item, this);
+
     }
 
     private void OnUnequip(Item item, DropSlot slot)

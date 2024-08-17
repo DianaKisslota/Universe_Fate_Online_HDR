@@ -53,5 +53,6 @@ public class DropSlot : MonoBehaviour, IDropHandler
         {
             oldParentItemSlot.SetFree();
         }
+        OnItemSet(itemPresenter.Item, this);
     }
 }
