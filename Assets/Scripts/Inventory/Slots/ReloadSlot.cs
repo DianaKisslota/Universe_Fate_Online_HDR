@@ -19,13 +19,15 @@ public class ReloadSlot : DropSlot
         { 
             if (itemPresenter.Item is Ammo ammo)
             {
-                if (weapon.Caliber == ammo.Caliber)
+                var amountToLoad = weapon.AmmoCapacity - weapon.AmmoCount;
+
+                if (weapon.Caliber == ammo.Caliber && (amountToLoad > 0 || weapon.CurrentAmmoType != ammo.GetType()))
                 {
                     if (weapon.CurrentAmmoType != null && weapon.CurrentAmmoType != ammo.GetType())
                     {
                         Debug.LogError("Не тот вид боеприпаса");  //TODO: Если перезаряжаем другим видом патронов, выгрузить старые патроны
                     }
-                    var amountToLoad = weapon.AmmoCapacity - weapon.AmmoCount;
+
                     if (itemPresenter.Count < amountToLoad)
                         amountToLoad = itemPresenter.Count;                    
                     itemPresenter.Count -= amountToLoad;
