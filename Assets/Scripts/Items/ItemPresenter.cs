@@ -88,6 +88,11 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (Count <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
         if (transform.parent == _transportPanel)
         {
             SetToParent(_oldParent);
