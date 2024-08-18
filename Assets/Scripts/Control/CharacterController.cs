@@ -612,10 +612,13 @@ public class CharacterController : AvatarController
             inventoryChangeInfo.ContainerNextStateInfo = _containerPresenter.Slot.StorageInfo;
         }
 
-        if (slot == inventoryChangeInfo.ChangedContainerSlot)
-            inventoryChangeInfo.ContainerNextStateInfo.Add(currentAmmoTemplate);
-        else
-            inventoryChangeInfo.InventoryState.CurrentState.InventorySnapshot.Add(currentAmmoTemplate);
+        if (currentAmmoTemplate.ItemCount > 0)
+        {
+            if (slot == inventoryChangeInfo.ChangedContainerSlot)
+                inventoryChangeInfo.ContainerNextStateInfo.Add(currentAmmoTemplate);
+            else
+                inventoryChangeInfo.InventoryState.CurrentState.InventorySnapshot.Add(currentAmmoTemplate);
+        }
 
         var quantInfo = new ReloadWeaponInfo(inventoryChangeInfo);
         _playerAvatar.AddReloadWeaponQuant(quantInfo);
