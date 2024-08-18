@@ -98,6 +98,7 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         }
 
         var sourceSlot = _oldParent.GetComponent<DropSlot>();
+
         var currentSlot = transform.parent.gameObject.GetComponent<DropSlot>();
         currentSlot.OnPresenterSet(this, sourceSlot);
 

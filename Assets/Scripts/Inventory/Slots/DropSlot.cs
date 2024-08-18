@@ -21,7 +21,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         ItemSet?.Invoke(item, slot);
     }
 
-    public void OnPresenterSet(ItemPresenter itemPresenter, DropSlot sourceSlot)
+    public virtual void OnPresenterSet(ItemPresenter itemPresenter, DropSlot sourceSlot)
     {
         ItemPresenterSet?.Invoke(sourceSlot, this, itemPresenter);
     }

@@ -13,6 +13,14 @@ public class CharacterItemSlot : ItemSlot
         ItemLeave += OnUnequip;        
     }
 
+    public override void OnPresenterSet(ItemPresenter itemPresenter, DropSlot sourceSlot)
+    {
+        if (sourceSlot == this)
+            OnItemSet(itemPresenter.Item, this);
+        else
+            base.OnPresenterSet(itemPresenter, sourceSlot);
+    }
+
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
         base.DropProcess(itemPresenter);

@@ -533,7 +533,9 @@ public class CharacterController : AvatarController
     public void ItemPresenterSet(DropSlot sourceSlot, DropSlot destinationSlot, ItemPresenter itemPresenter)
     {
         if (sourceSlot == destinationSlot)
+        {
             return;
+        }
         if (!_avatarApplyingQants && !_quantsReverting)
         {
             //var transferItemInfo = new TransferItemInfo(sourceSlot, destinationSlot, itemPresenter,
