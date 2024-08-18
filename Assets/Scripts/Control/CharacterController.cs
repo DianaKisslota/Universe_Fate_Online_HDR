@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -28,6 +29,7 @@ public class CharacterController : AvatarController
     [SerializeField] EventTrigger _fireModeTrigger3;
 
     [SerializeField] private PointerController _pointer;
+    [SerializeField] private TMP_Text _pointerCoords;
     //   [SerializeField] protected LineRenderer _pathDrawer;
 
     [SerializeField] private List<UIItem> _uiItems;
@@ -283,7 +285,9 @@ public class CharacterController : AvatarController
             var pointerPosition = GetPointerPositionOnMap();
             var movePosition = AllignPoint.ToMid(pointerPosition);
 
+            //_pointerCoords.text = pointerPosition.ToString();
             _canMove = PlayerCanReach(movePosition) && !_mouseOverUI;
+            //_pointerCoords.text += "Can reach: " + _canMove.ToString();
             _pointer.SetActive(_canMove && !AvatarBusy);
             if (_pointer.activeSelf && _pointer.position != movePosition)
             {
@@ -481,7 +485,7 @@ public class CharacterController : AvatarController
 
     public void ButtonApplyQuantsClick()
     {
-        if (AvatarBusy)
+        if (AvatarBusy || _playerAvatar.Quants.Count == 0)
             return;
         ApplyQuants();
     }
@@ -595,6 +599,7 @@ public class CharacterController : AvatarController
         _containerPresenter.Slot.ItemLeave -= ItemLeave;
         _containerPresenter.Slot.ItemPresenterSet -= ItemPresenterSet;
         _containerPresenter.Slot.WeaponReloaded -= OnWeaponReloaded;
+        _mouseOverUI = false;
     }
 
     public void OnWeaponReloaded(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int num, StorageSlot slot)

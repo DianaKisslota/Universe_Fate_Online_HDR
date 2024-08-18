@@ -113,8 +113,11 @@ public abstract class EntityAvatar : MonoBehaviour
         var result = _agent.enabled && _agent.CalculatePath(targetPoint, path);
         if (!result)
             return false;
-        var endPoint = path.corners[path.corners.Length - 1];
-        return Mathf.Abs(endPoint.x - targetPoint.x) < 0.001 && Mathf.Abs(endPoint.z - targetPoint.z) < 0.001;
+        //var endPoint = path.corners[path.corners.Length - 1];        
+        //return Mathf.Abs(endPoint.x - targetPoint.x) < 0.001 && Mathf.Abs(endPoint.z - targetPoint.z) < 0.001;
+
+        var startPoint = AllignPoint.ToMid(_agent.transform.position);
+        return Mathf.Abs(startPoint.x - targetPoint.x) > 0.001 || Mathf.Abs(startPoint.z - targetPoint.z) > 0.001;
     }
 
     public float PathLength(NavMeshPath path)
