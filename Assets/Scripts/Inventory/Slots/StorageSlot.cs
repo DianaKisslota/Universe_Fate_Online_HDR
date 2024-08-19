@@ -32,13 +32,6 @@ public abstract class StorageSlot : DropSlot
 
     public virtual void FillSlots()
     {
-        //while (_children.Count > 0)
-        //{
-        //    var itemObject = _children[0];
-        //    _children.Remove(itemObject);
-        //    Destroy(itemObject);
-        //}
-
         for (var i = 0; i < transform.childCount; i++)
         { 
             Destroy(transform.GetChild(i).gameObject);
@@ -47,17 +40,15 @@ public abstract class StorageSlot : DropSlot
         foreach (StoragePosition position in _storage.Items)
         {
             var itemPresenter = ItemFactory.CreateItemPresenter(position, _itemsParent.transform);
-
-         //   _children.Add(itemPresenter.gameObject);
         }
     }
 
     protected override bool ItemAccepted(ItemPresenter itemPresenter)
     {
-        Storage.AddItem(itemPresenter.Item, itemPresenter.Count);
-        if (itemPresenter.Item.Stackable)
-            itemPresenter.StoragePosition.Count = 0;
-        FillSlots();
+        itemPresenter.StoragePosition = Storage.AddItem(itemPresenter.Item, itemPresenter.Count);
+        //if (itemPresenter.Item.Stackable)
+        //    itemPresenter.StoragePosition.Count = 0;
+       // FillSlots();
         return true;
     }
 
@@ -65,23 +56,16 @@ public abstract class StorageSlot : DropSlot
     {
         if (itemPresenter?.Count > 0)
             base.DropProcess(itemPresenter);
-        //_children.Add(itemPresenter.gameObject);
-        FillSlots();
+       // FillSlots();
     }
 
     public void InsertItem(ItemPresenter itemPresenter)
     {
        itemPresenter.StoragePosition = Storage.AddItem(itemPresenter.Item, itemPresenter.Count);
-       // _children.Add(itemPresenter.gameObject);
     }
 
     public override void OnItemLeave(Item item)
     {
-        //var itemObject = _children.FirstOrDefault(x => x.TryGetComponent<ItemPresenter>(out var presenter) && presenter.Item == item);
-        //if (itemObject != null)
-        //{
-        //    _children.Remove(itemObject);
-        //}
         base.OnItemLeave(item);
     }
 

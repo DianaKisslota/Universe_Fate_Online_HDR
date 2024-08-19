@@ -88,15 +88,15 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (Count <= 0)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if (Count <= 0)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
         if (transform.parent == _transportPanel)
         {
             SetToParent(_oldParent);
-            if (transform.parent.gameObject.TryGetComponent<StorageSlot>(out var storageSlot))
+            if (transform.parent.gameObject.TryGetComponent<StorageSlot>(out var storageSlot) && Count > 0)
             {
                 storageSlot.InsertItem(this);
             }
@@ -105,9 +105,15 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         var sourceSlot = _oldParent.GetComponent<DropSlot>();
 
         var currentSlot = transform.parent.gameObject.GetComponent<DropSlot>();
-        currentSlot.OnPresenterSet(this, sourceSlot);
+        if (Count > 0)
+            currentSlot.OnPresenterSet(this, sourceSlot);
 
+        if (currentSlot is StorageSlot storageSlot1)
+            storageSlot1.FillSlots();
         _canvasGroup.blocksRaycasts = true;
+
+        if (Count <= 0)
+            Destroy(gameObject);
     }
 
     public void SetToParent(Transform parent)
