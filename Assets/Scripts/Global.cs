@@ -105,8 +105,9 @@ public static class Global
         Character.Inventory.AddItem(new KitchenKnife());
 
         Character.Inventory.AddItem(new Ammo9x18mm(), 50);
-       // Character.Inventory.AddItem(new Ammo545x39mm(), 30);
+        Character.Inventory.AddItem(new Ammo545x39mm(), 30);
         Character.Inventory.AddItem(new Ammo762x39mm(), 30);
+        Character.Inventory.AddItem(new Ammo762x39mm(), 45);
     }
         
 }

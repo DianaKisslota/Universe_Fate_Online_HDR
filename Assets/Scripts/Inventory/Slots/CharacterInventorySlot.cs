@@ -14,9 +14,9 @@ public class CharacterInventorySlot : StorageSlot
     }
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
-        base.DropProcess(itemPresenter);
-        if(itemPresenter?.Count > 0)
+        if (itemPresenter?.Count > 0)
             OnItemSet(itemPresenter.Item, this);
+        base.DropProcess(itemPresenter);
     }
 
     private void OnUnequip(Item item, DropSlot slot)

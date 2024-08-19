@@ -66,6 +66,7 @@ public abstract class StorageSlot : DropSlot
         if (itemPresenter?.Count > 0)
             base.DropProcess(itemPresenter);
         //_children.Add(itemPresenter.gameObject);
+        FillSlots();
     }
 
     public void InsertItem(ItemPresenter itemPresenter)
