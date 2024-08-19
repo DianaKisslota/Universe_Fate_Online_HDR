@@ -28,6 +28,8 @@ public abstract class MapData : MonoBehaviour
 
     private void Start()
     {
+        _cleanupSectorButton.gameObject.SetActive(false);
+        _transferButton.gameObject.SetActive(false);
         _navigation.ArriveToSector += OnArriveToSector;
         RefreshDirections += _navigation.UpdateButtons;
         _navigation.GoToSector += StartToGo;
@@ -38,13 +40,13 @@ public abstract class MapData : MonoBehaviour
             var x = _startSector.x.ConvertTo<int>();
             var y = _startSector.y.ConvertTo<int>();
             _currentSector = _source.GetSectorData(SectorData.CoordsToID(Name, x, y));
-            ReactToArriving();
         }
         else
         {
             _currentSector = _source.GetSectorData(Global.CurrentSectorID);
             SetNavigationToSector(_currentSector);
-        }          
+        }
+        ReactToArriving();
     }
 
     private void Update()

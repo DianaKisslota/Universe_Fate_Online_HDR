@@ -40,7 +40,7 @@ public class CharacterController : AvatarController
     private Vector3 _lastPoint;
     private Vector3 _lastAngle;
 
-    private bool _mouseOverUI;
+    public bool MouseOverUI { set; get; }
 
     private CharacterAvatar _playerAvatar => _avatar as CharacterAvatar;
 
@@ -127,7 +127,7 @@ public class CharacterController : AvatarController
 
     public void UIMouseInteract(bool mouseOverUI)
     {
-        _mouseOverUI = mouseOverUI;
+        MouseOverUI = mouseOverUI;
     }
 
     private void Update()
@@ -138,7 +138,7 @@ public class CharacterController : AvatarController
                                         (_inventoryPanel.gameObject.activeSelf && _inventoryPanel.transform.parent == _originInventoryPlaceHolder)));
 
         var entityAvatar = GetEntityAvatarUnderMousePoint();
-        if (entityAvatar != null && !entityAvatar.Entity.IsDead)
+        if (!MouseOverUI && entityAvatar != null && !entityAvatar.Entity.IsDead)
         {
             _pointer.SetPointerType(PointerType.Target);
             _pointer.SetActive(true);
@@ -172,7 +172,7 @@ public class CharacterController : AvatarController
             _pointer.SetPointerType(PointerType.Nav);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (!MouseOverUI && Input.GetMouseButtonDown(0))
         {
             var itemObject = GetItemUnderMousePoint();
             if (itemObject != null  && Vector3.Distance(_playerAvatar.transform.position, itemObject.transform.position) < 1.2f)                
@@ -183,7 +183,7 @@ public class CharacterController : AvatarController
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (!MouseOverUI && Input.GetMouseButtonDown(0))
         {
             var containerObject = GetContainerUnderMousePoint();
             if (containerObject != null && Vector3.Distance(_playerAvatar.transform.position, containerObject.transform.position) < 1.5f)
@@ -203,7 +203,7 @@ public class CharacterController : AvatarController
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && !_mouseOverUI && _canMove && PlayerCanReach(AllignPoint.ToMid(GetPointerPositionOnMap())) 
+        if (!MouseOverUI && Input.GetMouseButtonDown(0) && _canMove && PlayerCanReach(AllignPoint.ToMid(GetPointerPositionOnMap())) 
                    && !AvatarBusy &&!_containerPresenter.gameObject.activeSelf)
         {
             var navPoint = Instantiate(Global.NavPointPrefab);
@@ -286,7 +286,7 @@ public class CharacterController : AvatarController
             var movePosition = AllignPoint.ToMid(pointerPosition);
 
             //_pointerCoords.text = pointerPosition.ToString();
-            _canMove = PlayerCanReach(movePosition) && !_mouseOverUI;
+            _canMove = PlayerCanReach(movePosition) && !MouseOverUI;
             //_pointerCoords.text += "Can reach: " + _canMove.ToString();
             _pointer.SetActive(_canMove && !AvatarBusy);
             if (_pointer.activeSelf && _pointer.position != movePosition)
@@ -542,9 +542,6 @@ public class CharacterController : AvatarController
         }
         if (!_avatarApplyingQants && !_quantsReverting)
         {
-            //var transferItemInfo = new TransferItemInfo(sourceSlot, destinationSlot, itemPresenter,
-            //                        new ItemTemplate { ItemType = itemPresenter.Item.GetType(), ItemCount = itemPresenter.Count});
-            //_playerAvatar.AddItemtransferQuant(transferItemInfo);
             var inventoryChangeInfo = new InventoryChangeInfo();
             inventoryChangeInfo.InventoryState.PrevState = _playerAvatar.InventoryInfo;
             _playerAvatar.RefreshInventoryInfo();
@@ -599,7 +596,7 @@ public class CharacterController : AvatarController
         _containerPresenter.Slot.ItemLeave -= ItemLeave;
         _containerPresenter.Slot.ItemPresenterSet -= ItemPresenterSet;
         _containerPresenter.Slot.WeaponReloaded -= OnWeaponReloaded;
-        _mouseOverUI = false;
+        MouseOverUI = false;
     }
 
     public void OnWeaponReloaded(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int num, StorageSlot slot)

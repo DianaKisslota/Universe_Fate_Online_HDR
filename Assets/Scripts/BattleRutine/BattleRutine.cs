@@ -144,7 +144,7 @@ public class BattleRutine : MonoBehaviour
             _cameraHolder.Translate(Vector3.up * -wheelScroll * 3);
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && !_characterController.MouseOverUI)
         {
             _rotationX += Input.GetAxis("Mouse X") * _cameraRotateSpeed * 5 * Time.deltaTime;
             _rotationY += Input.GetAxis("Mouse Y") * _cameraRotateSpeed * 5 * Time.deltaTime;
