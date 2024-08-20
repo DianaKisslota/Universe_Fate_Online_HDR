@@ -8,7 +8,8 @@ public enum Caliber
 {
     bullet9x18,
     bullet545x39,
-    bullet762x39
+    bullet762x39,
+    bullet045ACP
 }
 public abstract class Ammo : Item
 {

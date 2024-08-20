@@ -112,8 +112,8 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             storageSlot1.FillSlots();
         _canvasGroup.blocksRaycasts = true;
 
-        if (Count <= 0)
-            Destroy(gameObject);
+        //if (Count <= 0)
+        //    Destroy(gameObject);
     }
 
     public void SetToParent(Transform parent)
