@@ -103,7 +103,6 @@ public class CharacterAvatar : EntityAvatar
             template.ItemCount = storagePosition.Count;
             _inventoryInfo.InventorySnapshot.Add(template);
         }
-        ClearItemObjects();
     }
     public void ReflectAllItems()
     {
@@ -315,6 +314,7 @@ public class CharacterAvatar : EntityAvatar
             containerSlot.RestoreStorage(containerStorage);
             containerSlot.FillSlots();
         }
+        ClearItemObjects();
     }
 
     private void StartCurrentQuant()
