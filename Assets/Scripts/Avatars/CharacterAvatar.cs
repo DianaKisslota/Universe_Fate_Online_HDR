@@ -71,6 +71,15 @@ public class CharacterAvatar : EntityAvatar
 
         return resultObject;
     }
+
+    private void ClearItemObjects()
+    {
+        foreach (var item in _itemObjects)
+        {
+            Destroy(item.Value.gameObject);
+        }
+        _itemObjects.Clear();   
+    }
     private void OnEquip(Item item, SlotType slotType)
     {
         ReflectEquipment(item, slotType);
@@ -94,6 +103,7 @@ public class CharacterAvatar : EntityAvatar
             template.ItemCount = storagePosition.Count;
             _inventoryInfo.InventorySnapshot.Add(template);
         }
+        ClearItemObjects();
     }
     public void ReflectAllItems()
     {
