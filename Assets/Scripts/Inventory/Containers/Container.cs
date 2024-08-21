@@ -1,4 +1,7 @@
-﻿public abstract class Container
+﻿using System;
+using System.Collections.Generic;
+
+public abstract class Container
 {
     public Storage Storage { get; set; }
 
@@ -7,14 +10,19 @@
         Storage = new Storage(100);
     }
 
-    public void AddItem(Item item)
+    public void AddItem(Item item, int number = 1)
     {
-        Storage.AddItem(item);
+        Storage.AddItem(item, number);
     }
 
     public void RemoveItem(Item item)
     { 
         Storage.RemoveItem(item);
+    }
+
+    public void RestoreStorage(List<ItemTemplate> containerStorage)
+    {
+        Storage.RestoreStorage(containerStorage);
     }
 }
 

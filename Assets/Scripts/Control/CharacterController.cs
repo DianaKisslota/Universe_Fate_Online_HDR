@@ -385,11 +385,11 @@ public class CharacterController : AvatarController
             case EntityAction.ChangeInventory:
                 {
                     var stateInventoryInfo = quant.Object as InventoryChangeInfo;
-                    _playerAvatar.RestoreInventory(stateInventoryInfo.InventoryState.PrevState, stateInventoryInfo.ChangedContainerSlot,
+                    _playerAvatar.RestoreInventory(stateInventoryInfo.InventoryState.PrevState, stateInventoryInfo.ChangedContainer,
                                             stateInventoryInfo.ContainerPrevStateInfo);
-                    if (stateInventoryInfo.ChangedContainerSlot != null)
+                    if (stateInventoryInfo.ChangedContainer != null)
                     {
-                        stateInventoryInfo.ChangedContainerSlot.RestoreStorage(stateInventoryInfo.ContainerPrevStateInfo);
+                        stateInventoryInfo.ChangedContainer.RestoreStorage(stateInventoryInfo.ContainerPrevStateInfo);
                         if (_containerPresenter.gameObject.activeSelf)
                             _containerPresenter.Slot.FillSlots();
                     }
@@ -418,7 +418,7 @@ public class CharacterController : AvatarController
                     //sourceSlot.FillSlots();
 
                     _playerAvatar.RestoreInventory(reloadWeaponInfo.InventoryChangeInfo.InventoryState.PrevState,
-                                            reloadWeaponInfo.InventoryChangeInfo.ChangedContainerSlot,
+                                            reloadWeaponInfo.InventoryChangeInfo.ChangedContainer,
                                             reloadWeaponInfo.InventoryChangeInfo.ContainerPrevStateInfo);
                     break;
                 }
@@ -548,10 +548,10 @@ public class CharacterController : AvatarController
             inventoryChangeInfo.InventoryState.CurrentState = _playerAvatar.InventoryInfo;
             if (_containerPresenter.gameObject.activeSelf)
             {
-                inventoryChangeInfo.ChangedContainerSlot = _containerPresenter.Slot;
-                inventoryChangeInfo.ContainerPrevStateInfo = _containerPresenter.Slot.StorageInfo;
+                inventoryChangeInfo.ChangedContainer = _containerPresenter.CurrentContainer;
+                inventoryChangeInfo.ContainerPrevStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
                 _containerPresenter.Slot.RefreshStorageInfo();
-                inventoryChangeInfo.ContainerNextStateInfo = _containerPresenter.Slot.StorageInfo;
+                inventoryChangeInfo.ContainerNextStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
             }
             _playerAvatar.AddInventoryChangeQuant(inventoryChangeInfo);
         }
@@ -610,15 +610,15 @@ public class CharacterController : AvatarController
         inventoryChangeInfo.InventoryState.CurrentState = _playerAvatar.InventoryInfo;
         if (_containerPresenter.gameObject.activeSelf)
         {
-            inventoryChangeInfo.ChangedContainerSlot = _containerPresenter.Slot;
-            inventoryChangeInfo.ContainerPrevStateInfo = _containerPresenter.Slot.StorageInfo;
+            inventoryChangeInfo.ChangedContainer = _containerPresenter.CurrentContainer;
+            inventoryChangeInfo.ContainerPrevStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
             _containerPresenter.Slot.RefreshStorageInfo();
-            inventoryChangeInfo.ContainerNextStateInfo = _containerPresenter.Slot.StorageInfo;
+            inventoryChangeInfo.ContainerNextStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
         }
 
         if (currentAmmoTemplate.ItemCount > 0)
         {
-            if (slot == inventoryChangeInfo.ChangedContainerSlot)
+            if (slot == _containerPresenter.Slot)
                 inventoryChangeInfo.ContainerNextStateInfo.Add(currentAmmoTemplate);
             else
                 inventoryChangeInfo.InventoryState.CurrentState.InventorySnapshot.Add(currentAmmoTemplate);

@@ -6,6 +6,8 @@ public class Storage
 {
     public List<StoragePosition> Items { get; private set; } = new List<StoragePosition>();
 
+    public List<ItemTemplate> StorageInfo { get; set; } = new List<ItemTemplate>();
+
     private int _positionCapacity;
 
     public Storage(int positionCapacity)
@@ -29,7 +31,7 @@ public class Storage
     {
         StoragePosition position = null;
         while (number > 0)
-        { 
+        {
             position = Items.FirstOrDefault(x => x.Item.GetType() == item.GetType() && x.Count < x.MaxCount);
             if (position == null || !position.Item.Stackable)
             {
@@ -53,7 +55,7 @@ public class Storage
 
     public void Clear()
     {
-        for(var i = Items.Count - 1; i > -1; i--)
+        for (var i = Items.Count - 1; i > -1; i--)
             RemovePosition(Items[i]);
     }
 
@@ -61,20 +63,48 @@ public class Storage
     {
         var position = Items.FirstOrDefault(x => x.Item == item);
         if (position != null)
-        { 
+        {
             position.Count -= number;
             if (position.Count < 1)
                 RemoveItem(item);
         }
     }
 
-    private void CheckStoragePosition(StoragePosition storagePosition) 
-    { 
+    private void CheckStoragePosition(StoragePosition storagePosition)
+    {
         if (storagePosition.Count == 0)
         {
             RemovePosition(storagePosition);
         }
     }
 
+    private List<ItemTemplate> GetItemsSnapshot()
+    {
+        var result = new List<ItemTemplate>();
+        foreach (StoragePosition storagePosition in Items)
+        {
+            var template = storagePosition.Item.GetTemplate();
+            template.ItemCount = storagePosition.Count;
+            result.Add(template);
+        }
+
+        return result;
+    }
+
+    public void RefreshStorageInfo()
+    {
+        StorageInfo = GetItemsSnapshot();
+    }
+
+    public void RestoreStorage(List<ItemTemplate> storageInfo)
+    {
+        Clear();
+        foreach (var itemTemplate in storageInfo)
+        {
+            AddPosition(ItemFactory.CreateItem(itemTemplate));
+        }
+
+        RefreshStorageInfo();
+    }
 }
 

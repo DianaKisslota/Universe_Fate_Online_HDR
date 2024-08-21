@@ -9890,6 +9890,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 804486836}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &808530008 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8937147447591976823, guid: 4836e1333deab284980cb5d3440b78dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 972737443}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb4ff30a3eb7cce4bb2206f4e9076a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &821571441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24207,10 +24219,10 @@ RectTransform:
   - {fileID: 1509931278}
   - {fileID: 410890399}
   - {fileID: 1952781769}
-  - {fileID: 972737444}
   - {fileID: 2151328}
   - {fileID: 62842331}
   - {fileID: 364762688}
+  - {fileID: 972737444}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -26001,6 +26013,7 @@ MonoBehaviour:
   - {fileID: 62842334}
   - {fileID: 1509931281}
   - {fileID: 1749875156}
+  - {fileID: 808530008}
 --- !u!95 &2106825605
 Animator:
   serializedVersion: 5

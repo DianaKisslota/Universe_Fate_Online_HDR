@@ -110,12 +110,11 @@ public static class Global
         Character.Inventory.AddItem(new AK47());
         Character.Inventory.AddItem(new PM());
         Character.Inventory.AddItem(new KitchenKnife());
-        Character.Inventory.AddItem(new UMP45());
 
-        Character.Inventory.AddItem(new Ammo9x18mm(), 50);
-        Character.Inventory.AddItem(new Ammo545x39mm(), 30);
-        Character.Inventory.AddItem(new Ammo045ACP(), 25);
+        Character.Inventory.AddItem(new Ammo9x18mm(), 50);       
         Character.Inventory.AddItem(new Ammo762x39mm(), 45);
+
+        //Character.Inventory.AddItem(new Ammo545x39mm(), 30);
     }
         
 }
