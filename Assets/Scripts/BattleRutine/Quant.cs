@@ -39,6 +39,24 @@ public class InventoryChangeInfo
     }
 }
 
+public class PickObjectInfo
+{
+    public ItemObject PickedItemObject;
+    public ItemTemplate ItemTemplate;
+    public InventoryStateInfo InventoryStateInfo;
+    public Vector3 ObjectPosition { get; set; }
+    public Quaternion ObjectRotation { get; set; }
+
+    public PickObjectInfo(ItemObject itemObject, InventoryStateInfo inventoryStateInfo)
+    {
+        ItemTemplate = itemObject.Item.GetTemplate();
+        InventoryStateInfo = inventoryStateInfo;
+        PickedItemObject = itemObject;
+        ObjectPosition = itemObject.transform.position;
+        ObjectRotation = itemObject.transform.rotation;
+    }
+}
+
 public class TransferItemInfo
 {
     public DropSlot Source {  get; private set; }

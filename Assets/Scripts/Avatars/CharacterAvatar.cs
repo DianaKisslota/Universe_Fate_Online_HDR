@@ -56,7 +56,7 @@ public class CharacterAvatar : EntityAvatar
         Character.OnUnEquip -= OnUnEquip;
     }
 
-    private ItemObject GetItemObject(Item item)
+    public ItemObject GetItemObject(Item item)
     {
         ItemObject resultObject = null;
         if (_itemObjects.ContainsKey(item))
@@ -74,12 +74,16 @@ public class CharacterAvatar : EntityAvatar
 
     private void ClearItemObjects()
     {
-        foreach (var item in _itemObjects)
+        foreach (var storagePosition in Character.Inventory.Items)
         {
-            if (item.Value != null)
-                Destroy(item.Value.gameObject);
+            if (_itemObjects.TryGetValue(storagePosition.Item, out var itemObject))
+            {
+                if (itemObject != null) 
+                    Destroy(itemObject.gameObject);
+                _itemObjects.Remove(storagePosition.Item);
+            }
         }
-        _itemObjects.Clear();   
+        //_itemObjects.Clear();   
     }
     private void OnEquip(Item item, SlotType slotType)
     {
@@ -180,9 +184,11 @@ public class CharacterAvatar : EntityAvatar
 
     private void OnUnEquip(Item item, SlotType slotType)
     {
-        var itemObject = GetItemObject(item);
-        if (itemObject != null)
-            itemObject.gameObject.SetActive(false);
+        if (_itemObjects.TryGetValue(item, out var itemObject))
+        {
+            Destroy(itemObject.gameObject);
+            _itemObjects.Remove(item);
+        }
         if (slotType == SlotType.MainWeapon)
         {
             Animator.SetInteger("HasWeapon", 0);
@@ -242,9 +248,9 @@ public class CharacterAvatar : EntityAvatar
         AddQuant(EntityAction.Move, point, transform.position, transform.rotation);
     }
 
-    public void AddPickObjectQuant(ItemObject itemObject)
+    public void AddPickObjectQuant(PickObjectInfo pickObjectInfo)
     {
-        AddQuant(EntityAction.PickObject, itemObject, itemObject.transform.position, itemObject.transform.rotation);
+        AddQuant(EntityAction.PickObject, pickObjectInfo, transform.position, transform.rotation);
     }
 
     public void AddItemtransferQuant(TransferItemInfo transferItemInfo)
@@ -286,7 +292,7 @@ public class CharacterAvatar : EntityAvatar
             transform.Rotate(0, 55, 0);
     }
 
-    public void RestoreInventory(InventoryInfo inventoryInfo, Container container, List<ItemTemplate> containerStorage)
+    public void RestoreInventory(InventoryInfo inventoryInfo, Container container = null, List<ItemTemplate> containerStorage = null)
     {
         ClearItemObjects();
         InventoryPresenter.ClearItemSlots();
@@ -305,7 +311,9 @@ public class CharacterAvatar : EntityAvatar
         }
 
         InventoryPresenter.InitItemSlots();
-        InventoryPresenter.Inventory.FillSlots();
+        
+        if (InventoryPresenter.gameObject.activeSelf)
+            InventoryPresenter.Inventory.FillSlots();
 
         ReflectAllItems();
 
@@ -328,7 +336,11 @@ public class CharacterAvatar : EntityAvatar
                 MoveTo((_quants[0].Object as Vector3?).Value);
                 break;
             case EntityAction.PickObject:
-                TakeItem(_quants[0].Object as ItemObject);
+                var pickObjectInfo = _quants[0].Object as PickObjectInfo;
+                //RestoreInventory(pickObjectInfo.InventoryStateInfo.PrevState);
+                //var pickedItem = ItemFactory.CreateItem(pickObjectInfo.ItemTemplate);
+                //TakeItem(GetItemObject(pickedItem.Item));
+                TakeItem(pickObjectInfo.PickedItemObject);
                 break;
             //case EntityAction.TransferItem:
             //    {

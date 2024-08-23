@@ -177,8 +177,14 @@ public class CharacterController : AvatarController
             var itemObject = GetItemUnderMousePoint();
             if (itemObject != null  && Vector3.Distance(_playerAvatar.transform.position, itemObject.transform.position) < 1.2f)                
             {
-                _playerAvatar.AddPickObjectQuant(itemObject);
+                var inventoryStateInfo = new InventoryStateInfo();
+                var pickObjectInfo = new PickObjectInfo(itemObject, inventoryStateInfo);
+                inventoryStateInfo.PrevState = _playerAvatar.InventoryInfo;
                 _playerAvatar.TakeItem(itemObject);
+                _playerAvatar.RefreshInventoryInfo();
+                inventoryStateInfo.CurrentState = _playerAvatar.InventoryInfo;
+                _playerAvatar.AddPickObjectQuant(pickObjectInfo);
+
                 return;
             }
         }
@@ -347,13 +353,17 @@ public class CharacterController : AvatarController
                 }
             case EntityAction.PickObject:
                 {
-                    var itemObject = quant.Object as ItemObject;                    
+                    var pickObjectInfo = quant.Object as PickObjectInfo;
+                    var pickedItem = ItemFactory.CreateItem(pickObjectInfo.ItemTemplate);
+                    var itemObject = _playerAvatar.GetItemObject(pickedItem.Item);                    
                     itemObject.transform.SetParent(null);
-                    itemObject.transform.position = quant.LastPosition.Value;
-                    itemObject.transform.rotation = quant.LastRotation;
+                    itemObject.transform.position = pickObjectInfo.ObjectPosition;
+                    itemObject.transform.rotation = pickObjectInfo.ObjectRotation;
                     itemObject.Drop();
-                    _playerAvatar.Character.UnEquip(itemObject.Item);
+                    pickObjectInfo.PickedItemObject = itemObject;
+                    //_playerAvatar.Character.UnEquip(itemObject.Item);
                     itemObject.gameObject.SetActive(true);
+                    _playerAvatar.RestoreInventory(pickObjectInfo.InventoryStateInfo.PrevState);
                     ReflectMainWeapon(_playerAvatar.Character.MainWeapon);
                     break;
                 }
