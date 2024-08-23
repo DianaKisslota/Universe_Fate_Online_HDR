@@ -122,6 +122,7 @@ public class CharacterController : AvatarController
         _playerAvatar.ReflectAllItems();
         ReflectMainWeapon(_playerAvatar.Character.MainWeapon);
         _playerAvatar.InventoryPresenter = _inventoryPanel;
+        _playerAvatar.ContainerPresenter = _containerPresenter;
         _playerAvatar.ItemPresenterTransferred += ItemPresenterSet;
     }
 
@@ -354,6 +355,7 @@ public class CharacterController : AvatarController
             case EntityAction.PickObject:
                 {
                     var pickObjectInfo = quant.Object as PickObjectInfo;
+                    _playerAvatar.RestoreInventory(pickObjectInfo.InventoryStateInfo.PrevState);
                     var pickedItem = ItemFactory.CreateItem(pickObjectInfo.ItemTemplate);
                     var itemObject = _playerAvatar.GetItemObject(pickedItem.Item);                    
                     itemObject.transform.SetParent(null);
@@ -363,7 +365,6 @@ public class CharacterController : AvatarController
                     pickObjectInfo.PickedItemObject = itemObject;
                     //_playerAvatar.Character.UnEquip(itemObject.Item);
                     itemObject.gameObject.SetActive(true);
-                    _playerAvatar.RestoreInventory(pickObjectInfo.InventoryStateInfo.PrevState);
                     ReflectMainWeapon(_playerAvatar.Character.MainWeapon);
                     break;
                 }

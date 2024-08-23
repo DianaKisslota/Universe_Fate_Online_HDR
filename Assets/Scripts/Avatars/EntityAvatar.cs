@@ -29,7 +29,7 @@ public abstract class EntityAvatar : MonoBehaviour
     {
         get { return _audioSource.clip; }
     }
-    public bool IsMoving {  get; set; }
+    private bool IsMoving {  get; set; }
 
     public event Action StartMoving;
     public event Action EndMoving;

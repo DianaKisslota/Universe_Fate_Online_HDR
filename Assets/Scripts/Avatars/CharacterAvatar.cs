@@ -8,11 +8,12 @@ public class CharacterAvatar : EntityAvatar
     [SerializeField] private Transform _weaponBackPoint;
     [SerializeField] private Transform _weaponSidePoint;
     public CharacterInventoryPresenter InventoryPresenter { get; set; }
+    public ContainerPresenter ContainerPresenter { get; set; }
 
     private List<Quant> _quants = new List<Quant>();
     public Character Character => Entity as Character;
 
-    private Dictionary<Item, ItemObject> _itemObjects = new Dictionary<Item, ItemObject>();
+    public Dictionary<Item, ItemObject> ItemObjects = new Dictionary<Item, ItemObject>();
 
     private InventoryInfo _inventoryInfo = new InventoryInfo();
     public InventoryInfo InventoryInfo => _inventoryInfo;
@@ -26,6 +27,7 @@ public class CharacterAvatar : EntityAvatar
 
     private bool _quantsApplaying = false;
 
+    private float _isWalking = 0f;
     private float _isFiring = 0f;
     private float _isReloading = 0f;
     private float _animationCooldown = 0f;
@@ -59,14 +61,14 @@ public class CharacterAvatar : EntityAvatar
     public ItemObject GetItemObject(Item item)
     {
         ItemObject resultObject = null;
-        if (_itemObjects.ContainsKey(item))
+        if (ItemObjects.ContainsKey(item))
         {
-            resultObject = _itemObjects[item];
+            resultObject = ItemObjects[item];
         }
         else
         {
             resultObject = ItemFactory.CreateItem(item);
-            _itemObjects.Add(item, resultObject);
+            ItemObjects.Add(item, resultObject);
         }
 
         return resultObject;
@@ -74,16 +76,15 @@ public class CharacterAvatar : EntityAvatar
 
     private void ClearItemObjects()
     {
-        foreach (var storagePosition in Character.Inventory.Items)
+        foreach (var item in ItemObjects) 
         {
-            if (_itemObjects.TryGetValue(storagePosition.Item, out var itemObject))
+            if (ItemObjects.TryGetValue(item.Key, out var itemObject))
             {
-                if (itemObject != null) 
+                if (itemObject != null && itemObject.transform.parent != null)
                     Destroy(itemObject.gameObject);
-                _itemObjects.Remove(storagePosition.Item);
             }
         }
-        //_itemObjects.Clear();   
+        ItemObjects.Clear();   
     }
     private void OnEquip(Item item, SlotType slotType)
     {
@@ -184,10 +185,10 @@ public class CharacterAvatar : EntityAvatar
 
     private void OnUnEquip(Item item, SlotType slotType)
     {
-        if (_itemObjects.TryGetValue(item, out var itemObject))
+        if (ItemObjects.TryGetValue(item, out var itemObject))
         {
             Destroy(itemObject.gameObject);
-            _itemObjects.Remove(item);
+            ItemObjects.Remove(item);
         }
         if (slotType == SlotType.MainWeapon)
         {
@@ -197,8 +198,8 @@ public class CharacterAvatar : EntityAvatar
 
     public void TakeItem(ItemObject itemObject)
     {
-        if (!_itemObjects.ContainsKey(itemObject.Item))
-            _itemObjects.Add(itemObject.Item, itemObject);
+        if (!ItemObjects.ContainsKey(itemObject.Item))
+            ItemObjects.Add(itemObject.Item, itemObject);
         if (itemObject.Item is Weapon weapon)
         {
             if (Character.MainWeapon == null)
@@ -292,7 +293,8 @@ public class CharacterAvatar : EntityAvatar
             transform.Rotate(0, 55, 0);
     }
 
-    public void RestoreInventory(InventoryInfo inventoryInfo, Container container = null, List<ItemTemplate> containerStorage = null)
+    public void RestoreInventory(InventoryInfo inventoryInfo, Container container = null, List<ItemTemplate> containerStorage = null,
+        ContainerSlot changedContainerSlot = null)
     {
         ClearItemObjects();
         InventoryPresenter.ClearItemSlots();
@@ -322,7 +324,7 @@ public class CharacterAvatar : EntityAvatar
         if (container != null)
         {
             container.RestoreStorage(containerStorage);
-            //containerSlot.FillSlots();
+            ContainerPresenter.Slot.FillSlots();
         }
     }
 
@@ -445,7 +447,11 @@ public class CharacterAvatar : EntityAvatar
             {
                 case EntityAction.Move:
                     {
-                        quantEnded = _walkingTo == null;
+                        if (_walkingTo != null)
+                            _isWalking = 0.4f;
+                        _isWalking -= Time.deltaTime;
+                         quantEnded = _isWalking <= 0;
+
                     }
                     break;
                 case EntityAction.PickObject:
