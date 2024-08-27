@@ -6,6 +6,7 @@
         WeaponType = WeaponType.Knife;
         Weight = 0.2f;
         Volume = 0.4f;
+        AddMeleeDamage = 10;
     }
 }
 

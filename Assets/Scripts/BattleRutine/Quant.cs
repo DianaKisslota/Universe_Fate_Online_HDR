@@ -107,7 +107,7 @@ public class AttackInfo
     public int AmmoCount {  get; private set; }
     public EntityAvatar Target {  get; private set; }
 
-    public AttackInfo(FireMode fireMode, Type ammoType, int ammoCount, EntityAvatar target)
+    public AttackInfo(EntityAvatar target, FireMode fireMode = FireMode.Undefined, Type ammoType = null, int ammoCount = 0)
     {
         FireMode = fireMode;
         AmmoType = ammoType;

@@ -62,6 +62,8 @@ public class Character : BaseEntity, IAttacker
         }
     }
 
+    public Weapon Weapon => MainWeapon;
+
     public void Equip(Item item, SlotType slotType)
     {
         if (item == null)

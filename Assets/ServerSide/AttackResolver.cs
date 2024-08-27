@@ -6,7 +6,28 @@ using UnityEngine;
 
 public class AttackResolver : IAttackResolver
 {
-    public AttackResult ResolveAttack(IAttacker attacker, ITarget target, int numberAttack = 1)
+    public AttackResult ResolveMeleeAttack(IAttacker attacker, ITarget target, int numberAttack = 1)
+    {
+        var attackResult = new AttackResult();
+        for (int i = 0; i < numberAttack; i++)
+        {
+            Debug.Log("Шанс попасть " + attacker.BaseHitChance);
+            var random = Random.Range(1, 101) / 100f;
+            var ishit = random >= attacker.BaseHitChance;
+            if (ishit)
+            {
+                attackResult.DamageInflicted += attacker.BaseDamage;
+                if (attacker.Weapon is MeleeWeapon meleeWeapon)
+                    attackResult.DamageInflicted += meleeWeapon.AddMeleeDamage;
+                Debug.Log("Есть пробитие! " + attackResult.DamageInflicted + " урона.");
+            }
+            else
+                Debug.Log("Промах!");
+        }
+        return attackResult;
+    }
+
+    public AttackResult ResolveRangeAttack(IAttacker attacker, ITarget target, int numberAttack = 1)
     {
         var attackResult = new AttackResult();
         for (int i = 0; i < numberAttack; i++)
@@ -17,13 +38,11 @@ public class AttackResolver : IAttackResolver
             Debug.Log("Выпало " + random + " на попадание");
             if (ishit)
             {
-                Debug.Log("Есть пробитие! " + attacker.BaseDamage + " урона.");
                 attackResult.DamageInflicted += attacker.BaseDamage;
+                Debug.Log("Есть пробитие! " + attackResult.DamageInflicted + " урона.");
             }
             else
                 Debug.Log("Промах!");
-
-
         }
 
         return attackResult;

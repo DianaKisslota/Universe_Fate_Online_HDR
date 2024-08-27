@@ -30,7 +30,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
     {
         var transferredObject = eventData.pointerDrag;
         var transferredItemPresenter = transferredObject.GetComponent<ItemPresenter>();
-        if (transferredItemPresenter != null && IsItemAccessible(transferredItemPresenter.Item) && ItemAccepted(transferredItemPresenter))
+        if (transferredItemPresenter != null && transferredItemPresenter.IsDragging && IsItemAccessible(transferredItemPresenter.Item) && ItemAccepted(transferredItemPresenter))
         {
             DropProcess(transferredItemPresenter);
         }

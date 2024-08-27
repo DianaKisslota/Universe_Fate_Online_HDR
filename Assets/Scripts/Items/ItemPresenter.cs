@@ -12,6 +12,8 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public int TestID;
 
+    public bool IsDragging { get; set; }
+
     private Transform _transportPanel;
     private Transform _oldParent;
     protected CanvasGroup _canvasGroup;
@@ -73,6 +75,9 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (Input.GetMouseButton(1) || Input.GetMouseButton(2))
+            return;
+        IsDragging = true;
         _canvasGroup.blocksRaycasts = false;
         _oldParent = transform.parent;
         transform.SetParent(_transportPanel);
@@ -83,16 +88,16 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData)
     {
-        _rectTransform.anchoredPosition += eventData.delta;// / _mainCanvas.scaleFactor;
+        //if (Input.GetMouseButton(1) || Input.GetMouseButton(2))
+        if (IsDragging)          
+            _rectTransform.anchoredPosition += eventData.delta;// / _mainCanvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //if (Count <= 0)
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
+        if (!IsDragging)
+            return;
+
         if (transform.parent == _transportPanel)
         {
             SetToParent(_oldParent);
@@ -111,9 +116,7 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         if (currentSlot is StorageSlot storageSlot1)
             storageSlot1.FillSlots();
         _canvasGroup.blocksRaycasts = true;
-
-        //if (Count <= 0)
-        //    Destroy(gameObject);
+        IsDragging = false;
     }
 
     public void SetToParent(Transform parent)

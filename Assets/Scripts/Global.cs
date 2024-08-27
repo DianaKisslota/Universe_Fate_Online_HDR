@@ -9,7 +9,9 @@ public enum SoundType
     Burst,
     LongBurst,
     Reload,
-    FailShot
+    FailShot,
+    MeleeStrike,
+    BareHandStrike
 }
 public static class Global 
 {
@@ -53,6 +55,7 @@ public static class Global
         Sounds.TryGetValue((type, soundType), out AudioClip sound);
         return sound;
     }
+
     public static GameObject NavPointPrefab { get; set; }
     public static GameObject TargetPrefab { get; set; }
     public static GameObject ItemPresenterPrefab { get; set; }
@@ -94,6 +97,8 @@ public static class Global
         Sounds.Add((typeof(UMP45), SoundType.Shot), Resources.Load<AudioClip>("Sound/762x39shot"));
         Sounds.Add((typeof(UMP45), SoundType.Reload), Resources.Load<AudioClip>("Sound/AK_reload"));
         Sounds.Add((typeof(UMP45), SoundType.FailShot), Resources.Load<AudioClip>("Sound/AK_Fail"));
+        Sounds.Add((typeof(KitchenKnife), SoundType.MeleeStrike), Resources.Load<AudioClip>("Sound/FightingSFX_Whoosh_006"));
+        Sounds.Add((typeof(Character), SoundType.BareHandStrike), Resources.Load<AudioClip>("Sound/FightingSFX_PunchWhoosh_Dry_009"));
 
         NavPointPrefab = Resources.Load<GameObject>("ControlPrefabs/Nav");
         TargetPrefab = Resources.Load<GameObject>("ControlPrefabs/Target");

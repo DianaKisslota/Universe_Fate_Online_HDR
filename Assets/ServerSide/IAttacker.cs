@@ -14,5 +14,7 @@ public interface IAttacker
     public float BaseHitChance {  get;}
     public float BaseDamage {  get; }
 
+    public Weapon Weapon { get; }
+
 }
 

@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 6f6eba35b8edc7d46be2a84fcc3eb248,
         type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5942301df25a95b4facb3d112ed3159b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioSource: {fileID: 0}
   _weaponPoint: {fileID: 462528249268305130}
   _weaponBackPoint: {fileID: 368621626760299074}
   _weaponSidePoint: {fileID: 125704213288444889}

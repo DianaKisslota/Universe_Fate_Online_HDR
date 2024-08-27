@@ -28,7 +28,7 @@ public class CharacterAvatar : EntityAvatar
     private bool _quantsApplaying = false;
 
     private float _isWalking = 0f;
-    private float _isFiring = 0f;
+    private float _isAttacking = 0f;
     private float _isReloading = 0f;
     private float _animationCooldown = 0f;
 
@@ -121,6 +121,8 @@ public class CharacterAvatar : EntityAvatar
     {
         if (item == null)
         {
+            if (slotType == SlotType.MainWeapon)
+                MainWeaponChanged?.Invoke(item);
             return;
         }
         var itemObject = GetItemObject(item);
@@ -135,13 +137,14 @@ public class CharacterAvatar : EntityAvatar
             else
                 FireMode = FireMode.Undefined;
             FireModeSet?.Invoke(FireMode);
+            MainWeaponChanged?.Invoke(item);
         }
 
         switch (slotType)
         {
             case SlotType.MainWeapon:
                 {
-                    //_animator.ResetTrigger("Idle");
+                    Animator.ResetTrigger("Idle");
                     itemObject.gameObject.transform.parent = _weaponPoint;
                     switch ((item as Weapon).WeaponType)
                     {
@@ -287,7 +290,7 @@ public class CharacterAvatar : EntityAvatar
 
     public void LookForShoot(EntityAvatar avatar)
     {
-        var type = Character.MainWeapon.WeaponType;
+        var type = Character.MainWeapon?.WeaponType;
         transform.LookAt(avatar.transform);
         if (type == WeaponType.SMG || type == WeaponType.Rifle || type == WeaponType.AssaultRifle || type == WeaponType.MG)
             transform.Rotate(0, 55, 0);
@@ -392,7 +395,7 @@ public class CharacterAvatar : EntityAvatar
                     {
                         LookForShoot(target);
                         var rangeAttackData = new RangeAttackData();
-                        rangeAttackData.Target = target.Entity;
+                        rangeAttackData.Target = target;
                         rangeAttackData.AmmoType = attackInfo.AmmoType;
                         rangeAttackData.ShotNumber = rangeWeapon.GetFireModeAmmo(attackInfo.FireMode).Value;
                         rangeAttackData.PossibleShotNumber = Mathf.Min(rangeAttackData.ShotNumber, rangeWeapon.AmmoCount);
@@ -400,9 +403,20 @@ public class CharacterAvatar : EntityAvatar
 
                         rangeWeapon.UnLoad(rangeAttackData.PossibleShotNumber);
 
-                        InventoryPresenter.RefreshItemSlots();
-
                         RangeAttack(rangeAttackData);
+
+                        InventoryPresenter.RefreshItemSlots();
+                    }
+                    else
+                    {
+                        var meleeAttackData = new MeleeAttackData();
+                        meleeAttackData.Target = target;
+                        meleeAttackData.BaseDamage = Character.BaseMeleeDamage;
+                        meleeAttackData.BaseHitChance = Character.BaseHitChance;
+
+                        MeleeAttack(meleeAttackData);
+
+                        InventoryPresenter.RefreshItemSlots();
                     }
                 }
                 break;
@@ -477,13 +491,13 @@ public class CharacterAvatar : EntityAvatar
                     }
                 case EntityAction.Attack:
                     {
-                        if (_isFiring > 0 && _isFiring - Time.deltaTime <= 0)
+                        if (_isAttacking > 0 && _isAttacking - Time.deltaTime <= 0)
                             _animationCooldown = 1f;
 
-                         _isFiring -= Time.deltaTime;
+                         _isAttacking -= Time.deltaTime;
                         _animationCooldown -= Time.deltaTime;
-                        quantEnded = _isFiring <= 0 && _animationCooldown <= 0;
-                        if (_isFiring <= 0)
+                        quantEnded = _isAttacking <= 0 && _animationCooldown <= 0;
+                        if (_isAttacking <= 0)
                             Animator.SetTrigger("Idle");
                         break;
                     }
@@ -505,36 +519,36 @@ public class CharacterAvatar : EntityAvatar
         }
     }
 
-    public void TransferItem(DropSlot sourceSlot, DropSlot destinationSlot, ItemPresenter itemPresenter)
-    {
-        itemPresenter.SetToParent(destinationSlot.transform);
-        if (sourceSlot is CharacterItemSlot sourceItemSlot)
-        {
-            sourceSlot.OnItemLeave(itemPresenter.Item);
-            sourceItemSlot.Character.UnEquip(itemPresenter.Item);
-        }
-        if (destinationSlot is CharacterItemSlot destinationItemSlot)
-        {
-            destinationItemSlot.PresenterSet(itemPresenter);
-            destinationItemSlot.Character.Equip(itemPresenter.Item, destinationItemSlot);
-        }
-        if (sourceSlot is StorageSlot sourceStorageSlotSlot)
-        {
-            sourceStorageSlotSlot.Storage.RemoveItem(itemPresenter.Item);
-        }
-        if (destinationSlot is StorageSlot destinationStorageSlot)
-        {
-            destinationStorageSlot.Storage.AddItem(itemPresenter.Item);
+    //public void TransferItem(DropSlot sourceSlot, DropSlot destinationSlot, ItemPresenter itemPresenter)
+    //{
+    //    itemPresenter.SetToParent(destinationSlot.transform);
+    //    if (sourceSlot is CharacterItemSlot sourceItemSlot)
+    //    {
+    //        sourceSlot.OnItemLeave(itemPresenter.Item);
+    //        sourceItemSlot.Character.UnEquip(itemPresenter.Item);
+    //    }
+    //    if (destinationSlot is CharacterItemSlot destinationItemSlot)
+    //    {
+    //        destinationItemSlot.PresenterSet(itemPresenter);
+    //        destinationItemSlot.Character.Equip(itemPresenter.Item, destinationItemSlot);
+    //    }
+    //    if (sourceSlot is StorageSlot sourceStorageSlotSlot)
+    //    {
+    //        sourceStorageSlotSlot.Storage.RemoveItem(itemPresenter.Item);
+    //    }
+    //    if (destinationSlot is StorageSlot destinationStorageSlot)
+    //    {
+    //        destinationStorageSlot.Storage.AddItem(itemPresenter.Item);
 
-        }
-        ItemPresenterTransferred?.Invoke(sourceSlot, destinationSlot, itemPresenter);
-        //destinationSlot.OnItemSet(itemPresenter.Item, destinationSlot);
-    }
+    //    }
+    //    ItemPresenterTransferred?.Invoke(sourceSlot, destinationSlot, itemPresenter);
+    //    //destinationSlot.OnItemSet(itemPresenter.Item, destinationSlot);
+    //}
 
     protected override void RangeAttack(RangeAttackData attackData)
     {
         Animator.SetTrigger("Shoot");
-        _isFiring = attackData.PossibleShotNumber / 4f;
+        _isAttacking = attackData.PossibleShotNumber / 4f;
 
         var soundFire = Global.GetSoundFor(attackData.WeaponType, SoundType.Shot);
         var soundFailFire = Global.GetSoundFor(attackData.WeaponType, SoundType.FailShot);
@@ -545,13 +559,37 @@ public class CharacterAvatar : EntityAvatar
         if (attackData.PossibleShotNumber == 0 && soundFailFire != null)
             PlaySound(soundFailFire);
 
-        _isFiring = 1f;
+        _isAttacking = 1f;
 
         var attackResolver = new AttackResolver();
 
-        var attackResult = attackResolver.ResolveAttack(Character, attackData.Target, attackData.PossibleShotNumber);
+        var attackResult = attackResolver.ResolveRangeAttack(Character, attackData.Target.Entity, attackData.PossibleShotNumber);
 
-        attackData.Target.CurrentHealth -= attackResult.DamageInflicted;
-
+        attackData.Target.Entity.CurrentHealth -= attackResult.DamageInflicted;
     }
+
+    protected override void MeleeAttack(MeleeAttackData attackData)
+    {
+        if (Vector3.Distance(attackData.Target.transform.position, transform.position) > 1.6f)
+        {
+            Debug.Log("Цель слишком далеко");
+            _isAttacking = 0.5f;
+            return;
+        }
+        transform.LookAt(attackData.Target.transform);
+        AudioClip sound;
+        if (Character.MainWeapon != null)
+            sound = Global.GetSoundFor(Character.MainWeapon.GetType(), SoundType.MeleeStrike);
+        else
+            sound = Global.GetSoundFor(Character.GetType(), SoundType.BareHandStrike);
+
+        Animator.SetTrigger("Melee");
+        PlaySound(sound, 0.5f);
+
+        _isAttacking = 0.5f;
+        var attackResolver = new AttackResolver();
+        var attackResult = attackResolver.ResolveMeleeAttack(Character, attackData.Target.Entity);
+        attackData.Target.Entity.CurrentHealth -= attackResult.DamageInflicted;
+    }
+
 }

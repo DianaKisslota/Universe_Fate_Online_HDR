@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 public abstract class MeleeWeapon : Weapon
 {
-
+    public float AddMeleeDamage {  get; set; }
 }
 

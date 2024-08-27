@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9352feb1be740ac4db48451d60a03b82
+guid: c90d1c5a7217c03428412f95f64286b4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: AttackB1hMelee
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0

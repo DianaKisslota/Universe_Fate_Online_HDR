@@ -130,12 +130,6 @@ public abstract class EntityAvatar : MonoBehaviour
         return result;
     }
 
-
-    //public bool PathReachable(NavMeshPath path)
-    //{
-    //    return PathLength(path) <= entity.MaxDistance();
-    //}
-
     public void PlaySound(AudioClip clip, float delay = 0, int numRepeat = 1)
     {
         StartCoroutine(Play(clip, delay, numRepeat));
@@ -151,6 +145,11 @@ public abstract class EntityAvatar : MonoBehaviour
     }
 
     protected virtual void RangeAttack(RangeAttackData attackData)
+    {
+
+    }
+
+    protected virtual void MeleeAttack(MeleeAttackData attackData)
     {
 
     }

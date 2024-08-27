@@ -84,7 +84,7 @@ public class CharacterController : AvatarController
         _inventoryPanel.Inventory.ItemPresenterSet += ItemPresenterSet;
         foreach (var itemSlot in _inventoryPanel.ItemSlots)
         {
-            itemSlot.ItemLeave += ItemLeave;
+            itemSlot.ItemLeave += ItemLeave;            
             itemSlot.ItemPresenterSet += ItemPresenterSet;
         }
 
@@ -145,7 +145,7 @@ public class CharacterController : AvatarController
             _pointer.SetActive(true);
             _pointer.position = entityAvatar.transform.position;
 
-            if (Input.GetMouseButtonDown(0) && _playerAvatar.Character.MainWeapon is RangeWeapon)
+            if (Input.GetMouseButtonDown(0))
             {
                 var target = Instantiate(Global.TargetPrefab);
                 target.transform.position = _pointer.position;
@@ -156,11 +156,11 @@ public class CharacterController : AvatarController
                     var ammoUsed = Mathf.Min(rangedWeapon.GetFireModeAmmo(_playerAvatar.FireMode).Value, rangedWeapon.AmmoCount);
                     rangedWeapon.UnLoad(ammoUsed);
                     _playerAvatar.InventoryPresenter.RefreshItemSlots();
-                    attackInfo = new AttackInfo(_playerAvatar.FireMode, rangedWeapon.CurrentAmmoType, ammoUsed, entityAvatar);
+                    attackInfo = new AttackInfo(entityAvatar, _playerAvatar.FireMode, rangedWeapon.CurrentAmmoType, ammoUsed);
                 }
                 else
                 {
-                    attackInfo = new AttackInfo(FireMode.Undefined, null, 0, entityAvatar);
+                    attackInfo = new AttackInfo(entityAvatar);
                 }
                 _playerAvatar.AddAttackQuant(attackInfo);
                 _playerAvatar.LookForShoot(entityAvatar);
@@ -404,6 +404,7 @@ public class CharacterController : AvatarController
                         if (_containerPresenter.gameObject.activeSelf)
                             _containerPresenter.Slot.FillSlots();
                     }
+                    ReflectMainWeapon(_playerAvatar.Character.MainWeapon);
                 }
                 break;
             case EntityAction.ReloadWeapon:
