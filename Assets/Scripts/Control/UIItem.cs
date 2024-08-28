@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler
 {
     public event Action<bool> MouseOver;
 
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         MouseOver?.Invoke(true);
@@ -18,4 +19,8 @@ public class UIItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         MouseOver?.Invoke(false);
     }
 
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        MouseOver?.Invoke(true);
+    }
 }
