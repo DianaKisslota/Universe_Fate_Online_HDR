@@ -18,6 +18,7 @@ public class CharacterController : AvatarController
     [SerializeField] private Transform _originInventoryPlaceHolder;
     [SerializeField] private Transform _containerInventoryPlaceHolder;
     [SerializeField] private GameObject _FinishBattleButton;
+    [SerializeField] private GameObject _windowsButtonsPanel;
     [SerializeField] private Toggle _SetFireMode1;
     [SerializeField] private Toggle _SetFireMode2;
     [SerializeField] private Toggle _SetFireMode3;
@@ -129,6 +130,7 @@ public class CharacterController : AvatarController
     public void UIMouseInteract(bool mouseOverUI)
     {
         MouseOverUI = mouseOverUI;
+        _pointer.SetActive(false);
     }
 
     private void Update()
@@ -137,6 +139,8 @@ public class CharacterController : AvatarController
             return;
         _FinishBattleButton.SetActive(!(_containerPresenter.gameObject.activeSelf ||
                                         (_inventoryPanel.gameObject.activeSelf && _inventoryPanel.transform.parent == _originInventoryPlaceHolder)));
+
+        _windowsButtonsPanel.SetActive(_FinishBattleButton.activeSelf);
 
         var entityAvatar = GetEntityAvatarUnderMousePoint();
         if (!MouseOverUI && entityAvatar != null && !entityAvatar.Entity.IsDead)
@@ -241,7 +245,7 @@ public class CharacterController : AvatarController
             ClearLastQuant();
         }
 
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_inventoryPanel.gameObject.activeSelf)
             {
@@ -255,8 +259,8 @@ public class CharacterController : AvatarController
                     InventoryPanelSwitch();
                     MouseOverUI = false;
                     _pointer.gameObject.SetActive(false);
-
                 }
+                _inventoryPanel.gameObject.SetActive(false);
             }
         }
     }
@@ -636,6 +640,7 @@ public class CharacterController : AvatarController
         _containerPresenter.Slot.WeaponReloaded -= OnWeaponReloaded;
         InventoryPanelSwitch();
         MouseOverUI = false;
+        _inventoryPanel.gameObject.SetActive(false);
     }
 
     public void OnWeaponReloaded(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int num, StorageSlot slot)
