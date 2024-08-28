@@ -1,0 +1,867 @@
+fileFormatVersion: 2
+guid: 359cf76947a74534698d2fed1e1f7232
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 2
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_0"
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 491
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dd7a4a605fcee644abc642c76f890aa
+      internalID: 1295068871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_1"
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 491
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75901f2d84a482444afd5ea1de9b8c0f
+      internalID: 1269907050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_2"
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 478
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 424ad80d9e80d5349ba7d73ddf69a60f
+      internalID: -1528745379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_3"
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 478
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed68d936754bbb94db2c621f869c39b4
+      internalID: -1748951032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_4"
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 465
+        width: 104
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 839c489b45ebe4f429440b597178a602
+      internalID: 19780897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_5"
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 464
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b83249f9859c00f4fa09c1bfc949d805
+      internalID: -565075096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_6"
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 464
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de5ce6587354fbf428b6cc29d4c5fc2f
+      internalID: 2124717977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_7"
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 438
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 552f926feb72ec344aded4f3bed4000f
+      internalID: 2114065840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_8"
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 438
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 042f82962b7df9d45b7db23f3d8b3773
+      internalID: -1954133600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_9"
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 437
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57c90f23e28fef148a0492d030b5156c
+      internalID: -1280170436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_10"
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 437
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 962248f0e15799645b1d3fef7cb4d3de
+      internalID: -1645541131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_11"
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 412
+        width: 104
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e418a2dbae608d43be62d0c4dd1a761
+      internalID: 1837603796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_12"
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 411
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ee7b1a0a9151c248a41cd19bbe3b0d5
+      internalID: 1451161766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_13"
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 411
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f92fe96efdde5604983aa28a4a230c13
+      internalID: 2025475701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_14"
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 398
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f33433857e4eda546a91626849617af8
+      internalID: -1651257362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_15"
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 398
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44f1a8de3da60e4cbd34d7f4957bde5
+      internalID: 113553444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_16"
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 384
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b28d419af941594980fff667300c35f
+      internalID: 1965015479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_17"
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 384
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd49bc1bf280e9849a1c15c4493f18cd
+      internalID: -1137920111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_18"
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 372
+        width: 49
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d215e0562ecf07418a240fa5b656017
+      internalID: -786037095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_19"
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 372
+        width: 49
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dbbafacedf5de348aaf7d4ee0e4cd10
+      internalID: -1687616937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_20"
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 357
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1e4004728798c446863cbb7214fdd02
+      internalID: -792873192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_21"
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 357
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c4e697808b10b34199f20fa942d861f
+      internalID: -1821373128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_22"
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 333
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86c4ac6b1baad164298235a82f33ea48
+      internalID: 567324473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_23"
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 333
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49cb588cf2bfb324aa1a59e06256f0df
+      internalID: -1954605721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_24"
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 123
+        width: 124
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98818b4c6a6b50e48ab5f1a136e96f4b
+      internalID: 1076162288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_25"
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 329
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77165a30fe3154447bbc5c68b75e81a3
+      internalID: 2146665404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_26"
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 329
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d663066d8c4f8764cbabd7c6311f10e8
+      internalID: 2105072814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_27"
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 329
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c13aa593e77a8554f8dfccb6023acbf0
+      internalID: -455124351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_28"
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 304
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcf518039b129654d8f7c3d013c3974c
+      internalID: 2140233026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_29"
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 304
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9755ea4d48922fb4cbbeb822ff74d4c7
+      internalID: 847123490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_30"
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 304
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47f94f3c3633517479a80a17b95ab9bb
+      internalID: 2034811335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_45"
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 362
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00910dd55888f5042816bc47d1d134eb
+      internalID: 1268224378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0421ombat_interface_46"
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 362
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 384da628bd53f564eb8d100d676ce081
+      internalID: -454519108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 4014b573cb4271f44bc8b180fc32ceb4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      "\u0421ombat_interface_0": 1295068871
+      "\u0421ombat_interface_1": 1269907050
+      "\u0421ombat_interface_10": -1645541131
+      "\u0421ombat_interface_11": 1837603796
+      "\u0421ombat_interface_12": 1451161766
+      "\u0421ombat_interface_13": 2025475701
+      "\u0421ombat_interface_14": -1651257362
+      "\u0421ombat_interface_15": 113553444
+      "\u0421ombat_interface_16": 1965015479
+      "\u0421ombat_interface_17": -1137920111
+      "\u0421ombat_interface_18": -786037095
+      "\u0421ombat_interface_19": -1687616937
+      "\u0421ombat_interface_2": -1528745379
+      "\u0421ombat_interface_20": -792873192
+      "\u0421ombat_interface_21": -1821373128
+      "\u0421ombat_interface_22": 567324473
+      "\u0421ombat_interface_23": -1954605721
+      "\u0421ombat_interface_24": 1076162288
+      "\u0421ombat_interface_25": 2146665404
+      "\u0421ombat_interface_26": 2105072814
+      "\u0421ombat_interface_27": -455124351
+      "\u0421ombat_interface_28": 2140233026
+      "\u0421ombat_interface_29": 847123490
+      "\u0421ombat_interface_3": -1748951032
+      "\u0421ombat_interface_30": 2034811335
+      "\u0421ombat_interface_31": 620710553
+      "\u0421ombat_interface_32": -145083578
+      "\u0421ombat_interface_33": 531412792
+      "\u0421ombat_interface_34": 1824798673
+      "\u0421ombat_interface_35": 2043858526
+      "\u0421ombat_interface_36": 1925503339
+      "\u0421ombat_interface_37": 2142256728
+      "\u0421ombat_interface_38": -951093276
+      "\u0421ombat_interface_39": -457746379
+      "\u0421ombat_interface_4": 19780897
+      "\u0421ombat_interface_40": 271810713
+      "\u0421ombat_interface_41": 1348761687
+      "\u0421ombat_interface_42": 1022996397
+      "\u0421ombat_interface_43": 992182629
+      "\u0421ombat_interface_44": 83618469
+      "\u0421ombat_interface_45": 1268224378
+      "\u0421ombat_interface_46": -454519108
+      "\u0421ombat_interface_5": -565075096
+      "\u0421ombat_interface_6": 2124717977
+      "\u0421ombat_interface_7": 2114065840
+      "\u0421ombat_interface_8": -1954133600
+      "\u0421ombat_interface_9": -1280170436
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

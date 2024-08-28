@@ -226,8 +226,8 @@ public class CharacterController : AvatarController
             {
                 //DrawPath(path);
                 _playerAvatar.AddMoveQuant(_pointer.position);
-                //_playerAvatar.MoveTo(_pointer.position);
-                _playerAvatar.transform.position = _pointer.position;
+                _playerAvatar.MoveTo(_pointer.position);
+                //_playerAvatar.transform.position = _pointer.position;
             }
         }
 
@@ -241,20 +241,21 @@ public class CharacterController : AvatarController
             ClearLastQuant();
         }
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
-            if (_containerPresenter.gameObject.activeSelf)
+            if (_inventoryPanel.gameObject.activeSelf)
             {
-                _containerPresenter.Close();
-                ContainerClose();
-            }
-            else
-            {
-                if (_inventoryPanel.gameObject.activeSelf)
+                if (_containerPresenter.gameObject.activeSelf)
+                {
+                    _containerPresenter.Close();
+                    ContainerClose();
+                }
+                else
                 {
                     InventoryPanelSwitch();
                     MouseOverUI = false;
                     _pointer.gameObject.SetActive(false);
+
                 }
             }
         }
@@ -633,6 +634,7 @@ public class CharacterController : AvatarController
         _containerPresenter.Slot.ItemLeave -= ItemLeave;
         _containerPresenter.Slot.ItemPresenterSet -= ItemPresenterSet;
         _containerPresenter.Slot.WeaponReloaded -= OnWeaponReloaded;
+        InventoryPanelSwitch();
         MouseOverUI = false;
     }
 
