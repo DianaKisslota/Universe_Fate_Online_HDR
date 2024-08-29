@@ -359,7 +359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 31.5, y: -492.93747}
+  m_AnchoredPosition: {x: 31.50003, y: -492.93747}
   m_SizeDelta: {x: 82.2192, y: 82.0833}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6533394746811507095
@@ -496,7 +496,7 @@ MonoBehaviour:
   _secondaryWeapon: {fileID: 4247862067005001783}
   _shoulder: {fileID: 3171693086671392320}
   _inventory: {fileID: 8846341841702232534}
-  ItemSlots: []
+  _itemSlots: []
 --- !u!114 &5080391431895657861
 MonoBehaviour:
   m_ObjectHideFlags: 0
