@@ -7,6 +7,7 @@ public enum SlotType
     Shoulder,
     Helm,
     Armor,
+    Pants,
     Boots,
     BackPack
 }
