@@ -24,6 +24,7 @@ public class CharacterController : AvatarController
     [SerializeField] private Toggle _SetFireMode3;
     [SerializeField] private Image _mainWeaponImage;
     [SerializeField] private Image _mainWeaponAmmo;
+    [SerializeField] private GameObject _screenPanel;
 
     [SerializeField] EventTrigger _fireModeTrigger1;
     [SerializeField] EventTrigger _fireModeTrigger2;
@@ -210,6 +211,7 @@ public class CharacterController : AvatarController
                 _containerPresenter.Slot.ItemLeave += ItemLeave;
                 _containerPresenter.Slot.ItemPresenterSet += ItemPresenterSet;
                 _containerPresenter.Slot.WeaponReloaded += OnWeaponReloaded;
+                _screenPanel.SetActive(true);
                 return;
             }
         }
@@ -555,6 +557,7 @@ public class CharacterController : AvatarController
         }
         else
             _inventoryPanel.gameObject.SetActive(!_inventoryPanel.gameObject.activeSelf);
+        _screenPanel.SetActive(_inventoryPanel.gameObject.activeSelf);
     }
     private void ItemLeave(Item item, DropSlot slot)
     {
@@ -641,6 +644,7 @@ public class CharacterController : AvatarController
         InventoryPanelSwitch();
         MouseOverUI = false;
         _inventoryPanel.gameObject.SetActive(false);
+        _screenPanel.SetActive(false);
     }
 
     public void OnWeaponReloaded(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int num, StorageSlot slot)
