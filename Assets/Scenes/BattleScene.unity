@@ -6439,7 +6439,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.093333334
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: d7073cc306e032f46ab7f19446632186, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!4 &535032002
 Transform:
@@ -16854,7 +16854,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 8300000, guid: 00f6a3a9794724a4c9398304ae83b643, type: 3}
+      objectReference: {fileID: 236196766}
     - target: {fileID: 3432166313986445288, guid: a431a5416be40a740908e0ffcbb38200,
         type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[3].m_Target
@@ -16863,7 +16863,7 @@ PrefabInstance:
     - target: {fileID: 3432166313986445288, guid: a431a5416be40a740908e0ffcbb38200,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: 
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 3432166313986445288, guid: a431a5416be40a740908e0ffcbb38200,
         type: 3}
@@ -16942,6 +16942,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2102223298, guid: 6a0bd88f2a0e9c447a36ce87376eadc4,
         type: 3}
+    - target: {fileID: 4557250100658227487, guid: a431a5416be40a740908e0ffcbb38200,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 77.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557250100658227487, guid: a431a5416be40a740908e0ffcbb38200,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.5401
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557250100658227487, guid: a431a5416be40a740908e0ffcbb38200,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4846906363722790772, guid: a431a5416be40a740908e0ffcbb38200,
         type: 3}
       propertyPath: m_Sprite
