@@ -6439,7 +6439,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.093333334
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 5e92b19d91df25c43b23078ab73a5342, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &535032002
 Transform:
@@ -6450,7 +6450,7 @@ Transform:
   m_GameObject: {fileID: 535032000}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4951484, y: -0.55, z: -0.76}
+  m_LocalPosition: {x: 1.29, y: -0.55, z: -1.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
