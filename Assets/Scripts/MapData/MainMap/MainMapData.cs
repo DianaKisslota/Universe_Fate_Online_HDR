@@ -8,5 +8,6 @@ public class MainMapData : MapData
     {
         Name = "Main";
         SceneName = "Global_map_HD";
+        DefaultBattleScene = "BattleSceneMain";
     }
 }

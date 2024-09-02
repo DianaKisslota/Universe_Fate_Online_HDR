@@ -10,6 +10,7 @@ public class Mine_AData : MapData
     {
         Name = "Mine";
         SceneName = "Mine_A";
+        DefaultBattleScene = "BattleSceneMine";
     }
 }
 

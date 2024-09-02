@@ -26,6 +26,8 @@ public abstract class MapData : MonoBehaviour
     protected string SceneName { get; set; }
     protected string Name {get; set;}
 
+    protected string DefaultBattleScene {  get; set;}
+
     private void Start()
     {
         _cleanupSectorButton.gameObject.SetActive(false);
@@ -176,7 +178,7 @@ public abstract class MapData : MonoBehaviour
     }
     public void CleanupSector()
     {
-        SceneManager.LoadScene("BattleScene");
+        SceneManager.LoadScene(DefaultBattleScene);
     }
 
     public void ShowBirdEyeView()

@@ -68,6 +68,7 @@ public static class Global
         EntityPrefabs.Add(typeof(Character), Resources.Load<GameObject>("EntityModels/Character/Character2"));
         EntityPrefabs.Add(typeof(FeralDog), Resources.Load<GameObject>("EntityModels/Wolf_Animated/Prefabs/Wolf"));
         EntityPrefabs.Add(typeof(Reptiloid), Resources.Load<GameObject>("EntityModels/Rake/Perfabs/Rake_A"));
+        EntityPrefabs.Add(typeof(Kobold), Resources.Load<GameObject>("EntityModels/Rapax/Prefabs/Rapax_Green"));
 
         ItemPrefabs.Add(typeof(AK47), Resources.Load<GameObject>("WeaponModels/Modern Weapons Pack/Ak-47/Prefab/Ak-47"));
         ItemPrefabs.Add(typeof(PM), Resources.Load<GameObject>("WeaponModels/PM Makarov/Makarov (PM)/Makarov"));
@@ -86,6 +87,7 @@ public static class Global
         Icons.Add(typeof(Ammo545x39mm), Resources.Load<Sprite>("Icons/Ammo545x39mm"));
         Icons.Add(typeof(Ammo762x39mm), Resources.Load<Sprite>("Icons/Ammo762x39mm"));
         Icons.Add(typeof(Ammo045ACP), Resources.Load<Sprite>("Icons/Ammo045ACP"));
+        Icons.Add(typeof(MetalScrap), Resources.Load<Sprite>("Icons/MetalScrap"));
 
 
         Sounds.Add((typeof(PM), SoundType.Shot), Resources.Load<AudioClip>("Sound/9x18 shot"));
