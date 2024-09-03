@@ -2114,11 +2114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
   m_Intensity: 254.60175
-=======
-  m_Intensity: 274.77875
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -2240,11 +2236,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
   m_Intensity: 20.260563
-=======
-  m_Intensity: 21.866198
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5162,11 +5154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 277.7563
-=======
   m_Intensity: 471.57083
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -5288,11 +5276,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 22.103142
-=======
   m_Intensity: 37.526413
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -11996,11 +11980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 408.8496
-=======
   m_Intensity: 695.5754
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -12122,11 +12102,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.9622642, g: 0.8033998, b: 0.8116814, a: 1}
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 32.535217
-=======
   m_Intensity: 55.352127
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -12398,11 +12374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 274.7788
-=======
   m_Intensity: 443.36322
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -12524,11 +12496,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 21.866201
-=======
   m_Intensity: 35.281723
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -28353,11 +28321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 702.54376
-=======
   m_Intensity: 893.69434
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -28479,11 +28443,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.3615611, g: 0.5681004, b: 0.6132076, a: 1}
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 55.906654
-=======
   m_Intensity: 71.117935
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -30762,7 +30722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1219782224
 Light:
   m_ObjectHideFlags: 0
@@ -30775,7 +30735,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 6892.3013
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -30852,7 +30812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 6892.3013
+  m_Intensity: 2
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -32397,11 +32357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 741.37164
-=======
   m_Intensity: 550.2211
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -32523,11 +32479,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.5596298, g: 0.8478385, b: 0.9056604, a: 1}
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_Intensity: 58.99648
-=======
   m_Intensity: 43.785206
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -48891,7 +48843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1990539667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49306,11 +49258,7 @@ Transform:
   m_GameObject: {fileID: 2002569387}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< Updated upstream:Assets/Scenes/BattleSceneMine.unity
-  m_LocalPosition: {x: -6.110882, y: 8.12, z: -5.2998047}
-=======
   m_LocalPosition: {x: -6.3, y: 6.06, z: -5.32}
->>>>>>> Stashed changes:Assets/Scenes/BattleScene main 1.unity
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
