@@ -4,6 +4,10 @@ public class SectorMine1010 : SectorData
     {
         ADDNPC("Выход");
         AddMonster(new EntitySpawner(typeof(Kobold), 3, 5));
+        var mineCar = new MineCar();
+        mineCar.AddItem(new IronOre(), 4);
+        AddStaticContainer(mineCar);
+
         TransferTo = new TransferInfo("Global_map_HD", "Main1413", "Выйти из шахты");
     }
 }

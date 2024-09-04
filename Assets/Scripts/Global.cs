@@ -77,6 +77,7 @@ public static class Global
 
         ContainerPrefabs.Add(typeof(Cabinet), Resources.Load<GameObject>("OtherModels/Cabinet/Cabinet"));
         ContainerPrefabs.Add(typeof(BiohazzardCase), Resources.Load<GameObject>("OtherModels/BiohazzardCase/BiohazzardCase"));
+        ContainerPrefabs.Add(typeof(MineCar), Resources.Load<GameObject>("OtherModels/MineCar/MineCar"));
 
         Icons.Add(typeof(AK47), Resources.Load<Sprite>("WeaponModels/Modern Weapons Pack/Ak-47/AK-47_icon"));
         Icons.Add(typeof(PM), Resources.Load<Sprite>("WeaponModels/PM Makarov/Makarov (PM)/pm_icon"));
@@ -88,6 +89,7 @@ public static class Global
         Icons.Add(typeof(Ammo762x39mm), Resources.Load<Sprite>("Icons/Ammo762x39mm"));
         Icons.Add(typeof(Ammo045ACP), Resources.Load<Sprite>("Icons/Ammo045ACP"));
         Icons.Add(typeof(MetalScrap), Resources.Load<Sprite>("Icons/MetalScrap"));
+        Icons.Add(typeof(IronOre), Resources.Load<Sprite>("Icons/IronOre"));
 
 
         Sounds.Add((typeof(PM), SoundType.Shot), Resources.Load<AudioClip>("Sound/9x18 shot"));

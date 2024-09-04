@@ -9,7 +9,7 @@ public class MetalScrap : Ingridient
     public MetalScrap()
     {
         Name = "Металлолом";
-        Description = "Лом черных металлов. Умелый мастер может дать ему вторую жизнь.";
+        Description = "Металлические элементы отслуживших свое механизмов и конструкций.";
         Weight = 1;
         Volume = 0.5f;
     }
