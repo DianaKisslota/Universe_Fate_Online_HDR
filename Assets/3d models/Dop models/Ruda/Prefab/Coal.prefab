@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3998821479160758224}
   - component: {fileID: 574735796565969208}
   m_Layer: 0
-  m_Name: Ruda_iron
+  m_Name: Coal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

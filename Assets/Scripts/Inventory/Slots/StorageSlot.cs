@@ -43,9 +43,6 @@ public abstract class StorageSlot : DropSlot
     protected override bool ItemAccepted(ItemPresenter itemPresenter)
     {
         itemPresenter.StoragePosition = Storage.AddItem(itemPresenter.Item, itemPresenter.Count);
-        //if (itemPresenter.Item.Stackable)
-        //    itemPresenter.StoragePosition.Count = 0;
-       // FillSlots();
         return true;
     }
 
@@ -53,7 +50,6 @@ public abstract class StorageSlot : DropSlot
     {
         if (itemPresenter?.Count > 0)
             base.DropProcess(itemPresenter);
-       // FillSlots();
     }
 
     public void InsertItem(ItemPresenter itemPresenter)
