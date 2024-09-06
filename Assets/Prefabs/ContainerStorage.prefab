@@ -427,11 +427,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4862900696409201016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 236e767ef47d1f64795d5427579aef34, type: 3}
+  m_Script: {fileID: 11500000, guid: de7e9eb210b09ec46ad07df2047d98a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _containerSlot: {fileID: 2112241555335497084}
   _lootContainerSlot: {fileID: 563502615069333333}
+  ContainerObject: {fileID: 0}
 --- !u!114 &1202162246948360575
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,4 +28,9 @@ public class ContainerObject : MonoBehaviour
         Light.SetActive(false);
     }
 
+    public void ShowSelf(bool show)
+    {
+        gameObject.SetActive(show);
+    }
+
 }

@@ -361,7 +361,7 @@ public class CharacterAvatar : EntityAvatar
             case EntityAction.ChangeInventory:
                 {
                     var stateInventoryInfo = _quants[0].Object as InventoryChangeInfo;
-                    RestoreInventory(stateInventoryInfo.InventoryState.CurrentState, stateInventoryInfo.ChangedContainer,
+                    RestoreInventory(stateInventoryInfo.InventoryState.CurrentState, stateInventoryInfo.ChangedContainer?.Container,
                                             stateInventoryInfo.ContainerNextStateInfo);
 
                 }
@@ -381,7 +381,7 @@ public class CharacterAvatar : EntityAvatar
                     //if (weapon.WeaponType != WeaponType.Pistol)
 
                     RestoreInventory(reloadWeaponInfo.InventoryChangeInfo.InventoryState.CurrentState, 
-                                            reloadWeaponInfo.InventoryChangeInfo.ChangedContainer,
+                                            reloadWeaponInfo.InventoryChangeInfo.ChangedContainer?.Container,
                                             reloadWeaponInfo.InventoryChangeInfo.ContainerNextStateInfo);
                     PlaySound(Global.GetSoundFor(typeof(AK47), SoundType.Reload));
                     _isReloading = 0.5f;

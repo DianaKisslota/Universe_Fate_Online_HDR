@@ -10,18 +10,21 @@ public class ContainerPresenter : MonoBehaviour
     private ContainerSlot _slot;
     [SerializeField] ContainerSlot _containerSlot;
     [SerializeField] LootContainerSlot _lootContainerSlot;
-    public void BindToContainer(Container container)
+    
+    public ContainerObject ContainerObject { get; set; }
+    public void BindToContainer(ContainerObject containerObject)
     {
         _containerSlot.gameObject.SetActive(false);
         _lootContainerSlot.gameObject.SetActive(false);
-        CurrentContainer = container;
+        ContainerObject = containerObject;
+        CurrentContainer = containerObject.Container;
         if (CurrentContainer is LootContainer)
             _slot = _lootContainerSlot;
         else
             _slot = _containerSlot;
 
         _slot.gameObject.SetActive(true);
-        _slot.Storage = container.Storage;
+        _slot.Storage = containerObject.Container.Storage;
     }
 
     public Container CurrentContainer { get; set; }
@@ -30,6 +33,10 @@ public class ContainerPresenter : MonoBehaviour
     public void Close()
     {
         gameObject.SetActive(false);
+        if (ContainerObject.Container.IsEmpty && ContainerObject.Container.DeleteOnEmpty)
+        {
+            ContainerObject.ShowSelf(false);
+        }
     }
 }
 

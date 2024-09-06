@@ -78,6 +78,7 @@ public static class Global
         ContainerPrefabs.Add(typeof(Cabinet), Resources.Load<GameObject>("OtherModels/Cabinet/Cabinet"));
         ContainerPrefabs.Add(typeof(BiohazzardCase), Resources.Load<GameObject>("OtherModels/BiohazzardCase/BiohazzardCase"));
         ContainerPrefabs.Add(typeof(MineCar), Resources.Load<GameObject>("OtherModels/MineCar/MineCar"));
+        ContainerPrefabs.Add(typeof(IronOrePile), Resources.Load<GameObject>("OtherModels/OrePile/IronOre"));
 
         Icons.Add(typeof(AK47), Resources.Load<Sprite>("WeaponModels/Modern Weapons Pack/Ak-47/AK-47_icon"));
         Icons.Add(typeof(PM), Resources.Load<Sprite>("WeaponModels/PM Makarov/Makarov (PM)/pm_icon"));

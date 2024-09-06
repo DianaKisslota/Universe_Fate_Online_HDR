@@ -4,7 +4,9 @@ using System.Collections.Generic;
 public abstract class Container
 {
     public Storage Storage { get; set; }
+    public bool DeleteOnEmpty { get; set; }
 
+    public bool IsEmpty => Storage.Items.Count == 0;
     protected Container()
     {
         Storage = new Storage(100);

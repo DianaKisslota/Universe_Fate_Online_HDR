@@ -29,7 +29,7 @@ public class InventoryStateInfo
 public class InventoryChangeInfo
 {
     public InventoryStateInfo InventoryState;
-    public Container ChangedContainer;
+    public ContainerObject ChangedContainer;
     public List<ItemTemplate> ContainerPrevStateInfo;
     public List<ItemTemplate> ContainerNextStateInfo;
 

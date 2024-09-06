@@ -198,9 +198,9 @@ public class CharacterController : AvatarController
         if (!MouseOverUI && Input.GetMouseButtonDown(0))
         {
             var containerObject = GetContainerUnderMousePoint();
-            if (containerObject != null && Vector3.Distance(_playerAvatar.transform.position, containerObject.transform.position) < 1.5f)
+            if (containerObject != null && Vector3.Distance(_playerAvatar.transform.position, containerObject.transform.position) < 1.7f)
             {
-                _containerPresenter.BindToContainer(containerObject.Container);
+                _containerPresenter.BindToContainer(containerObject);
                 _inventoryPanel.transform.SetParent(_containerInventoryPlaceHolder);
                 _inventoryPanel.transform.localPosition = Vector3.zero;
                 var rt = _inventoryPanel.GetComponent<RectTransform>();
@@ -422,13 +422,14 @@ public class CharacterController : AvatarController
             case EntityAction.ChangeInventory:
                 {
                     var stateInventoryInfo = quant.Object as InventoryChangeInfo;
-                    _playerAvatar.RestoreInventory(stateInventoryInfo.InventoryState.PrevState, stateInventoryInfo.ChangedContainer,
+                    _playerAvatar.RestoreInventory(stateInventoryInfo.InventoryState.PrevState, stateInventoryInfo.ChangedContainer?.Container,
                                             stateInventoryInfo.ContainerPrevStateInfo);
                     if (stateInventoryInfo.ChangedContainer != null)
                     {
-                        stateInventoryInfo.ChangedContainer.RestoreStorage(stateInventoryInfo.ContainerPrevStateInfo);
+                        stateInventoryInfo.ChangedContainer.Container.RestoreStorage(stateInventoryInfo.ContainerPrevStateInfo);
                         if (_containerPresenter.gameObject.activeSelf)
                             _containerPresenter.Slot.FillSlots();
+                        stateInventoryInfo.ChangedContainer.ShowSelf(true);
                     }
                     ReflectMainWeapon(_playerAvatar.Character.MainWeapon);
                 }
@@ -456,7 +457,7 @@ public class CharacterController : AvatarController
                     //sourceSlot.FillSlots();
 
                     _playerAvatar.RestoreInventory(reloadWeaponInfo.InventoryChangeInfo.InventoryState.PrevState,
-                                            reloadWeaponInfo.InventoryChangeInfo.ChangedContainer,
+                                            reloadWeaponInfo.InventoryChangeInfo.ChangedContainer?.Container,
                                             reloadWeaponInfo.InventoryChangeInfo.ContainerPrevStateInfo);
                     break;
                 }
@@ -587,7 +588,7 @@ public class CharacterController : AvatarController
             inventoryChangeInfo.InventoryState.CurrentState = _playerAvatar.InventoryInfo;
             if (_containerPresenter.gameObject.activeSelf)
             {
-                inventoryChangeInfo.ChangedContainer = _containerPresenter.CurrentContainer;
+                inventoryChangeInfo.ChangedContainer = _containerPresenter.ContainerObject;
                 inventoryChangeInfo.ContainerPrevStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
                 _containerPresenter.Slot.RefreshStorageInfo();
                 inventoryChangeInfo.ContainerNextStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
@@ -658,7 +659,7 @@ public class CharacterController : AvatarController
         inventoryChangeInfo.InventoryState.CurrentState = _playerAvatar.InventoryInfo;
         if (_containerPresenter.gameObject.activeSelf)
         {
-            inventoryChangeInfo.ChangedContainer = _containerPresenter.CurrentContainer;
+            inventoryChangeInfo.ChangedContainer = _containerPresenter.ContainerObject;
             inventoryChangeInfo.ContainerPrevStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
             _containerPresenter.Slot.RefreshStorageInfo();
             inventoryChangeInfo.ContainerNextStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
