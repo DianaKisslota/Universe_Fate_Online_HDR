@@ -14,7 +14,7 @@ public class DataSource : IDataSource
         AddSector(new SectorMine0912(09,12));
         AddSector(new SectorMine1007(10,07));
         AddSector(new SectorMine1008(10,08));
-        AddSector(new SectorMine1010(10,10));// ÿ‡ıÚ‡- ¬ıÓ‰
+        AddSector(new SectorMine1010(10,10));// Main A- Start
         AddSector(new SectorMine1011(10,11));
         AddSector(new SectorMine1012(10,12));
         AddSector(new SectorMine1108(11,08));
@@ -38,7 +38,7 @@ public class DataSource : IDataSource
         AddSector(new SectorMain0415(4, 15));
         AddSector(new SectorMain0416(4, 16));
         AddSector(new SectorMain0417(4, 17));
-        AddSector(new SectorMain0504(5, 4));
+        //AddSector(new SectorMain0504(5, 4));  // Block
         AddSector(new SectorMain0505(5, 5));
         AddSector(new SectorMain0506(5, 6));
         AddSector(new SectorMain0507(5, 7));
@@ -157,7 +157,7 @@ public class DataSource : IDataSource
         AddSector(new SectorMain1410(14, 10));
         AddSector(new SectorMain1411(14, 11));
         AddSector(new SectorMain1412(14, 12));
-        AddSector(new SectorMain1413(14, 13));  // Shahta
+        AddSector(new SectorMain1413(14, 13));  // Main A
         AddSector(new SectorMain1414(14, 14));  
         AddSector(new SectorMain1415(14, 15));
         AddSector(new SectorMain1416(14, 16));
