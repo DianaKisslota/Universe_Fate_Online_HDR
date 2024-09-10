@@ -389,36 +389,10 @@ public class CharacterController : AvatarController
                     itemObject.transform.rotation = pickObjectInfo.ObjectRotation;
                     itemObject.Drop();
                     pickObjectInfo.PickedItemObject = itemObject;
-                    //_playerAvatar.Character.UnEquip(itemObject.Item);
                     itemObject.gameObject.SetActive(true);
                     ReflectMainWeapon(_playerAvatar.Character.MainWeapon);
                     break;
                 }
-            //case EntityAction.TransferItem:
-            //    {
-            //        var transferItemInfo = quant.Object as TransferItemInfo;
-            //        var sourceSlot = transferItemInfo.Source;
-            //        var destinationSlot = transferItemInfo.Destination;
-            //        var itemPresenter = transferItemInfo.ItemPresenter;
-
-            //        if (itemPresenter == null)
-            //        {
-            //            itemPresenter = ItemFactory.CreateItemPresenter(transferItemInfo.ItemTemplate.ItemType);
-            //            itemPresenter.Count = transferItemInfo.ItemTemplate.ItemCount;
-            //        }
-
-            //        _playerAvatar.TransferItem(destinationSlot, sourceSlot, itemPresenter);
-
-            //        if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
-            //            _mainWeaponImage.gameObject.SetActive(false);
-            //        if (sourceSlot is CharacterItemSlot characterItemSlot1 && characterItemSlot1.SlotType == SlotType.MainWeapon)
-            //        {
-            //            _mainWeaponImage.gameObject.SetActive(true);
-            //            _mainWeaponImage.sprite = Global.GetIconFor(itemPresenter.Item.GetType());
-            //        }
-
-            //        break;
-            //    }
             case EntityAction.ChangeInventory:
                 {
                     var stateInventoryInfo = quant.Object as InventoryChangeInfo;

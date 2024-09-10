@@ -46889,7 +46889,6 @@ MonoBehaviour:
   _pointerCoords: {fileID: 364762690}
   _uiItems:
   - {fileID: 1822836018}
-  - {fileID: 0}
   - {fileID: 410890402}
   - {fileID: 62842334}
   - {fileID: 1509931281}
