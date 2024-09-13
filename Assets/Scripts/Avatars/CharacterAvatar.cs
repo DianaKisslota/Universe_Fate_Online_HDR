@@ -47,6 +47,7 @@ public class CharacterAvatar : EntityAvatar
 
     protected override void Init()
     {
+        base.Init();
         RefreshInventoryInfo();
         Character.OnEquip += OnEquip;
         Character.OnUnEquip += OnUnEquip;

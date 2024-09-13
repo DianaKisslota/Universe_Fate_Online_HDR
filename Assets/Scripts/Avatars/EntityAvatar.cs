@@ -11,6 +11,8 @@ public abstract class EntityAvatar : MonoBehaviour
     protected NavMeshAgent _agent;
     protected Rigidbody _rigidBody;
 
+    public int CurrentActionPoints { get; set; }
+
     [SerializeField] protected AudioSource _audioSource;
 
     protected Vector3? _walkingTo;
@@ -44,7 +46,15 @@ public abstract class EntityAvatar : MonoBehaviour
         Init();
     }
 
-    protected abstract void Init();
+    protected virtual void Init()
+    {
+
+    }
+
+    public void RestoreAP()
+    {
+        CurrentActionPoints = Entity.MaxActionPoints;
+    }
 
     public void MoveTo(Vector3 movePoint)
     {

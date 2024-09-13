@@ -9,5 +9,6 @@ public class AvatarController : MonoBehaviour
     public virtual void BindAvatar(EntityAvatar avatar)
     {
         _avatar = avatar;
+        _avatar.RestoreAP();
     }
 }

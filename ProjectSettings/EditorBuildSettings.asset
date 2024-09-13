@@ -9,12 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Global_map_HD.unity
     guid: 82b9bf9f7fb220c4492ae3bfe080e7bd
   - enabled: 1
-    path: Assets/Scenes/BattleSceneMain.unity
+    path: Assets/Scenes/MainMapBattleScenes/BattleSceneMain.unity
     guid: 5d859a9b8a7106543b83e9cbfff429d9
   - enabled: 1
     path: Assets/Scenes/Mine_A.unity
     guid: efd8213ef2569a74b8c5f20c316c73d9
   - enabled: 1
-    path: Assets/Scenes/BattleSceneMine_1.unity
+    path: Assets/Scenes/MineABattleScenes/BattleSceneMine_1.unity
     guid: 006014bff01bf514ea0d7de34de31f36
+  - enabled: 1
+    path: Assets/Scenes/MainMapBattleScenes/BattleScene_forest_1.unity
+    guid: 5744f6154cc5e82478571147b6696bbc
+  - enabled: 1
+    path: Assets/Scenes/MainMapBattleScenes/BattleScene_Road_1.unity
+    guid: 5fc2a7b0702c6b749aab85118ea6fbe4
   m_configObjects: {}

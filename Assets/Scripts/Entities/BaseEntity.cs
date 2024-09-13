@@ -28,6 +28,10 @@ public abstract class BaseEntity: ITarget
         CurrentHealth = MaxHealth;
     }
 
+    public int StepCost { get; set; } = 2;
+    public int RunCost { get; set; } = 1;
+
+
     public int Strength 
     {  
         get { return _strength; } 
@@ -123,5 +127,13 @@ public abstract class BaseEntity: ITarget
     public float NaturalArmor { get; set; } = 0;
 
     public virtual float Armor => NaturalArmor;
+
+    public int MaxActionPoints
+    {
+        get
+        {
+            return Agility * 2;
+        }
+    }
 }
 

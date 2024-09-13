@@ -35,7 +35,7 @@ public static class AvatarFactory
         var model = GameObject.Instantiate<GameObject>(modelPrefab);
         var avatar = model.GetComponent<CharacterAvatar>();
         model.AddComponent<AudioSource>();
-        avatar.Entity = character;
+        avatar.Entity = character;        
         avatar.Entity.Die += avatar.EntityDie;
         avatar.transform.position = parent.position;
 

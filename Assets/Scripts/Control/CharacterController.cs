@@ -30,6 +30,9 @@ public class CharacterController : AvatarController
     [SerializeField] EventTrigger _fireModeTrigger2;
     [SerializeField] EventTrigger _fireModeTrigger3;
 
+    [SerializeField] TMP_Text _currentAP;
+    [SerializeField] Image _currentAPImage;
+
     [SerializeField] private PointerController _pointer;
     [SerializeField] private TMP_Text _pointerCoords;
     //   [SerializeField] protected LineRenderer _pathDrawer;
@@ -94,6 +97,7 @@ public class CharacterController : AvatarController
         _playerAvatar.FireModeSet += OnFireModeSet;
         _playerAvatar.MainWeaponChanged += ReflectMainWeapon;
         InitFireMode();
+        RefreshCurrentAP();
     }
 
     private void InitFireMode()
@@ -685,5 +689,10 @@ public class CharacterController : AvatarController
         _playerAvatar.FireMode = fireMode;
     }
 
+    private void RefreshCurrentAP()
+    {        
+        _currentAP.text = _playerAvatar.CurrentActionPoints.ToString();
+        _currentAPImage.fillAmount = _playerAvatar.Character.MaxActionPoints / _playerAvatar.CurrentActionPoints;
+    }
 
 }
