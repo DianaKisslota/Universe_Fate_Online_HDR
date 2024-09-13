@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Mine_A.unity
     guid: efd8213ef2569a74b8c5f20c316c73d9
   - enabled: 1
-    path: Assets/Scenes/BattleSceneMine.unity
+    path: Assets/Scenes/BattleSceneMine_1.unity
     guid: 006014bff01bf514ea0d7de34de31f36
   m_configObjects: {}
