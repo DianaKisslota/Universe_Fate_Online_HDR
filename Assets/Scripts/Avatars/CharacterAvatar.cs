@@ -243,39 +243,39 @@ public class CharacterAvatar : EntityAvatar
             ReflectAllItems();
         }
     }
-    public void AddQuant(EntityAction action, object _object, Vector3? lastPosition, Quaternion lastRotation)
+    public void AddQuant(EntityAction action, object _object, Vector3? lastPosition, Quaternion lastRotation, int apSpent)
     {
-        _quants.Add(new Quant(action, _object, lastPosition, lastRotation));
+        _quants.Add(new Quant(action, _object, lastPosition, lastRotation, apSpent));
     }
 
-    public void AddMoveQuant(Vector3 point)
+    public void AddMoveQuant(Vector3 point, int apSpent)
     {
-        AddQuant(EntityAction.Move, point, transform.position, transform.rotation);
+        AddQuant(EntityAction.Move, point, transform.position, transform.rotation, apSpent);
     }
 
-    public void AddPickObjectQuant(PickObjectInfo pickObjectInfo)
+    public void AddPickObjectQuant(PickObjectInfo pickObjectInfo, int apSpent)
     {
-        AddQuant(EntityAction.PickObject, pickObjectInfo, transform.position, transform.rotation);
+        AddQuant(EntityAction.PickObject, pickObjectInfo, transform.position, transform.rotation, apSpent);
     }
 
-    public void AddItemtransferQuant(TransferItemInfo transferItemInfo)
+    //public void AddItemtransferQuant(TransferItemInfo transferItemInfo)
+    //{
+    //    AddQuant(EntityAction.TransferItem, transferItemInfo, transform.position, transform.rotation);
+    //}
+
+    public void AddInventoryChangeQuant(InventoryChangeInfo inventoryStateInfo, int apSpent = 0)
     {
-        AddQuant(EntityAction.TransferItem, transferItemInfo, transform.position, transform.rotation);
+        AddQuant(EntityAction.ChangeInventory, inventoryStateInfo, transform.position, transform.rotation, apSpent);
     }
 
-    public void AddInventoryChangeQuant(InventoryChangeInfo inventoryStateInfo)
+    public void AddReloadWeaponQuant(ReloadWeaponInfo reloadWeaponInfo, int apSpent = 0)
     {
-        AddQuant(EntityAction.ChangeInventory, inventoryStateInfo, transform.position, transform.rotation);
+        AddQuant(EntityAction.ReloadWeapon, reloadWeaponInfo, transform.position, transform.rotation, apSpent);
     }
 
-    public void AddReloadWeaponQuant(ReloadWeaponInfo reloadWeaponInfo)
+    public void AddAttackQuant(AttackInfo attackInfo, int apSpent = 0)
     {
-        AddQuant(EntityAction.ReloadWeapon, reloadWeaponInfo, transform.position, transform.rotation);
-    }
-
-    public void AddAttackQuant(AttackInfo attackInfo)
-    {
-        AddQuant(EntityAction.Attack, attackInfo, transform.position, transform.rotation);
+        AddQuant(EntityAction.Attack, attackInfo, transform.position, transform.rotation, apSpent);
     }
 
     public void RemoveLastQuant()
@@ -424,8 +424,9 @@ public class CharacterAvatar : EntityAvatar
 
             default:
                 Debug.LogError("Неизвестный тип действия");
-                break;
+                break;            
         }
+        CurrentActionPoints -= _quants[0].APSpent;
     }
 
     public void SetToPosition(Vector3 position)

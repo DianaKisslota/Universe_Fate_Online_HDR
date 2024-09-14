@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -38,6 +39,21 @@ public abstract class EntityAvatar : MonoBehaviour
 
     private float _timeBeforeAgentEnabled = 0;
 
+
+    public int APToReachPoint(Vector3 reachPoint)
+    {
+        return Mathf.RoundToInt(Vector3.Distance(reachPoint, transform.position) * Entity.StepCost);
+    }
+    public bool CanReachInTurn(Vector3 reachPoint)
+    {
+        return Vector3.Distance(reachPoint, transform.position) <= CurrentActionPoints / Entity.StepCost;
+    }
+
+    public void SpendAPForMoving(Vector3 reachPoint)
+    {
+        CurrentActionPoints -= APToReachPoint(reachPoint);
+    }
+
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -53,7 +69,7 @@ public abstract class EntityAvatar : MonoBehaviour
 
     public void RestoreAP()
     {
-        CurrentActionPoints = Entity.MaxActionPoints;
+        CurrentActionPoints = Mathf.RoundToInt(Entity.MaxActionPoints);
     }
 
     public void MoveTo(Vector3 movePoint)

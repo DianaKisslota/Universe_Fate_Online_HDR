@@ -73,6 +73,8 @@ public class CharacterController : AvatarController
             _originPoint = _playerAvatar.transform.position;
             _originAngle = _playerAvatar.transform.eulerAngles;
             _avatarApplyingQants = false;
+            _playerAvatar.RestoreAP();
+            RefreshCurrentAP();
         };
 
         _originPoint = _playerAvatar.transform.position;
@@ -185,7 +187,8 @@ public class CharacterController : AvatarController
         if (!MouseOverUI && Input.GetMouseButtonDown(0))
         {
             var itemObject = GetItemUnderMousePoint();
-            if (itemObject != null  && Vector3.Distance(_playerAvatar.transform.position, itemObject.transform.position) < 1.2f)                
+            if (itemObject != null  && Vector3.Distance(_playerAvatar.transform.position, itemObject.transform.position) < 1.2f
+                && _playerAvatar.CurrentActionPoints >= _playerAvatar.Character.PickupObjectCost)                
             {
                 var inventoryStateInfo = new InventoryStateInfo();
                 var pickObjectInfo = new PickObjectInfo(itemObject, inventoryStateInfo);
@@ -193,7 +196,9 @@ public class CharacterController : AvatarController
                 _playerAvatar.TakeItem(itemObject);
                 _playerAvatar.RefreshInventoryInfo();
                 inventoryStateInfo.CurrentState = _playerAvatar.InventoryInfo;
-                _playerAvatar.AddPickObjectQuant(pickObjectInfo);
+                _playerAvatar.CurrentActionPoints -= _playerAvatar.Character.PickupObjectCost;
+                RefreshCurrentAP();
+                _playerAvatar.AddPickObjectQuant(pickObjectInfo, _playerAvatar.Character.PickupObjectCost);
 
                 return;
             }
@@ -223,20 +228,26 @@ public class CharacterController : AvatarController
         if (!MouseOverUI && Input.GetMouseButtonDown(0) && _canMove && PlayerCanReach(AllignPoint.ToMid(GetPointerPositionOnMap())) 
                    && !AvatarBusy &&!_containerPresenter.gameObject.activeSelf)
         {
-            var navPoint = Instantiate(Global.NavPointPrefab);
-            navPoint.transform.position = _pointer.position;
-            _navPoints.Add(navPoint);
-
-            _lastPoint = _playerAvatar.transform.position;
-            _lastAngle = _playerAvatar.transform.eulerAngles;
-
             var path = new NavMeshPath();
 
             if (_playerAvatar.CalculateCompletePath(_pointer.position, path))
             {
                 //DrawPath(path);
-                _playerAvatar.AddMoveQuant(_pointer.position);
-                _playerAvatar.MoveTo(_pointer.position);
+                if (_playerAvatar.CanReachInTurn(_pointer.position))
+                {
+                    var navPoint = Instantiate(Global.NavPointPrefab);
+                    navPoint.transform.position = _pointer.position;
+                    _navPoints.Add(navPoint);
+
+                    _lastPoint = _playerAvatar.transform.position;
+                    _lastAngle = _playerAvatar.transform.eulerAngles;
+
+
+                    _playerAvatar.SpendAPForMoving(_pointer.position);
+                    _playerAvatar.AddMoveQuant(_pointer.position, _playerAvatar.APToReachPoint(_pointer.position));
+                    _playerAvatar.MoveTo(_pointer.position);
+                    RefreshCurrentAP();
+                }
                 //_playerAvatar.transform.position = _pointer.position;
             }
         }
@@ -330,10 +341,10 @@ public class CharacterController : AvatarController
             {
                 _pointer.position = movePosition;
 
-                //if (playerController.PlayerCanReach(_pointer.transform.position))
-                _pointer.SetPointerMaterial(AccessMoveMaterial);
-                //else
-                //    _pointer.SetPointerMaterial(RestrictMoveMaterial);
+                if (_playerAvatar.CanReachInTurn(movePosition))
+                    _pointer.SetPointerMaterial(AccessMoveMaterial);
+                else
+                    _pointer.SetPointerMaterial(RestrictMoveMaterial);
             }
         }
     }
@@ -361,7 +372,7 @@ public class CharacterController : AvatarController
     private void ApplyQuants()
     {
         RevertAllQuants();
-        _playerAvatar.ApplyQuants();        
+        _playerAvatar.ApplyQuants();
     }
 
     private void RevertQuant(Quant quant)
@@ -457,6 +468,8 @@ public class CharacterController : AvatarController
                     break;
                 }
         }
+        _playerAvatar.CurrentActionPoints += quant.APSpent;
+        RefreshCurrentAP();
     }
 
     private void RevertLastQuant()
@@ -571,7 +584,7 @@ public class CharacterController : AvatarController
                 _containerPresenter.Slot.RefreshStorageInfo();
                 inventoryChangeInfo.ContainerNextStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
             }
-            _playerAvatar.AddInventoryChangeQuant(inventoryChangeInfo);
+            _playerAvatar.AddInventoryChangeQuant(inventoryChangeInfo, 2);
         }
         if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
         {
@@ -692,7 +705,10 @@ public class CharacterController : AvatarController
     private void RefreshCurrentAP()
     {        
         _currentAP.text = _playerAvatar.CurrentActionPoints.ToString();
-        _currentAPImage.fillAmount = _playerAvatar.Character.MaxActionPoints / _playerAvatar.CurrentActionPoints;
+        if (_playerAvatar.CurrentActionPoints == 0)
+            _currentAPImage.fillAmount = 0;
+        else
+            _currentAPImage.fillAmount = _playerAvatar.CurrentActionPoints / _playerAvatar.Character.MaxActionPoints;
     }
 
 }
