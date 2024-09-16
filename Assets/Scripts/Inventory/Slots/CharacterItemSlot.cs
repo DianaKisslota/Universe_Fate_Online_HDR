@@ -13,6 +13,14 @@ public class CharacterItemSlot : ItemSlot
         ItemLeave += OnUnequip;        
     }
 
+    protected override bool IsItemAccessible(Item item)
+    {
+        if (Character.CurrentAP < Character.ChangeInventoryCast)
+            return false;
+        else
+            return base.IsItemAccessible(item);
+    }
+
     public override void OnPresenterSet(ItemPresenter itemPresenter, DropSlot sourceSlot)
     {
         if (sourceSlot == this)

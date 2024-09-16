@@ -20,6 +20,8 @@ public abstract class RangeWeapon : Weapon
     private Ammo _ammo;
     public Caliber Caliber { get; set; }
     public int AmmoCapacity {  get; set; }
+
+    public int ReloadCost { get; set; }
     public Type CurrentAmmoType 
     { get => _currentAmmoType; 
       set

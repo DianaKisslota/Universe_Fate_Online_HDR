@@ -11,6 +11,7 @@ public class Character : BaseEntity, IAttacker
         set { _expirience = value; }
     }
 
+    public int CurrentAP { get; set; }
 
     protected override void Init()
     {
@@ -142,5 +143,5 @@ public class Character : BaseEntity, IAttacker
     public void AddToInventory(Item item, int num)
     {
         Inventory.AddItem(item, num);
-    }
+    }    
 }

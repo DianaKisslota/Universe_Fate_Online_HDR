@@ -12,7 +12,7 @@ public abstract class EntityAvatar : MonoBehaviour
     protected NavMeshAgent _agent;
     protected Rigidbody _rigidBody;
 
-    public int CurrentActionPoints { get; set; }
+    public virtual int CurrentActionPoints { get; set; }
 
     [SerializeField] protected AudioSource _audioSource;
 

@@ -158,23 +158,35 @@ public class CharacterController : AvatarController
 
             if (Input.GetMouseButtonDown(0))
             {
-                var target = Instantiate(Global.TargetPrefab);
-                target.transform.position = _pointer.position;
-                _targets.Add(target);
                 AttackInfo attackInfo;
-                if (_playerAvatar.Character.MainWeapon != null && _playerAvatar.Character.MainWeapon is RangeWeapon rangedWeapon)
+                var apSpent = _playerAvatar.Character.BareHandAttackCost;
+                if (_playerAvatar.Character.MainWeapon != null && _playerAvatar.Character.MainWeapon is RangeWeapon rangeWeapon)
                 {
-                    var ammoUsed = Mathf.Min(rangedWeapon.GetFireModeAmmo(_playerAvatar.FireMode).Value, rangedWeapon.AmmoCount);
-                    rangedWeapon.UnLoad(ammoUsed);
+                    var ammoUsed = Mathf.Min(rangeWeapon.GetFireModeAmmo(_playerAvatar.FireMode).Value, rangeWeapon.AmmoCount);
+                    rangeWeapon.UnLoad(ammoUsed);
                     _playerAvatar.InventoryPresenter.RefreshItemSlots();
-                    attackInfo = new AttackInfo(entityAvatar, _playerAvatar.FireMode, rangedWeapon.CurrentAmmoType, ammoUsed);
+                    attackInfo = new AttackInfo(entityAvatar, _playerAvatar.FireMode, rangeWeapon.CurrentAmmoType, ammoUsed);
+                    apSpent = rangeWeapon.AttackCost(_playerAvatar.FireMode);
                 }
                 else
                 {
                     attackInfo = new AttackInfo(entityAvatar);
+                    if(_playerAvatar.Character.MainWeapon != null)
+                    {
+                        apSpent = _playerAvatar.Character.MainWeapon.AttackCost(FireMode.Undefined);
+                    }
                 }
-                _playerAvatar.AddAttackQuant(attackInfo);
-                _playerAvatar.LookForShoot(entityAvatar);
+
+                if (apSpent <= _playerAvatar.CurrentActionPoints)
+                {
+                    var target = Instantiate(Global.TargetPrefab);
+                    target.transform.position = _pointer.position;
+                    _targets.Add(target);
+                    _playerAvatar.AddAttackQuant(attackInfo, apSpent);
+                    _playerAvatar.LookForShoot(entityAvatar);
+                    _playerAvatar.CurrentActionPoints -= apSpent;
+                    RefreshCurrentAP();
+                }
             }
 
             return;
@@ -584,7 +596,9 @@ public class CharacterController : AvatarController
                 _containerPresenter.Slot.RefreshStorageInfo();
                 inventoryChangeInfo.ContainerNextStateInfo = _containerPresenter.CurrentContainer.Storage.StorageInfo;
             }
-            _playerAvatar.AddInventoryChangeQuant(inventoryChangeInfo, 2);
+            _playerAvatar.AddInventoryChangeQuant(inventoryChangeInfo, _playerAvatar.Character.ChangeInventoryCast);
+            _playerAvatar.CurrentActionPoints -= _playerAvatar.Character.ChangeInventoryCast;
+            RefreshCurrentAP();
         }
         if (destinationSlot is CharacterItemSlot characterItemSlot && characterItemSlot.SlotType == SlotType.MainWeapon)
         {
@@ -641,6 +655,15 @@ public class CharacterController : AvatarController
 
     public void OnWeaponReloaded(ItemPresenter weaponPresenter, ItemPresenter ammoPresenter, int num, StorageSlot slot)
     {
+        var apSpent = (weaponPresenter.Item as RangeWeapon).ReloadCost;
+        if (_playerAvatar.CurrentActionPoints < apSpent)                        //Отменяем перезарядку. Костыль :((
+        {
+            (weaponPresenter.Item as RangeWeapon).Reload(ammoPresenter.Item as Ammo, -num);
+            ammoPresenter.Count += num;
+            weaponPresenter.RefreshInfo();
+            ammoPresenter.RefreshInfo();
+            return;
+        }
         var inventoryChangeInfo = new InventoryChangeInfo();
         var currentAmmoTemplate = ammoPresenter.Item.GetTemplate();
         currentAmmoTemplate.ItemCount = ammoPresenter.Count;
@@ -665,7 +688,9 @@ public class CharacterController : AvatarController
         }
 
         var quantInfo = new ReloadWeaponInfo(inventoryChangeInfo);
-        _playerAvatar.AddReloadWeaponQuant(quantInfo);
+        _playerAvatar.AddReloadWeaponQuant(quantInfo, apSpent);
+        _playerAvatar.CurrentActionPoints -= apSpent;
+        RefreshCurrentAP();
     }
 
     public void SetFireMode(int mode)

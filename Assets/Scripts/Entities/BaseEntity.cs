@@ -31,6 +31,8 @@ public abstract class BaseEntity: ITarget
     public int StepCost { get; } = 2;
     public int RunCost { get; } = 1;
     public int PickupObjectCost { get; } = 6;
+    public int ChangeInventoryCast { get; } = 4;
+    public int BareHandAttackCost { get; } = 3;
 
 
     public int Strength 

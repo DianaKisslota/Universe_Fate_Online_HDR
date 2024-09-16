@@ -12,6 +12,15 @@ public class CharacterInventorySlot : StorageSlot
         Storage = Character.Inventory;
         ItemLeave += OnUnequip;
     }
+
+    protected override bool IsItemAccessible(Item item)
+    {
+        if (Character.CurrentAP < Character.ChangeInventoryCast)
+            return false;
+        else
+            return base.IsItemAccessible(item);
+    }
+
     protected override void DropProcess(ItemPresenter itemPresenter)
     {
         if (itemPresenter?.Count > 0)
