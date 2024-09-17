@@ -179,7 +179,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Diffusion_Profile_Asset: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.61722046, g: 1, b: 0.5137255, a: 1}
+    - _Color: {r: 0.2674037, g: 0.9433962, b: 0.031149892, a: 1}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _HueVariationColor: {r: 0.3177287, g: 0.45068148, b: 0.6415094, a: 0.2}
