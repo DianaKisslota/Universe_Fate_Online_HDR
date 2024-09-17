@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class TransferInfo
 {
@@ -42,15 +43,25 @@ public abstract class SectorData
     public string ID => CoordsToID(_prefix, X, Y);
     public string Coords => CoordsString(X, Y);
 
+    public List<string> BattleScenes { get; } = new List<string>();
     public List<EntitySpawner> Monsters { get; } = new List<EntitySpawner>();
     public List<ItemSpawner> Items { get; } = new List<ItemSpawner> ();
-
     public List<StaticContainer> StaticContainers { get; } = new List<StaticContainer> ();
-
     public List<SmallContainer> SmallContainers { get; } = new List<SmallContainer>();
-
     protected List<string> NPC { get; } = new List<string>();
 
+    public void AddBattleScene(string sceneName)
+    {
+        BattleScenes.Add(sceneName);
+    }
+
+    public string GetRandomBattleScene()
+    {
+        if(BattleScenes.Count == 0)
+            return null;
+        var sceneIndex = Random.Range(0, BattleScenes.Count);
+        return BattleScenes[sceneIndex];
+    }
     public void AddItem(Type itemType)
     {
         Items.Add(new ItemSpawner(itemType));

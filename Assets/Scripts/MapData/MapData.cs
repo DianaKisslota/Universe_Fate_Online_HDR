@@ -178,7 +178,10 @@ public abstract class MapData : MonoBehaviour
     }
     public void CleanupSector()
     {
-        SceneManager.LoadScene(DefaultBattleScene);
+        var battleSceneName = _currentSector.GetRandomBattleScene();
+        if (battleSceneName == null)
+            battleSceneName = DefaultBattleScene;
+        SceneManager.LoadScene(battleSceneName);
     }
 
     public void ShowBirdEyeView()
