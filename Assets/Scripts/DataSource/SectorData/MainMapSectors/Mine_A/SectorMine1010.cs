@@ -13,11 +13,11 @@ public class SectorMine1010 : SectorData
         AddSmallContainer(ironOrePile1);
 
         var ironOrePile2 = new IronOrePile();
-        ironOrePile1.AddItem(new IronOre(), 4);
+        ironOrePile2.AddItem(new IronOre(), 4);
         AddSmallContainer(ironOrePile2);
 
         var ironOrePile3 = new IronOrePile();
-        ironOrePile1.AddItem(new IronOre(), 6);
+        ironOrePile3.AddItem(new IronOre(), 6);
         AddSmallContainer(ironOrePile3);
 
         TransferTo = new TransferInfo("Global_map_HD", "Main1413", "Выйти из шахты");
