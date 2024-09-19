@@ -44366,6 +44366,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5635258367039256356, guid: 8c492714d92a5f24087d49149536a51f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2106825604}
+    - target: {fileID: 5635258367039256356, guid: 8c492714d92a5f24087d49149536a51f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonApplyQuantsClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884524367139230783, guid: 8c492714d92a5f24087d49149536a51f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2106825604}
+    - target: {fileID: 5884524367139230783, guid: 8c492714d92a5f24087d49149536a51f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonClearLastClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696893924874003118, guid: 8c492714d92a5f24087d49149536a51f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2106825604}
+    - target: {fileID: 6696893924874003118, guid: 8c492714d92a5f24087d49149536a51f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClearAllQuants
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

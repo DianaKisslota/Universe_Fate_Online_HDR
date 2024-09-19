@@ -2346,7 +2346,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.093333334
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 4c9703218da97e54d9bc06b0d128d947, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e001d7d9a23cf374a8c7c7fc6b83d17a, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &535032002
 Transform:
@@ -8432,6 +8432,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SK_Protof-Actor
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6f6eba35b8edc7d46be2a84fcc3eb248,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9051,7 +9056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1990539667
 MonoBehaviour:
   m_ObjectHideFlags: 0
