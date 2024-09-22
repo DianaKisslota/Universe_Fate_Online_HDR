@@ -118,7 +118,7 @@ TextureImporter:
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,7 +139,7 @@ TextureImporter:
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,7 +160,7 @@ TextureImporter:
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +181,7 @@ TextureImporter:
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,12 +197,12 @@ TextureImporter:
       name: Chat_4
       rect:
         serializedVersion: 2
-        x: 31
-        y: 1985
+        x: 5
+        y: 1933
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,12 +218,12 @@ TextureImporter:
       name: Chat_5
       rect:
         serializedVersion: 2
-        x: 57
-        y: 1985
+        x: 5
+        y: 1959
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,12 +239,12 @@ TextureImporter:
       name: Chat_6
       rect:
         serializedVersion: 2
-        x: 5
-        y: 1959
+        x: 31
+        y: 1985
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -265,7 +265,7 @@ TextureImporter:
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -281,12 +281,12 @@ TextureImporter:
       name: Chat_8
       rect:
         serializedVersion: 2
-        x: 57
-        y: 1959
+        x: 31
+        y: 1933
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -303,11 +303,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 57
-        y: 1959
+        y: 1985
         width: 26
         height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -323,12 +323,12 @@ TextureImporter:
       name: Chat_10
       rect:
         serializedVersion: 2
-        x: 6
-        y: 1681
+        x: 10
+        y: 1679
         width: 928
         height: 253
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -336,6 +336,237 @@ TextureImporter:
       bones: []
       spriteID: d3c15bdf9c48e3b46adceede891c2f8a
       internalID: -271545178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_11
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 1959
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df5bfc2e13c931c4985a13b7fb022304
+      internalID: 715818738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_12
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 1933
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9dd8b7239fb1f944a2cdf7284d992a3
+      internalID: -1102416612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_13
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1985
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1f6943010fe93248995258aa25af9db
+      internalID: -1984867127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_14
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1959
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a3589c6207eaae4e83f051fa290f70c
+      internalID: 1514799365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_15
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1933
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f74176d055b2c7e4d8db15a8069f7698
+      internalID: 21489767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_16
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 2014
+        width: 34
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee50f2d8b28d20c499312a4201175334
+      internalID: -621623792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_17
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 2014
+        width: 34
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 524e067b6f4ce9b43ac936e7a3b1458b
+      internalID: 861315794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_18
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 2014
+        width: 34
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 215359be2930eb44e90134fba3ec026b
+      internalID: 686905076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_19
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 1985
+        width: 34
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea3da432e9f22df4590ef15a9d338d58
+      internalID: 1659647808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_20
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 1985
+        width: 34
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a33819961dd0b1b4f8529950483c796b
+      internalID: 2111515564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_21
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 1985
+        width: 34
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef6e336b137dda349832e30d47bb5d6f
+      internalID: -464376050
       vertices: []
       indices: 
       edges: []
@@ -354,7 +585,18 @@ TextureImporter:
       Chat_0: -2891271
       Chat_1: -917931353
       Chat_10: -271545178
+      Chat_11: 715818738
+      Chat_12: -1102416612
+      Chat_13: -1984867127
+      Chat_14: 1514799365
+      Chat_15: 21489767
+      Chat_16: -621623792
+      Chat_17: 861315794
+      Chat_18: 686905076
+      Chat_19: 1659647808
       Chat_2: 852253109
+      Chat_20: 2111515564
+      Chat_21: -464376050
       Chat_3: -1346415102
       Chat_4: -1265791842
       Chat_5: 2011120708
