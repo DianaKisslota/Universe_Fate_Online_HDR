@@ -93,11 +93,8 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             _rectTransform.anchoredPosition += eventData.delta;// / _mainCanvas.scaleFactor;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void DoAnchor()
     {
-        if (!IsDragging)
-            return;
-
         if (transform.parent == _transportPanel)
         {
             SetToParent(_oldParent);
@@ -117,6 +114,13 @@ public class ItemPresenter : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             storageSlot1.FillSlots();
         _canvasGroup.blocksRaycasts = true;
         IsDragging = false;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (!IsDragging)
+            return;
+        DoAnchor();
     }
 
     public void SetToParent(Transform parent)

@@ -383,6 +383,16 @@ public class CharacterController : AvatarController
 
     private void ApplyQuants()
     {
+        var transportPanel = GameObject.Find("TransportPanel");
+        if (transportPanel != null)
+        {
+            if (transportPanel.transform.childCount != 0)
+            {
+                var draggingItem = transportPanel.transform.GetChild(0).gameObject.GetComponent<ItemPresenter>();
+
+                draggingItem.DoAnchor();
+            }
+        }
         RevertAllQuants();
         _playerAvatar.ApplyQuants();
     }
