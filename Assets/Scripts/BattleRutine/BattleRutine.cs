@@ -46,7 +46,7 @@ public class BattleRutine : MonoBehaviour
                 break;
             var staticContainerPointIndex = Random.Range(0, _staticContainersPoints.Count);
             var staticContainerPoint = _staticContainersPoints[staticContainerPointIndex];
-            var staticContainer = ContainerFactory.CreateContainer(container, staticContainerPoint);
+            var staticContainer = ContainerFactory.CreateContainer(container, _sectorData.IsDark, staticContainerPoint);
             _staticContainersPoints.Remove(staticContainerPoint);
         }
 
@@ -56,7 +56,7 @@ public class BattleRutine : MonoBehaviour
                 break;
             var smallContainerPointIndex = Random.Range(0, _spawnPoints.Count);
             var smallContainerPoint = _spawnPoints[smallContainerPointIndex];
-            var smallContainer = ContainerFactory.CreateContainer(container, smallContainerPoint);
+            var smallContainer = ContainerFactory.CreateContainer(container, _sectorData.IsDark, smallContainerPoint);
             _spawnPoints.Remove(smallContainerPoint);
         }
 

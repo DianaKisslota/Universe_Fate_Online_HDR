@@ -20,6 +20,7 @@ public abstract class SectorData
 {
     public int X { get; }
     public int Y { get; }
+    public bool IsDark {  get; set; }
     private string _prefix;
 
     public string Prefix => _prefix;

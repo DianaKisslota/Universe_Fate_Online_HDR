@@ -84,6 +84,7 @@ public class CharacterController : AvatarController
 
         foreach(var item in _uiItems)
         {
+            item.MouseOver -= UIMouseInteract;
             item.MouseOver += UIMouseInteract;
         }
 

@@ -61,6 +61,7 @@ public static class Global
     public static GameObject ItemPresenterPrefab { get; set; }
     public static GameObject ItemHighlighterPrefab { get; set; }
     public static GameObject ContainerHighlighterPrefab { get; set; }
+    public static GameObject ContainerHighlighterDarkPrefab { get; set; }
 
 
     static Global()
@@ -110,6 +111,7 @@ public static class Global
         ItemPresenterPrefab = Resources.Load<GameObject>("Presenters/ItemPresenter");
         ItemHighlighterPrefab = Resources.Load<GameObject>("ItemHighLighter");
         ContainerHighlighterPrefab = Resources.Load<GameObject>("ContainerHighLighter");
+        ContainerHighlighterDarkPrefab = Resources.Load<GameObject>("ContainerHighLighterDark");
 
         InitCharacter();
     }
