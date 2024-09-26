@@ -14,5 +14,13 @@ public class ContainerSlot : StorageSlot
         Storage.RemoveItem(item);
         base.OnItemLeave(item);
     }
+
+    protected override bool IsItemAccessible(Item item)
+    {
+        if (Global.Character.CurrentAP < Global.Character.ChangeInventoryCast)
+            return false;
+        else
+            return base.IsItemAccessible(item);
+    }
 }
 
