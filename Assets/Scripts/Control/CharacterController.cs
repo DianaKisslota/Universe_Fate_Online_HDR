@@ -112,6 +112,11 @@ public class CharacterController : AvatarController
 
     private void OnDestroy()
     {
+        foreach (var item in _uiItems)
+        {
+            item.MouseOver -= UIMouseInteract;
+        }
+
         foreach (var itemSlot in _inventoryPanel.ItemSlots)
         {
             itemSlot.ItemLeave -= ItemLeave;

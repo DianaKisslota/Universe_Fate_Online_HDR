@@ -135,7 +135,7 @@ public abstract class BaseEntity: ITarget
     {
         get
         {
-            return Agility * 2;
+            return Agility * 2 + 4;
         }
     }
 }
