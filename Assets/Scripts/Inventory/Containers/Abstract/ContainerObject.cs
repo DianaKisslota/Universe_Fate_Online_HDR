@@ -33,4 +33,12 @@ public class ContainerObject : MonoBehaviour
         gameObject.SetActive(show);
     }
 
+    public void CheckVisibility()
+    {
+        if (Container.IsEmpty && Container.DeleteOnEmpty)
+        {
+            ShowSelf(false);
+        }
+    }
+
 }

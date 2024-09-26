@@ -368,6 +368,9 @@ public class CharacterAvatar : EntityAvatar
                     RestoreInventory(stateInventoryInfo.InventoryState.CurrentState, stateInventoryInfo.ChangedContainer?.Container,
                                             stateInventoryInfo.ContainerNextStateInfo);
 
+                    if(stateInventoryInfo.ChangedContainer != null)
+                        stateInventoryInfo.ChangedContainer.CheckVisibility();
+
                 }
                 break;
             case EntityAction.ReloadWeapon:

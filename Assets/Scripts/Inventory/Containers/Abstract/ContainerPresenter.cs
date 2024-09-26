@@ -33,10 +33,7 @@ public class ContainerPresenter : MonoBehaviour
     public void Close()
     {
         gameObject.SetActive(false);
-        if (ContainerObject.Container.IsEmpty && ContainerObject.Container.DeleteOnEmpty)
-        {
-            ContainerObject.ShowSelf(false);
-        }
+        ContainerObject.CheckVisibility();
     }
 }
 
