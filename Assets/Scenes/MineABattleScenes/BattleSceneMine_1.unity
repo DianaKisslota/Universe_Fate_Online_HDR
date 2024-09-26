@@ -14853,18 +14853,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &732213053 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5273942977465033398, guid: 8c492714d92a5f24087d49149536a51f,
-    type: 3}
-  m_PrefabInstance: {fileID: 2040471836}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &736587851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42787,7 +42775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &2040471839 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 553839222187786776, guid: 8c492714d92a5f24087d49149536a51f,
+  m_CorrespondingSourceObject: {fileID: 3310336211537048667, guid: 8c492714d92a5f24087d49149536a51f,
     type: 3}
   m_PrefabInstance: {fileID: 2040471836}
   m_PrefabAsset: {fileID: 0}
@@ -42831,6 +42819,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2040471843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3994544535677055929, guid: 8c492714d92a5f24087d49149536a51f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2040471836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2042858167
@@ -43929,7 +43929,7 @@ MonoBehaviour:
   _SetFireMode1: {fileID: 2040471842}
   _SetFireMode2: {fileID: 2040471841}
   _SetFireMode3: {fileID: 2040471840}
-  _mainWeaponImage: {fileID: 732213053}
+  _mainWeaponImage: {fileID: 2040471843}
   _mainWeaponAmmo: {fileID: 2040471839}
   _screenPanel: {fileID: 1801589788}
   _fireModeTrigger1: {fileID: 0}
