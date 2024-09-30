@@ -20,6 +20,7 @@ public static class Global
 
     public static string CurrentMapName = null;
     public static string CurrentSectorID = null;
+    public static SectorInfo CurrentSectorInfo = new SectorInfo();
 
     private static Dictionary<Type, GameObject> EntityPrefabs = new Dictionary<Type, GameObject>();
     private static Dictionary<Type, GameObject> ItemPrefabs = new Dictionary<Type, GameObject>();

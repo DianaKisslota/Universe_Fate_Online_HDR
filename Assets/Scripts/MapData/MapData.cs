@@ -28,6 +28,14 @@ public abstract class MapData : MonoBehaviour
 
     protected string DefaultBattleScene {  get; set;}
 
+    public bool IsDark { get; set; }
+
+    protected SectorData GetSectorData(string sectorID)
+    {
+        var result = _source.GetSectorData(sectorID);
+        return result;
+    }
+
     private void Start()
     {
         _cleanupSectorButton.gameObject.SetActive(false);
@@ -41,13 +49,15 @@ public abstract class MapData : MonoBehaviour
         {
             var x = _startSector.x.ConvertTo<int>();
             var y = _startSector.y.ConvertTo<int>();
-            _currentSector = _source.GetSectorData(SectorData.CoordsToID(Name, x, y));
+            _currentSector = GetSectorData(SectorData.CoordsToID(Name, x, y));
         }
         else
         {
-            _currentSector = _source.GetSectorData(Global.CurrentSectorID);
+            _currentSector = GetSectorData(Global.CurrentSectorID);
             SetNavigationToSector(_currentSector);
         }
+
+        
         ReactToArriving();
     }
 
@@ -96,7 +106,7 @@ public abstract class MapData : MonoBehaviour
 
         Debug.Log("Отправляемся в сектор " + _currentSector.ID);
         var nextSectorID = SectorData.CoordsToID(Name, nextSectorX, nextSectorY);
-        _currentSector = _source.GetSectorData(nextSectorID);
+        _currentSector = GetSectorData(nextSectorID);
         _sectorInfoText.text = "Сектор " + _currentSector.X.ToString() + ":" + _currentSector.Y.ToString() + "\n\n";
     }
 
@@ -127,8 +137,19 @@ public abstract class MapData : MonoBehaviour
         }
 
         _transferButton.gameObject.SetActive(_currentSector.TransferTo != null);
+
+        InitCurrentSectorInfo();
     }
 
+    private void InitCurrentSectorInfo()
+    {
+        if (_currentSector == null)
+            return;
+        if (_currentSector.IsDark == null)
+            Global.CurrentSectorInfo.IsDark = IsDark;
+        else
+            Global.CurrentSectorInfo.IsDark = _currentSector.IsDark.Value;
+    }
     public void Transfer()
     {
         Global.CurrentSectorID = _currentSector.TransferTo.TransferToSector;
@@ -137,7 +158,7 @@ public abstract class MapData : MonoBehaviour
 
     private bool isSectorAvailable(int x, int y)
     {
-        var sector = _source.GetSectorData(SectorData.CoordsToID(Name, x, y));
+        var sector = GetSectorData(SectorData.CoordsToID(Name, x, y));
         return sector != null && !sector.IsRestricted();
 
     }
