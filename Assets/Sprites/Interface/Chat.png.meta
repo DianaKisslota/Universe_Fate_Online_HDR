@@ -119,7 +119,7 @@ TextureImporter:
         height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 6, z: 6, w: 6}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -182,7 +182,7 @@ TextureImporter:
         height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 6, z: 6, w: 6}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -245,7 +245,7 @@ TextureImporter:
         height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 6, z: 6, w: 6}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -449,8 +449,8 @@ TextureImporter:
       name: Chat_17
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 1988
+        x: 138
+        y: 1990
         width: 34
         height: 26
       alignment: 0
@@ -470,8 +470,8 @@ TextureImporter:
       name: Chat_18
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 1962
+        x: 138
+        y: 1964
         width: 34
         height: 26
       alignment: 0
@@ -491,8 +491,8 @@ TextureImporter:
       name: Chat_19
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 2014
+        x: 138
+        y: 2016
         width: 34
         height: 26
       alignment: 0
