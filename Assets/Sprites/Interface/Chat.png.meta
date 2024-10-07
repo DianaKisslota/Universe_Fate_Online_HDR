@@ -509,55 +509,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chat_20
-      rect:
-        serializedVersion: 2
-        x: 1058
-        y: 1962
-        width: 34
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ad2bfb8149362f7459ce77e8d3b0885e
-      internalID: -1728436190
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Chat_21
-      rect:
-        serializedVersion: 2
-        x: 1058
-        y: 1988
-        width: 34
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6344f5bc8e253da46a9a91a3efee6b14
-      internalID: -1586700954
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Chat_22
       rect:
         serializedVersion: 2
-        x: 1058
-        y: 2014
-        width: 34
-        height: 26
+        x: 938
+        y: 1872
+        width: 17
+        height: 168
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -567,6 +525,27 @@ TextureImporter:
       bones: []
       spriteID: 342021a948e1a2c4d925871300ef9cf7
       internalID: -580095918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chat_16
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 2010
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e004d23b72916f142870282875724366
+      internalID: -273200914
       vertices: []
       indices: 
       edges: []
