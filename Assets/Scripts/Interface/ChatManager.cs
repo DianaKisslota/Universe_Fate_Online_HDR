@@ -1,39 +1,58 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ChatManager : MonoBehaviour
 {
-    public TMP_InputField chatInput; // Поле для ввода сообщений
-    public TMP_Text chatLog;         // Поле для отображения чата
-    public ScrollRect scrollRect; // Для автоматической прокрутки
+    public TMP_InputField chatInput;  // Поле для ввода
+    public TextMeshProUGUI chatLog;   // Лог чата (TextMeshPro)
+    public ScrollRect scrollRect;     // ScrollRect для управления прокруткой
 
-    // Метод отправки сообщений
+    private void Start()
+    {
+        // Очищаем лог чата при старте игры
+        chatLog.text = "";
+    }
+
+    // Метод отправки сообщения в чат
     public void SendMessageToChat()
     {
-        // Проверяем, что текст не пустой
+        // Проверяем, что поле ввода не пустое
         if (!string.IsNullOrEmpty(chatInput.text))
         {
-            // Добавляем сообщение в лог чата
+            // Добавляем сообщение в лог
             string newMessage = "Player: " + chatInput.text;
             chatLog.text += newMessage + "\n";
 
             // Очищаем поле ввода после отправки
             chatInput.text = "";
 
-            // Прокручиваем чат вниз
-            Canvas.ForceUpdateCanvases();
-            scrollRect.verticalNormalizedPosition = 0f;
-            Canvas.ForceUpdateCanvases();
+            // Прокручиваем лог вниз
+            ScrollToBottom();
         }
     }
 
-    // Отправка сообщений при нажатии на Enter
+    // Метод прокрутки чата вниз
+    private void ScrollToBottom()
+    {
+        Canvas.ForceUpdateCanvases();
+        scrollRect.verticalNormalizedPosition = 0f;
+        Canvas.ForceUpdateCanvases();
+    }
+
     private void Update()
     {
+        // Отправка сообщения при нажатии клавиши Enter
         if (Input.GetKeyDown(KeyCode.Return))
         {
             SendMessageToChat();
+        }
+
+        // Прокрутка с использованием колесика мыши
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0.0f)
+        {
+            scrollRect.verticalNormalizedPosition += scroll * 0.1f;  // Скорость прокрутки
         }
     }
 }
