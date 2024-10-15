@@ -1,26 +1,41 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FixedScrollbarSize : MonoBehaviour
+public class FixedScrollRect : ScrollRect
 {
-    public Scrollbar scrollbar;      // Ссылка на скроллбар
-    public float fixedHandleSize = 0.1f; // Фиксированный размер ползунка (от 0 до 1)
+    [Range(0f, 1f)]
+    public float fixedScrollbarSize = 0.2f; // Фиксированный размер ползунка от 0 до 1
 
-    void Start()
+    protected override void SetNormalizedPosition(float value, int axis)
     {
-        // Устанавливаем фиксированный размер ползунка после загрузки сцены
-        SetFixedHandleSize();
+        base.SetNormalizedPosition(value, axis);
+
+        // Вручную устанавливаем размер ползунка на фиксированное значение
+        if (verticalScrollbar != null)
+        {
+            verticalScrollbar.size = fixedScrollbarSize;
+        }
     }
 
-    void SetFixedHandleSize()
+    protected override void SetContentAnchoredPosition(Vector2 position)
     {
-        if (scrollbar != null)
-        {
-            // Устанавливаем фиксированный размер ползунка
-            scrollbar.size = fixedHandleSize;
+        base.SetContentAnchoredPosition(position);
 
-            // Принудительно обновляем ползунок
-            Canvas.ForceUpdateCanvases();
+        // Обновляем размер ползунка, если его значение изменяется
+        if (verticalScrollbar != null)
+        {
+            verticalScrollbar.size = fixedScrollbarSize;
+        }
+    }
+
+    protected override void LateUpdate()
+    {
+        base.LateUpdate();
+
+        // Обновляем размер ползунка каждый кадр
+        if (verticalScrollbar != null)
+        {
+            verticalScrollbar.size = fixedScrollbarSize;
         }
     }
 }
