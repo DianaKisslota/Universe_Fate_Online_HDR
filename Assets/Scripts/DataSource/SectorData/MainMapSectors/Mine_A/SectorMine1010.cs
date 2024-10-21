@@ -20,6 +20,8 @@ public class SectorMine1010 : SectorData
         ironOrePile3.AddItem(new IronOre(), 6);
         AddSmallContainer(ironOrePile3);
 
+        AddItem(typeof(AK47));
+
         TransferTo = new TransferInfo("Global_map_HD", "Main1413", "Выйти из шахты");
     }
 }

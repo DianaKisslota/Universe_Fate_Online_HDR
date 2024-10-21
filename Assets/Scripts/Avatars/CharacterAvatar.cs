@@ -76,7 +76,7 @@ public class CharacterAvatar : EntityAvatar
         }
         else
         {
-            resultObject = ItemFactory.CreateItem(item);
+            resultObject = ItemFactory.CreateItem(item, Global.CurrentSectorInfo.IsDark);
             ItemObjects.Add(item, resultObject);
         }
 

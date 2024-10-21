@@ -66,7 +66,7 @@ public class BattleRutine : MonoBehaviour
                 break;
             var spawnPointIndex = Random.Range(0, _spawnPoints.Count);
             var spawnPoint = _spawnPoints[spawnPointIndex];
-            var item = ItemFactory.CreateItem(spawner.ItemType);
+            var item = ItemFactory.CreateItem(spawner.ItemType, Global.CurrentSectorInfo.IsDark);
             item.transform.position = spawnPoint.position;
             _spawnPoints.Remove(spawnPoint);
         }

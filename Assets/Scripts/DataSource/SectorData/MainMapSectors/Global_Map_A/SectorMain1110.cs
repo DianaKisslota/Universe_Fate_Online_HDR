@@ -5,9 +5,6 @@ public class SectorMain1110 : SectorData
         AddMonster(new EntitySpawner(typeof(FeralDog), 3, 5));
         AddItem(typeof(PM));
         AddItem(typeof(AK47));
-        AddItem(typeof(AK47));
-        AddItem(typeof(AK47));
-        AddItem(typeof(AK47));
 
         var cabinet = new Cabinet();
         cabinet.AddItem(new UMP45());

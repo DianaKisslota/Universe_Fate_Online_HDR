@@ -5635,7 +5635,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
@@ -19228,7 +19228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000006658432754326046634, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.007
+      value: 0.911
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000006658432754326046634, type: 3}
       propertyPath: m_LocalPosition.y

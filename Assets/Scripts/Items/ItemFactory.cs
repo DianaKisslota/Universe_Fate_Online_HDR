@@ -4,15 +4,15 @@ using UnityEngine;
 
 public static class ItemFactory
 {
-    public static ItemObject CreateItem(Type itemType, GameObject parent = null)
+    public static ItemObject CreateItem(Type itemType, bool isDark = false, GameObject parent = null)
     {
         var item = Activator.CreateInstance(itemType) as Item;
-        var itemObject = CreateItem(item, parent);
+        var itemObject = CreateItem(item, isDark, parent);
 
         return itemObject;
     }
 
-    public static ItemObject CreateItem(Item item, GameObject parent = null)
+    public static ItemObject CreateItem(Item item, bool isDark = false, GameObject parent = null)
     {
         var modelPrefab = Global.GetPrefabForItem(item.GetType());
         if (modelPrefab == null)
@@ -20,7 +20,13 @@ public static class ItemFactory
         var model = GameObject.Instantiate<GameObject>(modelPrefab);
         var itemObject = model.AddComponent<ItemObject>();
         model.AddComponent<Rigidbody>();
-        var highLighter = GameObject.Instantiate<GameObject>(Global.ItemHighlighterPrefab);
+
+        GameObject highLighter = null;
+        if (isDark)
+            highLighter = GameObject.Instantiate<GameObject>(Global.ContainerHighlighterDarkPrefab);
+        else
+            highLighter = GameObject.Instantiate<GameObject>(Global.ItemHighlighterPrefab);
+
         highLighter.transform.SetParent(model.transform, false);
         highLighter.transform.localPosition = Vector3.zero;
         itemObject.Light = highLighter;
