@@ -72,6 +72,7 @@ public static class Global
         EntityPrefabs.Add(typeof(FeralDog), Resources.Load<GameObject>("EntityModels/Wolf_Animated/Prefabs/Wolf"));
         EntityPrefabs.Add(typeof(Reptiloid), Resources.Load<GameObject>("EntityModels/Rake/Perfabs/Rake_A"));
         EntityPrefabs.Add(typeof(Kobold), Resources.Load<GameObject>("EntityModels/Rapax/Prefabs/Rapax_Green"));
+        EntityPrefabs.Add(typeof(MineBot), Resources.Load<GameObject>("EntityModels/mine_boot_166/mine_boot_166"));
 
         ItemPrefabs.Add(typeof(AK47), Resources.Load<GameObject>("WeaponModels/Modern Weapons Pack/Ak-47/Prefab/Ak-47"));
         ItemPrefabs.Add(typeof(PM), Resources.Load<GameObject>("WeaponModels/PM Makarov/Makarov (PM)/Makarov"));
