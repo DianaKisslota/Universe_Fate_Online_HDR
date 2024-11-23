@@ -33007,43 +33007,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.111
+      value: 4.1336
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.935
+      value: 1.9266
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.279
+      value: -1.2745
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6293171
+      value: 0.82000446
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.009039068
+      value: 0.008750098
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.77296245
+      value: 0.5297171
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0800457
+      value: 0.2166007
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -6.452
+      value: -12.423
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 101.324
+      value: 63.31
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abc00000000000936425701064219070, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 6.63
+      value: 21.915
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -43590,7 +43590,7 @@ Transform:
   m_GameObject: {fileID: 1798850351}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.983022, z: -0, w: 0.18348789}
-  m_LocalPosition: {x: 1.83, y: 0, z: 1.33}
+  m_LocalPosition: {x: 1.84, y: 0, z: 1.291}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
