@@ -21,6 +21,11 @@ public abstract class SectorData
     public int X { get; }
     public int Y { get; }
     public bool? IsDark { get; set; } = null;
+    // **Изменение: Добавлено свойство для проверки наличия магазина**
+    public bool HasShop { get; set; } = false; // Указывает, доступен ли магазин в секторе
+    public bool Hospital { get; set; } = false; // Указывает, доступен ли Госпиталь в секторе
+    public bool Arena { get; set; } = false; // Указывает, доступен ли Арена в секторе
+    public bool Warehouse { get; set; } = false; // Указывает, доступен ли Склад в секторе
     private string _prefix;
 
     public string Prefix => _prefix;

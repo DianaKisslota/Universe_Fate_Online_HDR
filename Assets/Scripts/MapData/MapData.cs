@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,16 +16,22 @@ public abstract class MapData : MonoBehaviour
     [SerializeField] protected TMP_Text _transferCaption;
     [SerializeField] protected Camera _miniMapCamera;
     [SerializeField] protected GameObject _inventoryPanel;
-    
+
+    // **Изменение: Добавлено поле для кнопки магазина**
+    [SerializeField] protected Button _shopButton; // Кнопка магазина
+    [SerializeField] protected Button _HospitalButton; // Кнопка магазина
+    [SerializeField] protected Button _ArenaButton; // Кнопка Арена
+    [SerializeField] protected Button _WarehouseButton; // Кнопка Склад
+
 
     protected SectorData _currentSector;
     protected IDataSource _source;
     public event Action<List<string>> RefreshDirections;
-    
-    protected string SceneName { get; set; }
-    protected string Name {get; set;}
 
-    protected string DefaultBattleScene {  get; set;}
+    protected string SceneName { get; set; }
+    protected string Name { get; set; }
+
+    protected string DefaultBattleScene { get; set; }
 
     public bool IsDark { get; set; }
 
@@ -40,6 +45,10 @@ public abstract class MapData : MonoBehaviour
     {
         _cleanupSectorButton.gameObject.SetActive(false);
         _transferButton.gameObject.SetActive(false);
+        _shopButton.gameObject.SetActive(false); // **Скрыть кнопку магазина при старте**
+        _HospitalButton.gameObject.SetActive(false); // **Скрыть кнопку магазина при старте**
+        _ArenaButton.gameObject.SetActive(false); // **Скрыть кнопку арены при старте**
+        _WarehouseButton.gameObject.SetActive(false); // **Скрыть кнопку склада при старте**
         _navigation.ArriveToSector += OnArriveToSector;
         RefreshDirections += _navigation.UpdateButtons;
         _navigation.GoToSector += StartToGo;
@@ -57,13 +66,12 @@ public abstract class MapData : MonoBehaviour
             SetNavigationToSector(_currentSector);
         }
 
-        
         ReactToArriving();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M))
             _miniMapCamera.gameObject.SetActive(!_miniMapCamera.gameObject.activeSelf);
     }
 
@@ -71,6 +79,10 @@ public abstract class MapData : MonoBehaviour
     {
         _cleanupSectorButton.gameObject.SetActive(false);
         _transferButton.gameObject.SetActive(false);
+        _shopButton.gameObject.SetActive(false); // **Скрыть кнопку магазина при переходе**
+        _HospitalButton.gameObject.SetActive(false); // **Скрыть кнопку госпиталь при переходе**
+        _ArenaButton.gameObject.SetActive(false); // **Скрыть кнопку арена при переходе**
+        _WarehouseButton.gameObject.SetActive(false); // **Скрыть кнопку склад при переходе**
         var nextSectorX = _currentSector.X;
         var nextSectorY = _currentSector.Y;
         switch (direction)
@@ -88,9 +100,7 @@ public abstract class MapData : MonoBehaviour
                 { nextSectorX++; }
                 break;
             case "NW":
-                {
-                    nextSectorY++; nextSectorX--;
-                }
+                { nextSectorY++; nextSectorX--; }
                 break;
             case "NE":
                 { nextSectorY++; nextSectorX++; }
@@ -101,7 +111,6 @@ public abstract class MapData : MonoBehaviour
             case "SE":
                 { nextSectorY--; nextSectorX++; }
                 break;
-
         }
 
         Debug.Log("Отправляемся в сектор " + _currentSector.ID);
@@ -112,7 +121,7 @@ public abstract class MapData : MonoBehaviour
 
     private void OnArriveToSector(string direction)
     {
-         Debug.Log("Прибыли в сектор " + _currentSector.ID);
+        Debug.Log("Прибыли в сектор " + _currentSector.ID);
         ReactToArriving();
     }
 
@@ -129,14 +138,25 @@ public abstract class MapData : MonoBehaviour
         var npc = _currentSector.GetNPCList();
         if (!string.IsNullOrEmpty(npc))
             _sectorInfoText.text += "Здесь находятся НПС: \n" + npc;
+
         Global.CurrentSectorID = _currentSector.ID;
         CheckDirections();
+
+        // **Изменение: Управление кнопкой магазина**
+        _shopButton.gameObject.SetActive(_currentSector.HasShop); // Показывать или скрывать кнопку магазина
+        _HospitalButton.gameObject.SetActive(_currentSector.Hospital); // Показывать или скрывать кнопку госпиталь
+        _ArenaButton.gameObject.SetActive(_currentSector.Arena); // Показывать или скрывать кнопку арена
+        _WarehouseButton.gameObject.SetActive(_currentSector.Warehouse); // Показывать или скрывать кнопку склад
+
         if (_currentSector.TransferTo != null)
         {
             _transferCaption.text = _currentSector.TransferTo.TransferCaption;
+            _transferButton.gameObject.SetActive(true);
         }
-
-        _transferButton.gameObject.SetActive(_currentSector.TransferTo != null);
+        else
+        {
+            _transferButton.gameObject.SetActive(false);
+        }
 
         InitCurrentSectorInfo();
     }
@@ -150,6 +170,7 @@ public abstract class MapData : MonoBehaviour
         else
             Global.CurrentSectorInfo.IsDark = _currentSector.IsDark.Value;
     }
+
     public void Transfer()
     {
         Global.CurrentSectorID = _currentSector.TransferTo.TransferToSector;
@@ -160,7 +181,6 @@ public abstract class MapData : MonoBehaviour
     {
         var sector = GetSectorData(SectorData.CoordsToID(Name, x, y));
         return sector != null && !sector.IsRestricted();
-
     }
 
     private void CheckDirections()
@@ -197,6 +217,7 @@ public abstract class MapData : MonoBehaviour
         _currentSector = sectorData;
         ReactToArriving();
     }
+
     public void CleanupSector()
     {
         var battleSceneName = _currentSector.GetRandomBattleScene();
@@ -214,5 +235,4 @@ public abstract class MapData : MonoBehaviour
     {
         _inventoryPanel.SetActive(!_inventoryPanel.activeSelf);
     }
-
 }
