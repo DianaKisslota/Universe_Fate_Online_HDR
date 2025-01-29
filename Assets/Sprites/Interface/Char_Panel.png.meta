@@ -113,10 +113,10 @@ TextureImporter:
       name: Char_Panel_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 255
-        width: 120
-        height: 249
+        x: 17
+        y: 244
+        width: 126
+        height: 251
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,6 +126,69 @@ TextureImporter:
       bones: []
       spriteID: 8d5a7f49996db434ab9e9e191dda4e9f
       internalID: 1786829498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_Panel_1
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 389
+        width: 120
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0187ae8ddf2b574481332de1430563a
+      internalID: 1455618523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_Panel_2
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 445
+        width: 120
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 898427c3bd34aa941b75fd927ca4c9a1
+      internalID: 1694757753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_Panel_3
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 473
+        width: 40
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f6a22c12dc1d7440a75c975fb687d2c
+      internalID: 422740037
       vertices: []
       indices: 
       edges: []
@@ -142,6 +205,9 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Char_Panel_0: 1786829498
+      Char_Panel_1: 1455618523
+      Char_Panel_2: 1694757753
+      Char_Panel_3: 422740037
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
