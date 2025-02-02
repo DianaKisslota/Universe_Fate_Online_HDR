@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,10 +113,10 @@ TextureImporter:
       name: Char_Panel_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 244
-        width: 126
-        height: 251
+        x: 0
+        y: 247
+        width: 140
+        height: 265
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,13 +134,13 @@ TextureImporter:
       name: Char_Panel_1
       rect:
         serializedVersion: 2
-        x: 150
-        y: 389
+        x: 140
+        y: 392
         width: 120
-        height: 113
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 13, y: 13, z: 13, w: 13}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -155,13 +155,13 @@ TextureImporter:
       name: Char_Panel_2
       rect:
         serializedVersion: 2
-        x: 270
-        y: 445
+        x: 140
+        y: 12
         width: 120
-        height: 50
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 13, y: 13, z: 13, w: 13}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -193,6 +193,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Char_Panel_4
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 370
+        width: 120
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fb24878dc13d584f882c6f79fbb12c4
+      internalID: 506705707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_Panel_5
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 305
+        width: 120
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8459cf1634be5f549a5b023e7f3cdb35
+      internalID: 1153338105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_Panel_6
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 132
+        width: 120
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77ea4914ff99ee94db1af40a718a7970
+      internalID: 178869522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_Panel_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 202
+        width: 120
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2478e7608c8c43c4b884bda780582ced
+      internalID: 1162832613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_Panel_8
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 272
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b0488aa64b6efc4691d8b731f91bb24
+      internalID: 177659812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -208,6 +313,11 @@ TextureImporter:
       Char_Panel_1: 1455618523
       Char_Panel_2: 1694757753
       Char_Panel_3: 422740037
+      Char_Panel_4: 506705707
+      Char_Panel_5: 1153338105
+      Char_Panel_6: 178869522
+      Char_Panel_7: 1162832613
+      Char_Panel_8: 177659812
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
