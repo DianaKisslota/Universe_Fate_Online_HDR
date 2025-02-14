@@ -19,7 +19,7 @@ public abstract class MapData : MonoBehaviour
 
     // **Изменение: Добавлено поле для кнопки магазина**
     [SerializeField] protected Button _shopButton; // Кнопка магазина
-    [SerializeField] protected Button _HospitalButton; // Кнопка магазина
+    [SerializeField] protected Button _HospitalButton; // Кнопка Госпиталь
     [SerializeField] protected Button _ArenaButton; // Кнопка Арена
     [SerializeField] protected Button _WarehouseButton; // Кнопка Склад
 
@@ -46,7 +46,7 @@ public abstract class MapData : MonoBehaviour
         _cleanupSectorButton.gameObject.SetActive(false);
         _transferButton.gameObject.SetActive(false);
         _shopButton.gameObject.SetActive(false); // **Скрыть кнопку магазина при старте**
-        _HospitalButton.gameObject.SetActive(false); // **Скрыть кнопку магазина при старте**
+        _HospitalButton.gameObject.SetActive(false); // **Скрыть кнопку Госпиталь при старте**
         _ArenaButton.gameObject.SetActive(false); // **Скрыть кнопку арены при старте**
         _WarehouseButton.gameObject.SetActive(false); // **Скрыть кнопку склада при старте**
         _navigation.ArriveToSector += OnArriveToSector;

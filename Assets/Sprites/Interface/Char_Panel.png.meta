@@ -113,10 +113,10 @@ TextureImporter:
       name: Char_Panel_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 247
-        width: 140
-        height: 265
+        x: 5
+        y: 251
+        width: 130
+        height: 255
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
