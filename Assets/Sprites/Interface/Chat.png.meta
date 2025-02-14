@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,13 +113,13 @@ TextureImporter:
       name: Chat_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 2016
-        width: 26
-        height: 26
+        x: 5
+        y: 2011
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 6, y: 6, z: 6, w: 6}
+      border: {x: 8, y: 8, z: 8, w: 8}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -134,10 +134,10 @@ TextureImporter:
       name: Chat_1
       rect:
         serializedVersion: 2
-        x: 34
-        y: 2016
-        width: 26
-        height: 26
+        x: 37
+        y: 2011
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: Chat_2
       rect:
         serializedVersion: 2
-        x: 60
-        y: 2016
-        width: 26
-        height: 26
+        x: 69
+        y: 2011
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: Chat_3
       rect:
         serializedVersion: 2
-        x: 8
-        y: 1990
-        width: 26
-        height: 26
+        x: 5
+        y: 1979
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 6, y: 6, z: 6, w: 6}
@@ -197,10 +197,10 @@ TextureImporter:
       name: Chat_4
       rect:
         serializedVersion: 2
-        x: 34
-        y: 1990
-        width: 26
-        height: 26
+        x: 37
+        y: 1979
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,12 +218,12 @@ TextureImporter:
       name: Chat_5
       rect:
         serializedVersion: 2
-        x: 60
-        y: 1990
-        width: 26
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 69
+        y: 1979
+        width: 32
+        height: 32
+      alignment: 9
+      pivot: {x: 0.8686607, y: 0.11904907}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,10 +239,10 @@ TextureImporter:
       name: Chat_6
       rect:
         serializedVersion: 2
-        x: 8
-        y: 1964
-        width: 26
-        height: 26
+        x: 5
+        y: 1947
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 6, y: 6, z: 6, w: 6}
@@ -260,10 +260,10 @@ TextureImporter:
       name: Chat_7
       rect:
         serializedVersion: 2
-        x: 34
-        y: 1964
-        width: 26
-        height: 26
+        x: 37
+        y: 1947
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +281,10 @@ TextureImporter:
       name: Chat_8
       rect:
         serializedVersion: 2
-        x: 60
-        y: 1964
-        width: 26
-        height: 26
+        x: 69
+        y: 1947
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -302,10 +302,10 @@ TextureImporter:
       name: Chat_9
       rect:
         serializedVersion: 2
-        x: 86
-        y: 1964
-        width: 26
-        height: 26
+        x: 101
+        y: 1947
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,10 +323,10 @@ TextureImporter:
       name: Chat_10
       rect:
         serializedVersion: 2
-        x: 7
-        y: 1682
-        width: 926
-        height: 251
+        x: 5
+        y: 1692
+        width: 930
+        height: 255
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -344,10 +344,10 @@ TextureImporter:
       name: Chat_11
       rect:
         serializedVersion: 2
-        x: 112
-        y: 2016
-        width: 26
-        height: 26
+        x: 133
+        y: 2011
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -365,10 +365,10 @@ TextureImporter:
       name: Chat_12
       rect:
         serializedVersion: 2
-        x: 112
-        y: 1990
-        width: 26
-        height: 26
+        x: 133
+        y: 1979
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -386,10 +386,10 @@ TextureImporter:
       name: Chat_13
       rect:
         serializedVersion: 2
-        x: 112
-        y: 1964
-        width: 26
-        height: 26
+        x: 133
+        y: 1947
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,10 +407,10 @@ TextureImporter:
       name: Chat_14
       rect:
         serializedVersion: 2
-        x: 86
-        y: 2016
-        width: 26
-        height: 26
+        x: 101
+        y: 2011
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -428,10 +428,10 @@ TextureImporter:
       name: Chat_15
       rect:
         serializedVersion: 2
-        x: 86
-        y: 1990
-        width: 26
-        height: 26
+        x: 101
+        y: 1979
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -449,10 +449,10 @@ TextureImporter:
       name: Chat_17
       rect:
         serializedVersion: 2
-        x: 138
-        y: 1990
-        width: 34
-        height: 26
+        x: 165
+        y: 1979
+        width: 40
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -470,10 +470,10 @@ TextureImporter:
       name: Chat_18
       rect:
         serializedVersion: 2
-        x: 138
-        y: 1964
-        width: 34
-        height: 26
+        x: 165
+        y: 1947
+        width: 40
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -491,10 +491,10 @@ TextureImporter:
       name: Chat_19
       rect:
         serializedVersion: 2
-        x: 138
-        y: 2016
-        width: 34
-        height: 26
+        x: 165
+        y: 2011
+        width: 40
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -554,10 +554,10 @@ TextureImporter:
       name: Chat_20
       rect:
         serializedVersion: 2
-        x: 172
-        y: 2016
-        width: 26
-        height: 26
+        x: 205
+        y: 2011
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -575,10 +575,10 @@ TextureImporter:
       name: Chat_21
       rect:
         serializedVersion: 2
-        x: 172
-        y: 1990
-        width: 26
-        height: 26
+        x: 205
+        y: 1979
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -596,10 +596,10 @@ TextureImporter:
       name: Chat_23
       rect:
         serializedVersion: 2
-        x: 172
-        y: 1964
-        width: 26
-        height: 26
+        x: 205
+        y: 1947
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -617,10 +617,10 @@ TextureImporter:
       name: Chat_24
       rect:
         serializedVersion: 2
-        x: 198
-        y: 2016
-        width: 26
-        height: 26
+        x: 237
+        y: 2011
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -638,10 +638,10 @@ TextureImporter:
       name: Chat_25
       rect:
         serializedVersion: 2
-        x: 198
-        y: 1990
-        width: 26
-        height: 26
+        x: 237
+        y: 1979
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -659,10 +659,10 @@ TextureImporter:
       name: Chat_26
       rect:
         serializedVersion: 2
-        x: 198
-        y: 1964
-        width: 26
-        height: 26
+        x: 237
+        y: 1947
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -680,10 +680,10 @@ TextureImporter:
       name: Chat_27
       rect:
         serializedVersion: 2
-        x: 224
-        y: 2016
-        width: 26
-        height: 26
+        x: 269
+        y: 2011
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -701,10 +701,10 @@ TextureImporter:
       name: Chat_28
       rect:
         serializedVersion: 2
-        x: 224
-        y: 1990
-        width: 26
-        height: 26
+        x: 269
+        y: 1979
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -722,10 +722,10 @@ TextureImporter:
       name: Chat_29
       rect:
         serializedVersion: 2
-        x: 224
-        y: 1964
-        width: 26
-        height: 26
+        x: 269
+        y: 1947
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -743,10 +743,10 @@ TextureImporter:
       name: Chat_30
       rect:
         serializedVersion: 2
-        x: 250
-        y: 2016
-        width: 26
-        height: 26
+        x: 301
+        y: 2011
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -764,10 +764,10 @@ TextureImporter:
       name: Chat_31
       rect:
         serializedVersion: 2
-        x: 250
-        y: 1990
-        width: 26
-        height: 26
+        x: 301
+        y: 1979
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -785,10 +785,10 @@ TextureImporter:
       name: Chat_32
       rect:
         serializedVersion: 2
-        x: 250
-        y: 1964
-        width: 26
-        height: 26
+        x: 301
+        y: 1947
+        width: 32
+        height: 32
       alignment: 9
       pivot: {x: 5.001669, y: 3.131883}
       border: {x: 0, y: 0, z: 0, w: 0}

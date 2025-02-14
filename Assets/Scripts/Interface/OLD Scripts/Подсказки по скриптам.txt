@@ -1,0 +1,6 @@
+CloseGameButton.cs        Закрыть игру
+WindowControl             перейти в оконный режим
+MinimizeGame              свернуть в трей
+InputFieldTabNavigation   переключение полей ввода по клавише таб
+PopupController           реключение окон (тут между вплываюшем окном, и логином)
+PopupWindowController     Скрипт убирает баг с включенно подсветкой кнопок
