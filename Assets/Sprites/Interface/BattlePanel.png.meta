@@ -1054,6 +1054,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: BattlePanel_26
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 293
+        width: 78
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7447d3346aa58e44f999c5de0327785b
+      internalID: -844193282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1103,6 +1124,7 @@ TextureImporter:
       BattlePanel_23: 1051476474
       BattlePanel_24: 888935036
       BattlePanel_25: -1895590336
+      BattlePanel_26: -844193282
       BattlePanel_3: 2064852912
       BattlePanel_4: -1054885414
       BattlePanel_5: -404587877
